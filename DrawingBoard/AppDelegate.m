@@ -7,7 +7,6 @@
 //
 
 #import "AppDelegate.h"
-#import "ViewController.h"
 
 @interface AppDelegate ()
 
@@ -17,11 +16,6 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    ViewController *VC = [[ViewController alloc] init];
-    VC.view.backgroundColor = [UIColor whiteColor];
-    self.window.rootViewController = VC;
-    [self.window makeKeyAndVisible];
     
     return YES;
 }

@@ -19,6 +19,9 @@
 		26CFBE431F4C05EE00CA1E58 /* DrawBoardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26CFBE421F4C05EE00CA1E58 /* DrawBoardView.m */; };
 		26CFBE451F4C1CA000CA1E58 /* Vencent.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 26CFBE441F4C1CA000CA1E58 /* Vencent.jpg */; };
 		26CFBE481F4C25B700CA1E58 /* EditView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26CFBE471F4C25B700CA1E58 /* EditView.m */; };
+		26FFE9061F59387600B828B5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26FFE9051F59387600B828B5 /* Main.storyboard */; };
+		26FFE9091F593AF200B828B5 /* TempViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26FFE9081F593AF200B828B5 /* TempViewController.m */; };
+		26FFE90E1F5953F700B828B5 /* ShareAndEditPhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26FFE90D1F5953F700B828B5 /* ShareAndEditPhotoView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +48,11 @@
 		26CFBE441F4C1CA000CA1E58 /* Vencent.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Vencent.jpg; sourceTree = "<group>"; };
 		26CFBE461F4C25B700CA1E58 /* EditView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditView.h; sourceTree = "<group>"; };
 		26CFBE471F4C25B700CA1E58 /* EditView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditView.m; sourceTree = "<group>"; };
+		26FFE9051F59387600B828B5 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		26FFE9071F593AF200B828B5 /* TempViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TempViewController.h; sourceTree = "<group>"; };
+		26FFE9081F593AF200B828B5 /* TempViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TempViewController.m; sourceTree = "<group>"; };
+		26FFE90C1F5953F700B828B5 /* ShareAndEditPhotoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareAndEditPhotoView.h; sourceTree = "<group>"; };
+		26FFE90D1F5953F700B828B5 /* ShareAndEditPhotoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareAndEditPhotoView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +121,11 @@
 				26CFBE2E1F4C004A00CA1E58 /* AppDelegate.m */,
 				26CFBE301F4C004A00CA1E58 /* ViewController.h */,
 				26CFBE311F4C004A00CA1E58 /* ViewController.m */,
+				26FFE9051F59387600B828B5 /* Main.storyboard */,
+				26FFE9071F593AF200B828B5 /* TempViewController.h */,
+				26FFE9081F593AF200B828B5 /* TempViewController.m */,
+				26FFE90C1F5953F700B828B5 /* ShareAndEditPhotoView.h */,
+				26FFE90D1F5953F700B828B5 /* ShareAndEditPhotoView.m */,
 				262188111F4FC42C00A58A09 /* DrawBoard.h */,
 				262188121F4FC42C00A58A09 /* DrawBoard.m */,
 				266F52CF1F54152D00E0CD1E /* Model */,
@@ -197,6 +210,7 @@
 				26CFBE451F4C1CA000CA1E58 /* Vencent.jpg in Resources */,
 				26CFBE3A1F4C004A00CA1E58 /* LaunchScreen.storyboard in Resources */,
 				26CFBE371F4C004A00CA1E58 /* Assets.xcassets in Resources */,
+				26FFE9061F59387600B828B5 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -213,6 +227,8 @@
 				26CFBE2C1F4C004A00CA1E58 /* main.m in Sources */,
 				265102681F51AEF700D461D7 /* TypeLineCollectionCell.m in Sources */,
 				26CFBE481F4C25B700CA1E58 /* EditView.m in Sources */,
+				26FFE9091F593AF200B828B5 /* TempViewController.m in Sources */,
+				26FFE90E1F5953F700B828B5 /* ShareAndEditPhotoView.m in Sources */,
 				26CFBE431F4C05EE00CA1E58 /* DrawBoardView.m in Sources */,
 				262188131F4FC42C00A58A09 /* DrawBoard.m in Sources */,
 				264E9F971F50789D00806F5D /* LineModel.m in Sources */,
