@@ -9,6 +9,34 @@
 /* Begin PBXBuildFile section */
 		262188131F4FC42C00A58A09 /* DrawBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = 262188121F4FC42C00A58A09 /* DrawBoard.m */; };
 		262320481F4EC302008A043D /* CollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 262320471F4EC302008A043D /* CollectionView.m */; };
+		263C23521F5BCC8D006BEDDE /* icon-dx.png in Resources */ = {isa = PBXBuildFile; fileRef = 263C23371F5BCC8D006BEDDE /* icon-dx.png */; };
+		263C23531F5BCC8D006BEDDE /* icon-dx@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 263C23381F5BCC8D006BEDDE /* icon-dx@2x.png */; };
+		263C23541F5BCC8D006BEDDE /* icon-dx@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 263C23391F5BCC8D006BEDDE /* icon-dx@3x.png */; };
+		263C23551F5BCC8D006BEDDE /* icon-fx.png in Resources */ = {isa = PBXBuildFile; fileRef = 263C233A1F5BCC8D006BEDDE /* icon-fx.png */; };
+		263C23561F5BCC8D006BEDDE /* icon-fx@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 263C233B1F5BCC8D006BEDDE /* icon-fx@2x.png */; };
+		263C23571F5BCC8D006BEDDE /* icon-fx@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 263C233C1F5BCC8D006BEDDE /* icon-fx@3x.png */; };
+		263C23581F5BCC8D006BEDDE /* icon-pyq.png in Resources */ = {isa = PBXBuildFile; fileRef = 263C233D1F5BCC8D006BEDDE /* icon-pyq.png */; };
+		263C23591F5BCC8D006BEDDE /* icon-pyq@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 263C233E1F5BCC8D006BEDDE /* icon-pyq@2x.png */; };
+		263C235A1F5BCC8D006BEDDE /* icon-pyq@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 263C233F1F5BCC8D006BEDDE /* icon-pyq@3x.png */; };
+		263C235B1F5BCC8D006BEDDE /* icon-qq-kj.png in Resources */ = {isa = PBXBuildFile; fileRef = 263C23401F5BCC8D006BEDDE /* icon-qq-kj.png */; };
+		263C235C1F5BCC8D006BEDDE /* icon-qq-kj@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 263C23411F5BCC8D006BEDDE /* icon-qq-kj@2x.png */; };
+		263C235D1F5BCC8D006BEDDE /* icon-qq-kj@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 263C23421F5BCC8D006BEDDE /* icon-qq-kj@3x.png */; };
+		263C235E1F5BCC8D006BEDDE /* icon-qq.png in Resources */ = {isa = PBXBuildFile; fileRef = 263C23431F5BCC8D006BEDDE /* icon-qq.png */; };
+		263C235F1F5BCC8D006BEDDE /* icon-qq@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 263C23441F5BCC8D006BEDDE /* icon-qq@2x.png */; };
+		263C23601F5BCC8E006BEDDE /* icon-qq@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 263C23451F5BCC8D006BEDDE /* icon-qq@3x.png */; };
+		263C23611F5BCC8E006BEDDE /* icon-wb.png in Resources */ = {isa = PBXBuildFile; fileRef = 263C23461F5BCC8D006BEDDE /* icon-wb.png */; };
+		263C23621F5BCC8E006BEDDE /* icon-wb@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 263C23471F5BCC8D006BEDDE /* icon-wb@2x.png */; };
+		263C23631F5BCC8E006BEDDE /* icon-wb@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 263C23481F5BCC8D006BEDDE /* icon-wb@3x.png */; };
+		263C23641F5BCC8E006BEDDE /* icon-wx.png in Resources */ = {isa = PBXBuildFile; fileRef = 263C23491F5BCC8D006BEDDE /* icon-wx.png */; };
+		263C23651F5BCC8E006BEDDE /* icon-wx@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 263C234A1F5BCC8D006BEDDE /* icon-wx@2x.png */; };
+		263C23661F5BCC8E006BEDDE /* icon-wx@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 263C234B1F5BCC8D006BEDDE /* icon-wx@3x.png */; };
+		263C23671F5BCC8E006BEDDE /* icon-wxsc.png in Resources */ = {isa = PBXBuildFile; fileRef = 263C234C1F5BCC8D006BEDDE /* icon-wxsc.png */; };
+		263C23681F5BCC8E006BEDDE /* icon-wxsc@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 263C234D1F5BCC8D006BEDDE /* icon-wxsc@2x.png */; };
+		263C23691F5BCC8E006BEDDE /* icon-wxsc@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 263C234E1F5BCC8D006BEDDE /* icon-wxsc@3x.png */; };
+		263C236A1F5BCC8E006BEDDE /* icon-yx.png in Resources */ = {isa = PBXBuildFile; fileRef = 263C234F1F5BCC8D006BEDDE /* icon-yx.png */; };
+		263C236B1F5BCC8E006BEDDE /* icon-yx@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 263C23501F5BCC8D006BEDDE /* icon-yx@2x.png */; };
+		263C236C1F5BCC8E006BEDDE /* icon-yx@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 263C23511F5BCC8D006BEDDE /* icon-yx@3x.png */; };
+		263C23721F5BD5E0006BEDDE /* BNCUMShare.m in Sources */ = {isa = PBXBuildFile; fileRef = 263C23711F5BD5E0006BEDDE /* BNCUMShare.m */; };
 		264E9F971F50789D00806F5D /* LineModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 264E9F961F50789D00806F5D /* LineModel.m */; };
 		265102681F51AEF700D461D7 /* TypeLineCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 265102671F51AEF700D461D7 /* TypeLineCollectionCell.m */; };
 		26CFBE2C1F4C004A00CA1E58 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 26CFBE2B1F4C004A00CA1E58 /* main.m */; };
@@ -17,11 +45,10 @@
 		26CFBE371F4C004A00CA1E58 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 26CFBE361F4C004A00CA1E58 /* Assets.xcassets */; };
 		26CFBE3A1F4C004A00CA1E58 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26CFBE381F4C004A00CA1E58 /* LaunchScreen.storyboard */; };
 		26CFBE431F4C05EE00CA1E58 /* DrawBoardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26CFBE421F4C05EE00CA1E58 /* DrawBoardView.m */; };
-		26CFBE451F4C1CA000CA1E58 /* Vencent.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 26CFBE441F4C1CA000CA1E58 /* Vencent.jpg */; };
 		26CFBE481F4C25B700CA1E58 /* EditView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26CFBE471F4C25B700CA1E58 /* EditView.m */; };
-		26FFE9061F59387600B828B5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26FFE9051F59387600B828B5 /* Main.storyboard */; };
 		26FFE9091F593AF200B828B5 /* TempViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26FFE9081F593AF200B828B5 /* TempViewController.m */; };
 		26FFE90E1F5953F700B828B5 /* ShareAndEditPhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26FFE90D1F5953F700B828B5 /* ShareAndEditPhotoView.m */; };
+		6B8A31F800187F76E97BE28B /* libPods-DrawingBoard.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 66A5C5364AB1F5CBAAAAB30B /* libPods-DrawingBoard.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +57,36 @@
 		262320461F4EC302008A043D /* CollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionView.h; sourceTree = "<group>"; };
 		262320471F4EC302008A043D /* CollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionView.m; sourceTree = "<group>"; };
 		262A11DB1F52707B00D2283F /* CollectionCellDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionCellDelegate.h; sourceTree = "<group>"; };
+		263C23371F5BCC8D006BEDDE /* icon-dx.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-dx.png"; sourceTree = "<group>"; };
+		263C23381F5BCC8D006BEDDE /* icon-dx@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-dx@2x.png"; sourceTree = "<group>"; };
+		263C23391F5BCC8D006BEDDE /* icon-dx@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-dx@3x.png"; sourceTree = "<group>"; };
+		263C233A1F5BCC8D006BEDDE /* icon-fx.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-fx.png"; sourceTree = "<group>"; };
+		263C233B1F5BCC8D006BEDDE /* icon-fx@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-fx@2x.png"; sourceTree = "<group>"; };
+		263C233C1F5BCC8D006BEDDE /* icon-fx@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-fx@3x.png"; sourceTree = "<group>"; };
+		263C233D1F5BCC8D006BEDDE /* icon-pyq.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-pyq.png"; sourceTree = "<group>"; };
+		263C233E1F5BCC8D006BEDDE /* icon-pyq@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-pyq@2x.png"; sourceTree = "<group>"; };
+		263C233F1F5BCC8D006BEDDE /* icon-pyq@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-pyq@3x.png"; sourceTree = "<group>"; };
+		263C23401F5BCC8D006BEDDE /* icon-qq-kj.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-qq-kj.png"; sourceTree = "<group>"; };
+		263C23411F5BCC8D006BEDDE /* icon-qq-kj@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-qq-kj@2x.png"; sourceTree = "<group>"; };
+		263C23421F5BCC8D006BEDDE /* icon-qq-kj@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-qq-kj@3x.png"; sourceTree = "<group>"; };
+		263C23431F5BCC8D006BEDDE /* icon-qq.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-qq.png"; sourceTree = "<group>"; };
+		263C23441F5BCC8D006BEDDE /* icon-qq@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-qq@2x.png"; sourceTree = "<group>"; };
+		263C23451F5BCC8D006BEDDE /* icon-qq@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-qq@3x.png"; sourceTree = "<group>"; };
+		263C23461F5BCC8D006BEDDE /* icon-wb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-wb.png"; sourceTree = "<group>"; };
+		263C23471F5BCC8D006BEDDE /* icon-wb@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-wb@2x.png"; sourceTree = "<group>"; };
+		263C23481F5BCC8D006BEDDE /* icon-wb@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-wb@3x.png"; sourceTree = "<group>"; };
+		263C23491F5BCC8D006BEDDE /* icon-wx.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-wx.png"; sourceTree = "<group>"; };
+		263C234A1F5BCC8D006BEDDE /* icon-wx@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-wx@2x.png"; sourceTree = "<group>"; };
+		263C234B1F5BCC8D006BEDDE /* icon-wx@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-wx@3x.png"; sourceTree = "<group>"; };
+		263C234C1F5BCC8D006BEDDE /* icon-wxsc.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-wxsc.png"; sourceTree = "<group>"; };
+		263C234D1F5BCC8D006BEDDE /* icon-wxsc@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-wxsc@2x.png"; sourceTree = "<group>"; };
+		263C234E1F5BCC8D006BEDDE /* icon-wxsc@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-wxsc@3x.png"; sourceTree = "<group>"; };
+		263C234F1F5BCC8D006BEDDE /* icon-yx.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-yx.png"; sourceTree = "<group>"; };
+		263C23501F5BCC8D006BEDDE /* icon-yx@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-yx@2x.png"; sourceTree = "<group>"; };
+		263C23511F5BCC8D006BEDDE /* icon-yx@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-yx@3x.png"; sourceTree = "<group>"; };
+		263C23701F5BD5E0006BEDDE /* BNCUMShare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNCUMShare.h; sourceTree = "<group>"; };
+		263C23711F5BD5E0006BEDDE /* BNCUMShare.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNCUMShare.m; sourceTree = "<group>"; };
+		263C23731F5BD61D006BEDDE /* DrawingBoard.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawingBoard.pch; sourceTree = "<group>"; };
 		264E9F951F50789D00806F5D /* LineModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LineModel.h; sourceTree = "<group>"; };
 		264E9F961F50789D00806F5D /* LineModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LineModel.m; sourceTree = "<group>"; };
 		265102661F51AEF700D461D7 /* TypeLineCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TypeLineCollectionCell.h; sourceTree = "<group>"; };
@@ -45,14 +102,15 @@
 		26CFBE3B1F4C004A00CA1E58 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		26CFBE411F4C05EE00CA1E58 /* DrawBoardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawBoardView.h; sourceTree = "<group>"; };
 		26CFBE421F4C05EE00CA1E58 /* DrawBoardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawBoardView.m; sourceTree = "<group>"; };
-		26CFBE441F4C1CA000CA1E58 /* Vencent.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Vencent.jpg; sourceTree = "<group>"; };
 		26CFBE461F4C25B700CA1E58 /* EditView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditView.h; sourceTree = "<group>"; };
 		26CFBE471F4C25B700CA1E58 /* EditView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditView.m; sourceTree = "<group>"; };
-		26FFE9051F59387600B828B5 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		26FFE9071F593AF200B828B5 /* TempViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TempViewController.h; sourceTree = "<group>"; };
 		26FFE9081F593AF200B828B5 /* TempViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TempViewController.m; sourceTree = "<group>"; };
 		26FFE90C1F5953F700B828B5 /* ShareAndEditPhotoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareAndEditPhotoView.h; sourceTree = "<group>"; };
 		26FFE90D1F5953F700B828B5 /* ShareAndEditPhotoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareAndEditPhotoView.m; sourceTree = "<group>"; };
+		66A5C5364AB1F5CBAAAAB30B /* libPods-DrawingBoard.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DrawingBoard.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		742A00AE132E7F32420E6D89 /* Pods-DrawingBoard.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DrawingBoard.release.xcconfig"; path = "Pods/Target Support Files/Pods-DrawingBoard/Pods-DrawingBoard.release.xcconfig"; sourceTree = "<group>"; };
+		CD93ADF6E4D2729C2DFBC568 /* Pods-DrawingBoard.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DrawingBoard.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DrawingBoard/Pods-DrawingBoard.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,12 +118,47 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6B8A31F800187F76E97BE28B /* libPods-DrawingBoard.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		263C23361F5BCC8D006BEDDE /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				263C23371F5BCC8D006BEDDE /* icon-dx.png */,
+				263C23381F5BCC8D006BEDDE /* icon-dx@2x.png */,
+				263C23391F5BCC8D006BEDDE /* icon-dx@3x.png */,
+				263C233A1F5BCC8D006BEDDE /* icon-fx.png */,
+				263C233B1F5BCC8D006BEDDE /* icon-fx@2x.png */,
+				263C233C1F5BCC8D006BEDDE /* icon-fx@3x.png */,
+				263C233D1F5BCC8D006BEDDE /* icon-pyq.png */,
+				263C233E1F5BCC8D006BEDDE /* icon-pyq@2x.png */,
+				263C233F1F5BCC8D006BEDDE /* icon-pyq@3x.png */,
+				263C23401F5BCC8D006BEDDE /* icon-qq-kj.png */,
+				263C23411F5BCC8D006BEDDE /* icon-qq-kj@2x.png */,
+				263C23421F5BCC8D006BEDDE /* icon-qq-kj@3x.png */,
+				263C23431F5BCC8D006BEDDE /* icon-qq.png */,
+				263C23441F5BCC8D006BEDDE /* icon-qq@2x.png */,
+				263C23451F5BCC8D006BEDDE /* icon-qq@3x.png */,
+				263C23461F5BCC8D006BEDDE /* icon-wb.png */,
+				263C23471F5BCC8D006BEDDE /* icon-wb@2x.png */,
+				263C23481F5BCC8D006BEDDE /* icon-wb@3x.png */,
+				263C23491F5BCC8D006BEDDE /* icon-wx.png */,
+				263C234A1F5BCC8D006BEDDE /* icon-wx@2x.png */,
+				263C234B1F5BCC8D006BEDDE /* icon-wx@3x.png */,
+				263C234C1F5BCC8D006BEDDE /* icon-wxsc.png */,
+				263C234D1F5BCC8D006BEDDE /* icon-wxsc@2x.png */,
+				263C234E1F5BCC8D006BEDDE /* icon-wxsc@3x.png */,
+				263C234F1F5BCC8D006BEDDE /* icon-yx.png */,
+				263C23501F5BCC8D006BEDDE /* icon-yx@2x.png */,
+				263C23511F5BCC8D006BEDDE /* icon-yx@3x.png */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
 		266F52CE1F54152600E0CD1E /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -103,6 +196,8 @@
 			children = (
 				26CFBE291F4C004A00CA1E58 /* DrawingBoard */,
 				26CFBE281F4C004A00CA1E58 /* Products */,
+				AEFEF2030F4BA9FCEB73184D /* Pods */,
+				B7B9E127793DAEEB243F4A72 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -119,9 +214,11 @@
 			children = (
 				26CFBE2D1F4C004A00CA1E58 /* AppDelegate.h */,
 				26CFBE2E1F4C004A00CA1E58 /* AppDelegate.m */,
+				263C23701F5BD5E0006BEDDE /* BNCUMShare.h */,
+				263C23711F5BD5E0006BEDDE /* BNCUMShare.m */,
+				263C23731F5BD61D006BEDDE /* DrawingBoard.pch */,
 				26CFBE301F4C004A00CA1E58 /* ViewController.h */,
 				26CFBE311F4C004A00CA1E58 /* ViewController.m */,
-				26FFE9051F59387600B828B5 /* Main.storyboard */,
 				26FFE9071F593AF200B828B5 /* TempViewController.h */,
 				26FFE9081F593AF200B828B5 /* TempViewController.m */,
 				26FFE90C1F5953F700B828B5 /* ShareAndEditPhotoView.h */,
@@ -131,6 +228,7 @@
 				266F52CF1F54152D00E0CD1E /* Model */,
 				266F52CE1F54152600E0CD1E /* View */,
 				266F52D01F54155700E0CD1E /* Other */,
+				263C23361F5BCC8D006BEDDE /* Images */,
 				26CFBE2A1F4C004A00CA1E58 /* Supporting Files */,
 			);
 			path = DrawingBoard;
@@ -139,13 +237,29 @@
 		26CFBE2A1F4C004A00CA1E58 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				26CFBE441F4C1CA000CA1E58 /* Vencent.jpg */,
 				26CFBE361F4C004A00CA1E58 /* Assets.xcassets */,
 				26CFBE381F4C004A00CA1E58 /* LaunchScreen.storyboard */,
 				26CFBE3B1F4C004A00CA1E58 /* Info.plist */,
 				26CFBE2B1F4C004A00CA1E58 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		AEFEF2030F4BA9FCEB73184D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				CD93ADF6E4D2729C2DFBC568 /* Pods-DrawingBoard.debug.xcconfig */,
+				742A00AE132E7F32420E6D89 /* Pods-DrawingBoard.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		B7B9E127793DAEEB243F4A72 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				66A5C5364AB1F5CBAAAAB30B /* libPods-DrawingBoard.a */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -155,9 +269,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 26CFBE3E1F4C004A00CA1E58 /* Build configuration list for PBXNativeTarget "DrawingBoard" */;
 			buildPhases = (
+				2B499E3AD87E9907F9160672 /* [CP] Check Pods Manifest.lock */,
 				26CFBE231F4C004A00CA1E58 /* Sources */,
 				26CFBE241F4C004A00CA1E58 /* Frameworks */,
 				26CFBE251F4C004A00CA1E58 /* Resources */,
+				5606C5BC55172FD363D81CE2 /* [CP] Embed Pods Frameworks */,
+				B9F100356E40B52ACBCB7D0E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -207,14 +324,87 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				26CFBE451F4C1CA000CA1E58 /* Vencent.jpg in Resources */,
+				263C23621F5BCC8E006BEDDE /* icon-wb@2x.png in Resources */,
+				263C23671F5BCC8E006BEDDE /* icon-wxsc.png in Resources */,
+				263C23591F5BCC8D006BEDDE /* icon-pyq@2x.png in Resources */,
+				263C23641F5BCC8E006BEDDE /* icon-wx.png in Resources */,
+				263C23521F5BCC8D006BEDDE /* icon-dx.png in Resources */,
+				263C23681F5BCC8E006BEDDE /* icon-wxsc@2x.png in Resources */,
+				263C236A1F5BCC8E006BEDDE /* icon-yx.png in Resources */,
+				263C23581F5BCC8D006BEDDE /* icon-pyq.png in Resources */,
+				263C23571F5BCC8D006BEDDE /* icon-fx@3x.png in Resources */,
+				263C23691F5BCC8E006BEDDE /* icon-wxsc@3x.png in Resources */,
+				263C236C1F5BCC8E006BEDDE /* icon-yx@3x.png in Resources */,
+				263C235C1F5BCC8D006BEDDE /* icon-qq-kj@2x.png in Resources */,
+				263C236B1F5BCC8E006BEDDE /* icon-yx@2x.png in Resources */,
+				263C23551F5BCC8D006BEDDE /* icon-fx.png in Resources */,
+				263C235E1F5BCC8D006BEDDE /* icon-qq.png in Resources */,
+				263C23661F5BCC8E006BEDDE /* icon-wx@3x.png in Resources */,
+				263C23601F5BCC8E006BEDDE /* icon-qq@3x.png in Resources */,
+				263C23611F5BCC8E006BEDDE /* icon-wb.png in Resources */,
+				263C235A1F5BCC8D006BEDDE /* icon-pyq@3x.png in Resources */,
+				263C23541F5BCC8D006BEDDE /* icon-dx@3x.png in Resources */,
+				263C235D1F5BCC8D006BEDDE /* icon-qq-kj@3x.png in Resources */,
 				26CFBE3A1F4C004A00CA1E58 /* LaunchScreen.storyboard in Resources */,
+				263C23651F5BCC8E006BEDDE /* icon-wx@2x.png in Resources */,
+				263C235B1F5BCC8D006BEDDE /* icon-qq-kj.png in Resources */,
+				263C23531F5BCC8D006BEDDE /* icon-dx@2x.png in Resources */,
 				26CFBE371F4C004A00CA1E58 /* Assets.xcassets in Resources */,
-				26FFE9061F59387600B828B5 /* Main.storyboard in Resources */,
+				263C235F1F5BCC8D006BEDDE /* icon-qq@2x.png in Resources */,
+				263C23561F5BCC8D006BEDDE /* icon-fx@2x.png in Resources */,
+				263C23631F5BCC8E006BEDDE /* icon-wb@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		2B499E3AD87E9907F9160672 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		5606C5BC55172FD363D81CE2 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DrawingBoard/Pods-DrawingBoard-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B9F100356E40B52ACBCB7D0E /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DrawingBoard/Pods-DrawingBoard-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		26CFBE231F4C004A00CA1E58 /* Sources */ = {
@@ -228,6 +418,7 @@
 				265102681F51AEF700D461D7 /* TypeLineCollectionCell.m in Sources */,
 				26CFBE481F4C25B700CA1E58 /* EditView.m in Sources */,
 				26FFE9091F593AF200B828B5 /* TempViewController.m in Sources */,
+				263C23721F5BD5E0006BEDDE /* BNCUMShare.m in Sources */,
 				26FFE90E1F5953F700B828B5 /* ShareAndEditPhotoView.m in Sources */,
 				26CFBE431F4C05EE00CA1E58 /* DrawBoardView.m in Sources */,
 				262188131F4FC42C00A58A09 /* DrawBoard.m in Sources */,
@@ -341,10 +532,14 @@
 		};
 		26CFBE3F1F4C004A00CA1E58 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CD93ADF6E4D2729C2DFBC568 /* Pods-DrawingBoard.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = DH6P4GZ73C;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/DrawingBoard/DrawingBoard.pch";
 				INFOPLIST_FILE = DrawingBoard/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Vencent.DrawingBoard.HK;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -353,10 +548,14 @@
 		};
 		26CFBE401F4C004A00CA1E58 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 742A00AE132E7F32420E6D89 /* Pods-DrawingBoard.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = DH6P4GZ73C;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/DrawingBoard/DrawingBoard.pch";
 				INFOPLIST_FILE = DrawingBoard/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Vencent.DrawingBoard.HK;
 				PRODUCT_NAME = "$(TARGET_NAME)";

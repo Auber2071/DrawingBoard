@@ -8,6 +8,12 @@
 
 #import "AppDelegate.h"
 
+#import "ViewController.h"
+
+#import <UMSocialCore/UMSocialCore.h>
+#define USHARE_APPKEY @"592395994544cb50e20019e1"//友盟appKey
+
+
 @interface AppDelegate ()
 
 @end
@@ -16,8 +22,56 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [self configureUMengSocialData];
+    
+    ViewController *VC = [[ViewController alloc] init];
+    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    self.window.rootViewController = VC;
+    [self.window makeKeyAndVisible];
     
     return YES;
+}
+
+#pragma mark - UShare
+//初始化友盟相关配置
+-(void)configureUMengSocialData{
+#ifdef DEBUG
+    [[UMSocialManager defaultManager] openLog:YES];
+#else
+    [[UMSocialManager defaultManager] openLog:NO];
+#endif
+    
+    
+    [[UMSocialManager defaultManager] setUmSocialAppkey:USHARE_APPKEY];
+    [self configUSharePlatforms];
+    [self confitUShareSettings];
+}
+
+
+- (void)confitUShareSettings {
+    [UMSocialGlobal shareInstance].isUsingWaterMark = NO;
+    //配置水印
+    //创建UMSocialImageWarterMarkConfig
+    UMSocialImageWarterMarkConfig* imageWarterMarkConfig = [[UMSocialImageWarterMarkConfig alloc] init];
+    //配置imageWarterMarkConfig的参数
+    imageWarterMarkConfig.warterMarkImage = [UIImage imageNamed:@"liantong"];
+    //创建UMSocialWarterMarkConfig
+    UMSocialWarterMarkConfig* warterMarkConfig = [[UMSocialWarterMarkConfig alloc] init];
+    //配置warterMarkConfig的参数
+    //...TODO
+    //设置配置类
+    [warterMarkConfig setUserDefinedImageWarterMarkConfig:imageWarterMarkConfig];
+    
+    
+    [UMSocialGlobal shareInstance].isUsingHttpsWhenShareContent = NO;
+}
+
+- (void)configUSharePlatforms {
+    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_WechatSession appKey:@"wx45bee633d52d515d" appSecret:@"40aa4e51054b1f6142f87942512f7f3d" redirectURL:@"http://www.bonc.com.cn"];
+    
+    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_QQ appKey:@"1106106351"/*设置QQ平台的appID*/  appSecret:nil redirectURL:@"http://mobile.umeng.com/social"];
+    
+    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_Sina appKey:@"3729399173"  appSecret:@"372837d5b602106fd4894be1b3055fb5" redirectURL:@"http://www.bonc.com.cn"];
 }
 
 

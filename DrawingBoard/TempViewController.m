@@ -27,17 +27,16 @@
     if (!_backImageView) {
         _backImageView =  [[UIImageView alloc] initWithFrame:self.view.bounds];
         _backImageView.userInteractionEnabled = YES;
-        [_backImageView setImage:[UIImage imageNamed:@"Vencent.jpg"]];
+        [_backImageView setImage:[UIImage imageNamed:@"background"]];
     }
     return _backImageView;
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.view addSubview:self.backImageView];
+    
     [self p_designNavigation];
     [self p_addShareAndEditView];
-    
-    
     
     //[self.view addSubview:self.drawBoard];
 }
@@ -45,9 +44,10 @@
 -(void)p_designNavigation{
     [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
     [self.navigationController.navigationBar setShadowImage:[[UIImage alloc]init]];
+    
+    //rightNaviItem
     UIButton *shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [shareBtn setTitle:@"分享" forState:UIControlStateNormal];
-    [shareBtn setTitleColor:[UIColor orangeColor] forState:UIControlStateNormal];
+    [shareBtn setImage:[UIImage imageNamed:@"icon-fx"] forState:UIControlStateNormal];
     [shareBtn addTarget:self action:@selector(showEditView:) forControlEvents:UIControlEventTouchUpInside];
     [shareBtn setFrame:CGRectMake(0, 0, 60, 40)];
     UIBarButtonItem *shareBarBtnItem = [[UIBarButtonItem alloc] initWithCustomView:shareBtn];

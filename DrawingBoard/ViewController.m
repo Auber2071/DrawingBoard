@@ -19,10 +19,18 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self.view setBackgroundColor:[UIColor whiteColor]];
     
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button setTitle:@"画板" forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+    [button setFrame:CGRectMake(100, 100, 60, 40)];
+    [button addTarget:self action:@selector(clickBtn:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.view addSubview:button];
 }
 
-- (IBAction)clickBtn:(id)sender {
+- (void)clickBtn:(id)sender {
     TempViewController *tempVC = [[TempViewController alloc] init];
     UINavigationController *navi = [[UINavigationController alloc] initWithRootViewController:tempVC];
     [self presentViewController:navi animated:YES completion:nil];

@@ -7,6 +7,7 @@
 //
 
 #import "ShareAndEditPhotoView.h"
+#import "BNCUMShare.h"
 
 typedef enum : NSUInteger {
     quitShareAndEditViewOption,
@@ -36,7 +37,7 @@ static NSTimeInterval  const duration = 0.1f;
 }
 
 -(void)layoutSubviews{
-    CGFloat padding = 20.f;
+    CGFloat padding = 40.f;
     CGFloat btnW = (CGRectGetWidth(self.frame) - padding*(self.btnMutArr.count+1))/self.btnMutArr.count;
     CGFloat btnH = btnW;
     
@@ -52,27 +53,26 @@ static NSTimeInterval  const duration = 0.1f;
     
     for (int i = 0; i<3; i++) {
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-        [button setBackgroundColor:[UIColor lightGrayColor]];
         [button addTarget:self action:@selector(p_clickButton:) forControlEvents:UIControlEventTouchUpInside];
         
         button.tag = i;
         switch (i) {
             case 0:{
                 button.tag = quitShareAndEditViewOption;
-                [button setTitle:@"退出" forState:UIControlStateNormal];
-                [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+                //[button setBackgroundColor:[UIColor lightGrayColor]];
+                [button setBackgroundImage:[UIImage imageNamed:@"返回"] forState:UIControlStateNormal];
             }
                 break;
             case 1:{
                 button.tag = EditPhotoOption;
-                [button setTitle:@"编辑" forState:UIControlStateNormal];
-                [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+                //[button setBackgroundColor:[UIColor lightGrayColor]];
+                [button setBackgroundImage:[UIImage imageNamed:@"编辑"] forState:UIControlStateNormal];
             }
                 break;
             case 2:{
                 button.tag = SharePhotoOption;
-                [button setTitle:@"分享" forState:UIControlStateNormal];
-                [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+                [button setBackgroundColor:[UIColor whiteColor]];
+                [button setBackgroundImage:[UIImage imageNamed:@"完成"] forState:UIControlStateNormal];
             }
                 break;
         }
@@ -96,7 +96,13 @@ static NSTimeInterval  const duration = 0.1f;
         }
             break;
         case SharePhotoOption:{
-            [self p_ScreenShot];
+            [UIView animateWithDuration:duration animations:^{
+                CGRect tempFrame = self.frame;
+                tempFrame.origin.y = [[UIScreen mainScreen] bounds].size.height;
+                self.frame = tempFrame;
+            }];
+            BNCUMShare *shareView = [BNCUMShare shareWithUMShare];
+            [shareView shareImg];
         }
             break;
     }
