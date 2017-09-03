@@ -12,7 +12,6 @@
 
 @interface DrawBoard ()<DrawBoardViewDeletage>
 
-@property (nonatomic, strong) UIImageView *backImageView;
 @property (nonatomic, strong) DrawBoardView *drawBoardView;
 @property (nonatomic, strong) EditView *editView;
 
@@ -23,13 +22,46 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        [self addSubview:self.backImageView];
+        self.backgroundColor = [UIColor clearColor];
         [self addSubview:self.drawBoardView];
         [self addSubview:self.editView];
+        [self p_addSubViews];
     }
     return self;
 }
 
+
+-(void)p_addSubViews{
+    UIButton *cancelBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [cancelBtn setTitle:@"取消" forState:UIControlStateNormal];
+    [cancelBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [cancelBtn setBackgroundColor:[UIColor grayColor]];
+    [cancelBtn.layer setCornerRadius:5.f];
+    [cancelBtn addTarget:self action:@selector(p_cancelEdit) forControlEvents:UIControlEventTouchUpInside];
+    [cancelBtn setFrame:CGRectMake(10, 20, 60, 30)];
+    [self addSubview:cancelBtn];
+ 
+    
+    UIButton *finishBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [finishBtn setTitle:@"确定" forState:UIControlStateNormal];
+    [finishBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [finishBtn setBackgroundColor:[UIColor greenColor]];
+    [finishBtn.layer setCornerRadius:5.f];
+    [finishBtn addTarget:self action:@selector(p_finishEdit) forControlEvents:UIControlEventTouchUpInside];
+    [finishBtn setFrame:CGRectMake(SCREEN_WIDTH - 70, 20, 60, 30)];
+    [self addSubview:finishBtn];
+}
+
+-(void)p_cancelEdit{
+    if (self.drawBoardDelegate && [self.drawBoardDelegate respondsToSelector:@selector(cancelEdit)]) {
+        [self.drawBoardDelegate cancelEdit];
+    }
+}
+-(void)p_finishEdit{
+    if (self.drawBoardDelegate && [self.drawBoardDelegate respondsToSelector:@selector(finishEditWithImage:)]) {
+        [self.drawBoardDelegate finishEditWithImage:[UIImage imageNamed:@"background"]];
+    }
+}
 
 
 #pragma mark - DrawBoardViewDeletage
@@ -48,7 +80,7 @@
         }
             break;
         case DrawingStatusEnd:{
-            CGFloat Y = CGRectGetHeight(tempSelf.frame)/5*4;
+            CGFloat Y = CGRectGetHeight(tempSelf.frame)/10*9;
             [UIView animateWithDuration:timerInterval animations:^{
                 [tempSelf.editView setFrame:CGRectMake(0, Y, CGRectGetWidth(tempSelf.frame), CGRectGetHeight(tempSelf.frame) - Y)];
             }];
@@ -59,14 +91,7 @@
     }
 }
 
--(UIImageView *)backImageView{
-    if (!_backImageView) {
-        _backImageView =  [[UIImageView alloc] initWithFrame:self.bounds];
-        _backImageView.userInteractionEnabled = YES;
-        [_backImageView setImage:[UIImage imageNamed:@"Vencent.jpg"]];
-    }
-    return _backImageView;
-}
+
 -(DrawBoardView *)drawBoardView{
     if (!_drawBoardView) {
         _drawBoardView = [[DrawBoardView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame))];
@@ -77,7 +102,7 @@
 
 -(EditView *)editView{
     if (!_editView) {
-        CGFloat Y =  CGRectGetHeight(self.frame)/5*4;
+        CGFloat Y = CGRectGetHeight(self.frame)/10*9;
         _editView = [[EditView alloc] initWithFrame:CGRectMake(0, Y, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame) - Y)];
     }
     return _editView;

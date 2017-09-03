@@ -15,12 +15,9 @@ UIKIT_EXTERN NSString * const EditMenuTypeChangeNotification;
 typedef NS_ENUM(NSInteger,EditMenuType) {
     EditMenuTypeLine,
     EditMenuTypeCharacter,
-    EditMenuTypeRectangle,
-    EditMenuTypeCyclo,
+    EditMenuTypeRect,
     EditMenuTypeEraser,
-    EditMenuTypeBack,
-    EditMenuTypeGoForward,
-    EditMenuTypeClearAll
+    EditMenuTypeBack
 };
 
 

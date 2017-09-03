@@ -89,6 +89,6 @@ typedef NS_ENUM(NSUInteger, PositionType){
 /**
  分享图片
  */
-- (void)shareImg;
+- (void)shareImg:(UIImage *)image;
 
 @end

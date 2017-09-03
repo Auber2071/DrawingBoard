@@ -12,7 +12,7 @@
 #import "DrawBoard.h"
 #import "ShareAndEditPhotoView.h"
 
-@interface TempViewController ()
+@interface TempViewController ()<shareAndEditPhotoViewDelegate,DrawBoardDelegate>
 @property (nonatomic, strong) DrawBoard *drawBoard;
 @property (nonatomic, strong) UIImageView *backImageView;
 
@@ -23,14 +23,6 @@
 @end
 
 @implementation TempViewController
--(UIImageView *)backImageView{
-    if (!_backImageView) {
-        _backImageView =  [[UIImageView alloc] initWithFrame:self.view.bounds];
-        _backImageView.userInteractionEnabled = YES;
-        [_backImageView setImage:[UIImage imageNamed:@"background"]];
-    }
-    return _backImageView;
-}
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.view addSubview:self.backImageView];
@@ -38,12 +30,17 @@
     [self p_designNavigation];
     [self p_addShareAndEditView];
     
-    //[self.view addSubview:self.drawBoard];
+}
+
+-(void)p_addShareAndEditView{
+    self.shareAndEditView = [[ShareAndEditPhotoView alloc] init];
+    self.shareAndEditView.shareAndEditDelegate = self;
+    [self.view addSubview:self.shareAndEditView];
 }
 
 -(void)p_designNavigation{
-    [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
-    [self.navigationController.navigationBar setShadowImage:[[UIImage alloc]init]];
+    //[self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
+    //[self.navigationController.navigationBar setShadowImage:[[UIImage alloc]init]];
     
     //rightNaviItem
     UIButton *shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -54,22 +51,66 @@
     self.navigationItem.rightBarButtonItem = shareBarBtnItem;
 }
 
--(void)p_addShareAndEditView{
-    self.shareAndEditView = [[ShareAndEditPhotoView alloc] init];
-    [self.view addSubview:self.shareAndEditView];
-}
 
 
 -(void)showEditView:(UIButton *)sender{
     [self.shareAndEditView showShareAndEditView];
 }
 
+#pragma mark - shareAndEditPhotoViewDelegate
 
+-(void)EditPhoto{
+
+    [self.navigationController.navigationBar setHidden:YES];
+    [self.view addSubview:self.drawBoard];
+    [UIView animateWithDuration:0.5f animations:^{
+        [self.drawBoard setFrame:self.view.bounds];
+    }];
+}
+
+
+#pragma mark - DrawBoardDelegate
+-(void)cancelEdit{
+    [self.navigationController.navigationBar setHidden:NO];
+    if ([self.view.subviews containsObject:self.drawBoard]) {
+        self.drawBoard.drawBoardDelegate = nil;
+        [self.drawBoard removeFromSuperview];
+        self.drawBoard = nil;
+    }
+    [self.shareAndEditView showShareAndEditView];
+
+}
+
+-(void)finishEditWithImage:(UIImage *)finishImage{
+    [self.backImageView setImage:finishImage];
+    
+    [self.navigationController.navigationBar setHidden:NO];
+    if ([self.view.subviews containsObject:self.drawBoard]) {
+        self.drawBoard.drawBoardDelegate = nil;
+        [self.drawBoard removeFromSuperview];
+        self.drawBoard = nil;
+    }
+    [self.shareAndEditView showShareAndEditView];
+}
+
+
+
+
+-(UIImageView *)backImageView{
+    if (!_backImageView) {
+        _backImageView =  [[UIImageView alloc] initWithFrame:self.view.bounds];
+        _backImageView.userInteractionEnabled = YES;
+        [_backImageView setImage:[UIImage imageNamed:@"background"]];
+    }
+    return _backImageView;
+}
 
 -(DrawBoard *)drawBoard{
     if (!_drawBoard) {
-        _drawBoard = [[DrawBoard alloc] initWithFrame:self.view.bounds];
+        _drawBoard = [[DrawBoard alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT)];
+        _drawBoard.drawBoardDelegate = self;
     }
     return _drawBoard;
 }
+
 @end

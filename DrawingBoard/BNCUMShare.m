@@ -104,15 +104,15 @@
 }
 
 //分享事件
-- (void)shareImg {
+- (void)shareImg:(UIImage *)image {
     //显示分享面板
     __weak typeof(self) tempSelf = self;
     [UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMSocialPlatformType platformType, NSDictionary *userInfo) {
-        [tempSelf shareImageToPlatformType:platformType];
+        [tempSelf shareImageToPlatformType:platformType image:image];
     }];
 }
 
-- (void)shareImageToPlatformType:(UMSocialPlatformType)platformType {
+- (void)shareImageToPlatformType:(UMSocialPlatformType)platformType image:(UIImage *)image {
     //创建分享消息对象
     UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
     
@@ -121,7 +121,7 @@
     //如果有缩略图，则设置缩略图本地
     //shareObject.thumbImage = [UIImage imageNamed:@"icon"];
     
-    [shareObject setShareImage:self.screenCapture];
+    [shareObject setShareImage:image];
     
     //分享消息对象设置分享内容对象
     messageObject.shareObject = shareObject;
@@ -244,10 +244,8 @@
     return defaultSuperView;
 }
 
-
-/**
- 截屏
- */
+/*
+// 截屏
 -(UIImage *)screenCapture{
     if (!_screenCapture) {
         CGSize imageSize = CGSizeZero;
@@ -288,6 +286,6 @@
     }
     return _screenCapture;
 }
-
+*/
 
 @end

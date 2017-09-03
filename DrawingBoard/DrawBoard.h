@@ -8,6 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+@class DrawBoard;
+@protocol DrawBoardDelegate <NSObject>
+
+-(void)cancelEdit;
+-(void)finishEditWithImage:(UIImage *)finishImage;
+
+
+@end
+
 @interface DrawBoard : UIView
+@property (nonatomic, assign) id<DrawBoardDelegate> drawBoardDelegate;
 
 @end

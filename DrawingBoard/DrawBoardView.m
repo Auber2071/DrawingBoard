@@ -30,7 +30,6 @@
 @property (nonatomic, assign) NSInteger textFieldTag;
 @property (nonatomic, strong) UITextField *textField;
 
-
 @end
 
 @implementation DrawBoardView
@@ -86,18 +85,11 @@
     CGContextSetBlendMode(context, blendMode);
     
     switch (self.selectedEditType) {
-        case EditMenuTypeRectangle:{
+        case EditMenuTypeRect:{
             CGPoint point1 = [[self.pointMutArr firstObject] CGPointValue];
             CGPoint point2 = [[self.pointMutArr lastObject] CGPointValue];
             CGRect frame = CGRectMake(point1.x, point1.y, point2.x-point1.x, point2.y-point1.y);
             CGContextStrokeRect(context, frame);
-        }
-            break;
-        case EditMenuTypeCyclo:{
-            CGPoint point1 = [[self.pointMutArr firstObject] CGPointValue];
-            CGPoint point2 = [[self.pointMutArr lastObject] CGPointValue];
-            CGRect frame = CGRectMake(point1.x, point1.y, point2.x-point1.x, point2.y-point1.y);
-            CGContextStrokeEllipseInRect(context, frame);
         }
             break;
         default:{
@@ -121,12 +113,8 @@
         
         switch (line.lineType) {
 
-            case EditMenuTypeRectangle:{
+            case EditMenuTypeRect:{
                 CGContextStrokeRect(context, [self p_drawRectOrEllipseWithLine:line]);
-            }
-                break;
-            case EditMenuTypeCyclo:{
-                CGContextStrokeEllipseInRect(context,[self p_drawRectOrEllipseWithLine:line]);
             }
                 break;
             default:{
@@ -233,8 +221,7 @@
     self.selectedEditType = selectMenuType;
     switch (selectMenuType) {
         case EditMenuTypeLine://线条
-        case EditMenuTypeRectangle://方形
-        case EditMenuTypeCyclo://圆形
+        case EditMenuTypeRect://方形
             self.lineColor = self.tempLineColor;
             break;
         case EditMenuTypeCharacter:{//文本
@@ -259,38 +246,12 @@
             }
         }
             break;
-        case EditMenuTypeGoForward:{
-            if (self.removedLinesMutArr.count>0) {
-                self.lineColor = self.tempLineColor;
-                
-                LineModel *tempLastLine = [self.removedLinesMutArr lastObject];
-                [self.linesMutArr addObject:tempLastLine];
-                [self.removedLinesMutArr removeLastObject];
-                [self setNeedsDisplay];
-            }
-        }
-            break;
-        case EditMenuTypeClearAll:{
-            if (self.linesMutArr.count>0) {
-                self.lineColor = self.tempLineColor;
-                
-                [self.linesMutArr removeAllObjects];
-                [self.removedLinesMutArr removeAllObjects];
-                [self setNeedsDisplay];
-            }
-        }
-            break;
     }
 }
 
 -(void)dealloc{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
-
-
-
-
-
 
 #pragma mark - 文字输入&缩放移动手势
 -(void)printSomething{
@@ -336,6 +297,11 @@
 
 #pragma mark 添加手势
 -(void)addGesture{
+    /*添加拖动手势*/
+    UIPanGestureRecognizer *panGesture=[[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(panTextField:)];
+    [self.textField addGestureRecognizer:panGesture];
+
+    
     /*添加捏合手势*/
     UIPinchGestureRecognizer *pinchGesture=[[UIPinchGestureRecognizer alloc]initWithTarget:self action:@selector(pinchTextField:)];
     [self.textField addGestureRecognizer:pinchGesture];
@@ -343,10 +309,6 @@
     /*添加旋转手势*/
     UIRotationGestureRecognizer *rotationGesture=[[UIRotationGestureRecognizer alloc]initWithTarget:self action:@selector(rotateTextField:)];
     [self.textField addGestureRecognizer:rotationGesture];
-    
-    /*添加拖动手势*/
-    UIPanGestureRecognizer *panGesture=[[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(panTextField:)];
-    [self.textField addGestureRecognizer:panGesture];
 }
 #pragma mark 拖动图片
 -(void)panTextField:(UIPanGestureRecognizer *)gesture{

@@ -37,7 +37,7 @@ NSString * const EditMenuTypeChangeNotification = @"EditMenuTypeChangeNotificati
         
         
         [self p_addActionBtns];
-        [self p_addCollectionView];
+        //[self p_addCollectionView];
         
     }
     return self;
@@ -51,81 +51,66 @@ NSString * const EditMenuTypeChangeNotification = @"EditMenuTypeChangeNotificati
 
 
 -(void)p_addActionBtns{
-    UIEdgeInsets btnInsets = UIEdgeInsetsMake(0, 0, 0, 0);
-    CGFloat padding = 0.f;
-    CGFloat showBtnCount = 8.f;
-    NSUInteger btnCount = 8;
-    CGFloat btnW = (CGRectGetWidth(self.frame) - btnInsets.left - btnInsets.right - padding*(showBtnCount-1))/showBtnCount;
-
-    
-    
-    CGFloat actionScrolVH = 30;
+    CGFloat actionScrolVH = CGRectGetHeight(self.frame);
     UIScrollView *actionScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.frame), actionScrolVH)];
     self.actionScrollView = actionScrollView;
-    
     actionScrollView.backgroundColor = [UIColor grayColor];
     actionScrollView.alpha = 0.8f;
     actionScrollView.showsHorizontalScrollIndicator = NO;
+    [self addSubview:actionScrollView];
+    
+    
+    
+    CGFloat padding = 0.f;
+    UIEdgeInsets btnInsets = UIEdgeInsetsMake(5, 10, 5, 10);
+    NSUInteger btnCount = 5;
+    CGFloat showBtnCount = btnCount;
+    
+    CGFloat btnW = (CGRectGetWidth(self.frame) - btnInsets.left - btnInsets.right - padding*(showBtnCount-1))/showBtnCount;
+    btnW = btnW>(CGRectGetHeight(actionScrollView.frame) - btnInsets.top - btnInsets.bottom)? (CGRectGetHeight(actionScrollView.frame) - btnInsets.top - btnInsets.bottom) : btnW;
+    padding = (CGRectGetWidth(self.frame) - btnW*showBtnCount - btnInsets.left - btnInsets.right)/(showBtnCount-1);
+    
+    
     CGFloat scrolContentSizeW = btnW*btnCount+btnInsets.left+btnInsets.right+(btnCount-1)*padding;
     [actionScrollView setContentSize:CGSizeMake(scrolContentSizeW, actionScrolVH)];
-    [self addSubview:actionScrollView];
 
     
     
     for (int i = 0; i<btnCount; i++) {
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-        [button setFrame:CGRectMake(btnInsets.left + i*(btnW + padding), btnInsets.top, btnW, CGRectGetHeight(actionScrollView.frame))];
+        [button setBackgroundColor:[UIColor grayColor]];
+        [button setFrame:CGRectMake(btnInsets.left + i*(btnW + padding), (CGRectGetHeight(actionScrollView.frame) - btnW)/2.f, btnW, btnW)];
+        [button.layer setCornerRadius: btnW/2.f];
+        button.layer.borderColor = [UIColor whiteColor].CGColor;
+        button.layer.borderWidth = 1.f;
+        
         [button addTarget:self action:@selector(p_changeAction:) forControlEvents:UIControlEventTouchUpInside];
         
         switch (i) {
             case 0:{
-                [button setTitle:@"画线" forState:UIControlStateNormal];
-                [button.titleLabel setFont:[UIFont systemFontOfSize:12.f]];
-                [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-                button.backgroundColor = [UIColor redColor];
-                self.lastButton = button;
+                [button setImage:[UIImage imageNamed:@"文字"] forState:UIControlStateNormal];
+                
                 button.tag = EditMenuTypeLine;
             }
                 break;
             case 1:{
-                [button setTitle:@"文字" forState:UIControlStateNormal];
-                [button.titleLabel setFont:[UIFont systemFontOfSize:12.f]];
-                [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+                [button setImage:[UIImage imageNamed:@"画笔"] forState:UIControlStateNormal];
                 button.tag = EditMenuTypeCharacter;
             }
                 break;
             case 2:{
-                [button setTitle:@"方形" forState:UIControlStateNormal];
-                [button.titleLabel setFont:[UIFont systemFontOfSize:12.f]];
-                [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-                button.tag = EditMenuTypeRectangle;
+                [button setImage:[UIImage imageNamed:@"图形"] forState:UIControlStateNormal];
+                button.tag = EditMenuTypeRect;
             }
                 break;
             case 3:{
-                [button setTitle:@"圆形" forState:UIControlStateNormal];
-                [button.titleLabel setFont:[UIFont systemFontOfSize:12.f]];
-                [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-                button.tag = EditMenuTypeCyclo;
-            }
-                break;
-            case 4:{
                 [button setImage:[UIImage imageNamed:@"eraser"] forState:UIControlStateNormal];
                 button.tag = EditMenuTypeEraser;
             }
                 break;
-            case 5:{
+            case 4:{
                 [button setImage:[UIImage imageNamed:@"chexiao"] forState:UIControlStateNormal];
                 button.tag = EditMenuTypeBack;
-            }
-                break;
-            case 6:{
-                [button setImage:[UIImage imageNamed:@"qianjin"] forState:UIControlStateNormal];
-                button.tag = EditMenuTypeGoForward;
-            }
-                break;
-            case 7:{
-                [button setImage:[UIImage imageNamed:@"qingkong"] forState:UIControlStateNormal];
-                button.tag = EditMenuTypeClearAll;
             }
                 break;
         }
@@ -135,12 +120,13 @@ NSString * const EditMenuTypeChangeNotification = @"EditMenuTypeChangeNotificati
 
 
 
+
+
 -(void)p_changeAction:(UIButton *)sender{
-    if (![self.lastButton isEqual:sender]) {
-        sender.backgroundColor = [UIColor redColor];
-        self.lastButton.backgroundColor = [UIColor grayColor];
-        self.lastButton = sender;
-    }
+
+    sender.backgroundColor = [UIColor redColor];
+    self.lastButton.backgroundColor = [UIColor grayColor];
+    self.lastButton = sender;
     
     [[NSNotificationCenter defaultCenter] postNotificationName:EditMenuTypeChangeNotification object:nil userInfo:[NSDictionary dictionaryWithObject:[NSNumber numberWithInteger:sender.tag] forKey:@"selectedEditMenuType"]];
 }

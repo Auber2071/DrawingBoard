@@ -8,8 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+@class ShareAndEditPhotoView;
+@protocol shareAndEditPhotoViewDelegate <NSObject>
+
+-(void)EditPhoto;
+
+@end
+
 @interface ShareAndEditPhotoView : UIView
+@property (nonatomic, assign) id<shareAndEditPhotoViewDelegate> shareAndEditDelegate;
 
 -(void)showShareAndEditView;
+-(void)dismissShareAndEditView;
 
 @end

@@ -9,6 +9,8 @@
 #import "ShareAndEditPhotoView.h"
 #import "BNCUMShare.h"
 
+#import "DrawBoard.h"
+
 typedef enum : NSUInteger {
     quitShareAndEditViewOption,
     EditPhotoOption,
@@ -19,6 +21,9 @@ static NSTimeInterval  const duration = 0.1f;
 
 @interface ShareAndEditPhotoView ()
 @property (nonatomic, strong) NSMutableArray<UIButton *> *btnMutArr;
+@property (nonatomic, strong) BNCUMShare *shareView;
+@property (nonatomic, strong) DrawBoard *drawBoard;
+
 
 @end
 
@@ -34,6 +39,29 @@ static NSTimeInterval  const duration = 0.1f;
         [self p_addBtn];
     }
     return self;
+}
+
+-(void)showShareAndEditView{
+    if (CGRectGetMinY(self.frame) < [[UIScreen mainScreen] bounds].size.height) {
+        return;
+    }
+
+    [UIView animateWithDuration:duration animations:^{
+        CGRect tempFrame = self.frame;
+        tempFrame.origin.y = ([[UIScreen mainScreen] bounds].size.height/6.f)*5;
+        self.frame = tempFrame;
+    }];
+}
+
+-(void)dismissShareAndEditView{
+    if (CGRectGetMinY(self.frame)>=[[UIScreen mainScreen] bounds].size.height) {
+        return;
+    }
+    [UIView animateWithDuration:duration animations:^{
+        CGRect tempFrame = self.frame;
+        tempFrame.origin.y = [[UIScreen mainScreen] bounds].size.height;
+        self.frame = tempFrame;
+    }];
 }
 
 -(void)layoutSubviews{
@@ -81,42 +109,6 @@ static NSTimeInterval  const duration = 0.1f;
     }
 }
 
--(void)p_clickButton:(UIButton *)sender{
-    switch (sender.tag) {
-        case quitShareAndEditViewOption:{
-            [UIView animateWithDuration:duration animations:^{
-                CGRect tempFrame = self.frame;
-                tempFrame.origin.y = [[UIScreen mainScreen] bounds].size.height;
-                self.frame = tempFrame;
-            }];
-        }
-            break;
-        case EditPhotoOption:{
-
-        }
-            break;
-        case SharePhotoOption:{
-            [UIView animateWithDuration:duration animations:^{
-                CGRect tempFrame = self.frame;
-                tempFrame.origin.y = [[UIScreen mainScreen] bounds].size.height;
-                self.frame = tempFrame;
-            }];
-            BNCUMShare *shareView = [BNCUMShare shareWithUMShare];
-            [shareView shareImg];
-        }
-            break;
-    }
-}
-
-
--(void)showShareAndEditView{
-    [UIView animateWithDuration:duration animations:^{
-        CGRect tempFrame = self.frame;
-        tempFrame.origin.y = ([[UIScreen mainScreen] bounds].size.height/6.f)*5;
-        self.frame = tempFrame;
-    }];
-}
-
 -(UIImage *)p_ScreenShot{
     UIImage *screenCapture = nil;
     CGSize imageSize = CGSizeZero;
@@ -155,6 +147,29 @@ static NSTimeInterval  const duration = 0.1f;
     screenCapture = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     return screenCapture;
+}
+
+
+
+-(void)p_clickButton:(UIButton *)sender{
+    [self dismissShareAndEditView];
+    
+    switch (sender.tag) {
+        case quitShareAndEditViewOption:{//返回
+        }
+            break;
+        case EditPhotoOption:{//画板面板弹出
+            if (self.shareAndEditDelegate && [self.shareAndEditDelegate respondsToSelector:@selector(EditPhoto)]) {
+                [self.shareAndEditDelegate EditPhoto];
+            }
+        }
+            break;
+        case SharePhotoOption:{//分享
+            self.shareView = [BNCUMShare shareWithUMShare];
+            [self.shareView shareImg:[self p_ScreenShot]];
+        }
+            break;
+    }
 }
 
 
