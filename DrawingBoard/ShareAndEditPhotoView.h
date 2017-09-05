@@ -10,9 +10,9 @@
 
 @class ShareAndEditPhotoView;
 @protocol shareAndEditPhotoViewDelegate <NSObject>
-
+-(void)back;
 -(void)EditPhoto;
-
+-(void)shareImage;
 @end
 
 @interface ShareAndEditPhotoView : UIView

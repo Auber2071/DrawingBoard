@@ -7,21 +7,25 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CollectionView.h"
 
-UIKIT_EXTERN NSString * const EditMenuTypeChangeNotification;
-
-
-typedef NS_ENUM(NSInteger,EditMenuType) {
-    EditMenuTypeLine,
-    EditMenuTypeCharacter,
-    EditMenuTypeRect,
-    EditMenuTypeEraser,
-    EditMenuTypeBack
+typedef NS_ENUM(NSInteger,EditMenuTypeOptions) {
+    EditMenuTypeOptionCharacter,
+    EditMenuTypeOptionLine,
+    EditMenuTypeOptionRect,
+    EditMenuTypeOptionEraser,
+    EditMenuTypeOptionBack
 };
 
+@class EditView;
+
+@protocol EditViewDelegate <NSObject>
+-(void)EditView:(EditView *)sender changedDrawingOption:(EditMenuTypeOptions)drawingOption;
+
+
+@end
 
 @interface EditView : UIView
+@property (nonatomic, assign) id<EditViewDelegate> editViewDelegate;
 
 
 @end

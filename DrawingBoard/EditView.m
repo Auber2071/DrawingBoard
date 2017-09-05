@@ -7,20 +7,20 @@
 //
 
 #import "EditView.h"
-
-
-NSString * const EditMenuTypeChangeNotification = @"EditMenuTypeChangeNotification";
-
+#import "CollectionView.h"
 
 @interface EditView ()
 @property (nonatomic, strong) UIScrollView *actionScrollView;
-
-@property (nonatomic, strong) NSMutableArray *colorMutArr;
-@property (nonatomic, strong) UIColor *lineColor;
-@property (nonatomic, assign) EditMenuType selectEditMenuTye;
-
 @property (nonatomic, strong) UIButton *lastButton;
 
+@property (nonatomic, strong) UIScrollView *colorBackGroundView;
+@property (nonatomic, strong) NSArray *colorArr;
+
+@property (nonatomic, strong) UIButton *lastBtn;
+@property (nonatomic, assign) UIEdgeInsets buttonInset;
+@property (nonatomic, assign) CGFloat normalWidth;
+@property (nonatomic, assign) CGFloat largeWidth;
+@property (nonatomic, assign) CGFloat padding;
 @end
 
 @implementation EditView
@@ -31,21 +31,10 @@ NSString * const EditMenuTypeChangeNotification = @"EditMenuTypeChangeNotificati
     if (self) {
         self.userInteractionEnabled = YES;
         [self setBackgroundColor:[UIColor clearColor]];
-        _lineColor = [UIColor redColor];
-        _selectEditMenuTye = EditMenuTypeLine;
-        
-        
-        
         [self p_addActionBtns];
-        //[self p_addCollectionView];
-        
+        [self p_addColorView];
     }
     return self;
-}
-
--(void)p_addCollectionView{
-    CollectionView *collectionView = [[CollectionView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.actionScrollView.frame), CGRectGetWidth(self.frame), CGRectGetHeight(self.frame)-CGRectGetHeight(self.actionScrollView.frame))];
-    [self addSubview:collectionView];
 }
 
 
@@ -54,8 +43,7 @@ NSString * const EditMenuTypeChangeNotification = @"EditMenuTypeChangeNotificati
     CGFloat actionScrolVH = CGRectGetHeight(self.frame);
     UIScrollView *actionScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.frame), actionScrolVH)];
     self.actionScrollView = actionScrollView;
-    actionScrollView.backgroundColor = [UIColor grayColor];
-    actionScrollView.alpha = 0.8f;
+    actionScrollView.backgroundColor = UIColorFromRGB(0xDCDCDC);
     actionScrollView.showsHorizontalScrollIndicator = NO;
     [self addSubview:actionScrollView];
     
@@ -78,39 +66,42 @@ NSString * const EditMenuTypeChangeNotification = @"EditMenuTypeChangeNotificati
     
     for (int i = 0; i<btnCount; i++) {
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-        [button setBackgroundColor:[UIColor grayColor]];
+        [button setBackgroundColor:UIColorFromRGB(0xC0C0C0)];
         [button setFrame:CGRectMake(btnInsets.left + i*(btnW + padding), (CGRectGetHeight(actionScrollView.frame) - btnW)/2.f, btnW, btnW)];
         [button.layer setCornerRadius: btnW/2.f];
         button.layer.borderColor = [UIColor whiteColor].CGColor;
         button.layer.borderWidth = 1.f;
         
-        [button addTarget:self action:@selector(p_changeAction:) forControlEvents:UIControlEventTouchUpInside];
+        [button addTarget:self action:@selector(p_selectEditType:) forControlEvents:UIControlEventTouchUpInside];
         
         switch (i) {
             case 0:{
                 [button setImage:[UIImage imageNamed:@"文字"] forState:UIControlStateNormal];
-                
-                button.tag = EditMenuTypeLine;
+                button.tag = EditMenuTypeOptionCharacter;
             }
                 break;
             case 1:{
                 [button setImage:[UIImage imageNamed:@"画笔"] forState:UIControlStateNormal];
-                button.tag = EditMenuTypeCharacter;
+                [button setImage:[UIImage imageNamed:@"画笔_selected"] forState:UIControlStateSelected];
+                button.tag = EditMenuTypeOptionLine;
             }
                 break;
             case 2:{
                 [button setImage:[UIImage imageNamed:@"图形"] forState:UIControlStateNormal];
-                button.tag = EditMenuTypeRect;
+                [button setImage:[UIImage imageNamed:@"图形_selected"] forState:UIControlStateSelected];
+                button.tag = EditMenuTypeOptionRect;
             }
                 break;
             case 3:{
-                [button setImage:[UIImage imageNamed:@"eraser"] forState:UIControlStateNormal];
-                button.tag = EditMenuTypeEraser;
+                [button setImage:[UIImage imageNamed:@"橡皮"] forState:UIControlStateNormal];
+                [button setImage:[UIImage imageNamed:@"橡皮_selected"] forState:UIControlStateSelected];
+                button.tag = EditMenuTypeOptionEraser;
             }
                 break;
             case 4:{
-                [button setImage:[UIImage imageNamed:@"chexiao"] forState:UIControlStateNormal];
-                button.tag = EditMenuTypeBack;
+                [button setImage:[UIImage imageNamed:@"返回"] forState:UIControlStateNormal];
+                [button setImage:[UIImage imageNamed:@"返回_selected"] forState:UIControlStateHighlighted];
+                button.tag = EditMenuTypeOptionBack;
             }
                 break;
         }
@@ -118,17 +109,95 @@ NSString * const EditMenuTypeChangeNotification = @"EditMenuTypeChangeNotificati
     }
 }
 
-
-
-
-
--(void)p_changeAction:(UIButton *)sender{
-
-    sender.backgroundColor = [UIColor redColor];
-    self.lastButton.backgroundColor = [UIColor grayColor];
-    self.lastButton = sender;
+-(void)p_selectEditType:(UIButton *)sender{
+    if (!sender.isSelected) {
+        self.lastButton.selected = !self.lastButton.selected;
+        sender.selected = !sender.selected;
+        self.lastButton = sender;
+    }
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:EditMenuTypeChangeNotification object:nil userInfo:[NSDictionary dictionaryWithObject:[NSNumber numberWithInteger:sender.tag] forKey:@"selectedEditMenuType"]];
+    if (self.editViewDelegate && [self.editViewDelegate respondsToSelector:@selector(EditView:changedDrawingOption:)]) {
+        [self.editViewDelegate EditView:self changedDrawingOption:sender.tag];
+    }
+}
+
+
+
+
+
+
+
+-(void)p_addColorView{
+    [self addSubview:self.colorBackGroundView];
+    [self p_addColorOptions];
+    
+}
+
+-(UIScrollView *)colorBackGroundView{
+    if (!_colorBackGroundView) {
+        _colorBackGroundView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, -SCREEN_HEIGHT*0.1, SCREEN_WIDTH, SCREEN_HEIGHT*0.1)];
+        _colorBackGroundView.showsHorizontalScrollIndicator = NO;
+        _colorBackGroundView.backgroundColor = [UIColor clearColor];
+    }
+    return _colorBackGroundView;
+}
+
+-(void)p_addColorOptions{
+    self.buttonInset = UIEdgeInsetsMake(0, SCREEN_WIDTH*0.074, 0, SCREEN_WIDTH*0.074);
+    self.normalWidth = 0.07*SCREEN_WIDTH;
+    self.largeWidth = 0.1*SCREEN_WIDTH;
+    self.padding = (SCREEN_WIDTH - self.buttonInset.left - self.buttonInset.right - self.normalWidth*self.colorArr.count)/(self.colorArr.count-1);
+    
+    
+    for (int i = 0; i<self.colorArr.count; i++) {
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+        [button setBackgroundColor:self.colorArr[i]];
+        [button setFrame:CGRectMake(0, 0, self.normalWidth, self.normalWidth)];
+        
+        button.center = CGPointMake(self.buttonInset.left+self.normalWidth/2.f +i*(self.normalWidth+self.padding), CGRectGetHeight(self.colorBackGroundView.frame)/2.f);
+        
+        button.layer.cornerRadius = button.size.width/2.f;
+        
+        button.tag = (NSInteger)i;
+        [button addTarget:self action:@selector(p_clickColorOption:) forControlEvents:UIControlEventTouchUpInside];
+        [self.colorBackGroundView addSubview:button];
+        
+        if (i == 0) {
+            self.lastBtn = button;
+            button.selected = YES;
+            [self p_reserBtnFrameWithButton:button isLast:NO tag:(NSUInteger)i];
+        }
+    }
+}
+
+
+-(void)p_clickColorOption:(UIButton *)sender{
+    if (!sender.isSelected) {
+        self.lastBtn.selected = !self.lastBtn.selected;
+        sender.selected = !sender.selected;
+        
+        [self p_reserBtnFrameWithButton:sender isLast:NO tag:sender.tag];
+        [self p_reserBtnFrameWithButton:self.lastBtn isLast:YES tag:self.lastBtn.tag];
+        self.lastBtn = sender;
+    }
+}
+
+-(void)p_reserBtnFrameWithButton:(UIButton *)sender isLast:(BOOL)isLast tag:(NSInteger)tag{
+    if (isLast) {
+        sender.size = CGSizeMake(self.normalWidth, self.normalWidth);
+    }else{
+        sender.size = CGSizeMake(self.largeWidth, self.largeWidth);
+    }
+    sender.layer.cornerRadius = sender.size.width/2.f;
+    sender.center = CGPointMake(self.buttonInset.left+self.normalWidth/2.f +tag*(self.normalWidth+self.padding), CGRectGetHeight(self.colorBackGroundView.frame)/2.f);
+}
+
+
+-(NSArray *)colorArr{
+    if (!_colorArr) {
+        _colorArr = @[[UIColor blackColor],[UIColor redColor],[UIColor greenColor],[UIColor blueColor],[UIColor yellowColor],[UIColor purpleColor]];
+    }
+    return _colorArr;
 }
 
 @end

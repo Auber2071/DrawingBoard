@@ -22,7 +22,7 @@
     [self.view setBackgroundColor:[UIColor whiteColor]];
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    [button setTitle:@"画板" forState:UIControlStateNormal];
+    [button setTitle:@"button" forState:UIControlStateNormal];
     [button setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
     [button setFrame:CGRectMake(100, 100, 60, 40)];
     [button addTarget:self action:@selector(clickBtn:) forControlEvents:UIControlEventTouchUpInside];

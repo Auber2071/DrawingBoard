@@ -28,7 +28,7 @@ static NSString *CellGraphIdentifierCell = @"CellGraphIdentifierCell";
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [UIColor whiteColor];
+        self.backgroundColor = [UIColor clearColor];
         
         UICollectionViewFlowLayout *viewLayout = [[UICollectionViewFlowLayout alloc]init];
         viewLayout.itemSize = CGSizeMake(CGRectGetWidth(frame), CGRectGetHeight(frame));
@@ -38,7 +38,7 @@ static NSString *CellGraphIdentifierCell = @"CellGraphIdentifierCell";
         viewLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
         
         UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(frame), CGRectGetHeight(frame)) collectionViewLayout:viewLayout];
-        collectionView.backgroundColor = [UIColor whiteColor];
+        collectionView.backgroundColor = [UIColor clearColor];
         collectionView.dataSource = self;
         collectionView.pagingEnabled = YES;
         collectionView.showsHorizontalScrollIndicator = NO;
@@ -52,7 +52,7 @@ static NSString *CellGraphIdentifierCell = @"CellGraphIdentifierCell";
 
 #pragma mark - UICollectionViewDataSource
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return 4;
+    return 1;
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{    

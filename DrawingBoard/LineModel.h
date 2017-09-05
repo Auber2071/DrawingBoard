@@ -14,10 +14,10 @@
 @property (nonatomic, strong, readonly) UIColor *lineColor;
 @property (nonatomic, assign, readonly) CGFloat lineWidth;
 @property (nonatomic, strong, readonly) NSMutableArray<NSValue *> *lineTrackMutArr;
-@property (nonatomic, assign, readonly) EditMenuType lineType;
+@property (nonatomic, assign, readonly) EditMenuTypeOptions lineType;
 
 
 
-- (instancetype)initWithLineTrack:(NSMutableArray<NSValue *> *)lineTrack lineColor:(UIColor *)lineColor lineWidth:(CGFloat)lineWidth lineType:(EditMenuType)lineType;
+- (instancetype)initWithLineTrack:(NSMutableArray<NSValue *> *)lineTrack lineColor:(UIColor *)lineColor lineWidth:(CGFloat)lineWidth lineType:(EditMenuTypeOptions)lineType;
 
 @end

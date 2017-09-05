@@ -7,14 +7,16 @@
 //
 
 #import "TempViewController.h"
-
-
-#import "DrawBoard.h"
 #import "ShareAndEditPhotoView.h"
+#import "DrawBoardViewController.h"
 
-@interface TempViewController ()<shareAndEditPhotoViewDelegate,DrawBoardDelegate>
-@property (nonatomic, strong) DrawBoard *drawBoard;
+#import "BNCUMShare.h"
+
+
+@interface TempViewController ()<shareAndEditPhotoViewDelegate,DrawBoardViewControllerDelegaete>
 @property (nonatomic, strong) UIImageView *backImageView;
+@property (nonatomic, strong) UIImage *backImage;
+@property (nonatomic, strong) BNCUMShare *shareView;
 
 
 
@@ -26,10 +28,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.view addSubview:self.backImageView];
-    
+
     [self p_designNavigation];
     [self p_addShareAndEditView];
-    
+
 }
 
 -(void)p_addShareAndEditView{
@@ -39,8 +41,8 @@
 }
 
 -(void)p_designNavigation{
-    //[self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
-    //[self.navigationController.navigationBar setShadowImage:[[UIImage alloc]init]];
+    [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setShadowImage:[[UIImage alloc]init]];
     
     //rightNaviItem
     UIButton *shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -50,6 +52,9 @@
     UIBarButtonItem *shareBarBtnItem = [[UIBarButtonItem alloc] initWithCustomView:shareBtn];
     self.navigationItem.rightBarButtonItem = shareBarBtnItem;
 }
+-(BOOL)prefersStatusBarHidden{
+    return NO;
+}
 
 
 
@@ -58,59 +63,86 @@
 }
 
 #pragma mark - shareAndEditPhotoViewDelegate
-
+-(void)back{
+    [self.backImageView setImage:[UIImage imageNamed:@"background"]];
+}
 -(void)EditPhoto{
-
-    [self.navigationController.navigationBar setHidden:YES];
-    [self.view addSubview:self.drawBoard];
-    [UIView animateWithDuration:0.5f animations:^{
-        [self.drawBoard setFrame:self.view.bounds];
-    }];
+    DrawBoardViewController *drawBoardVC = [[DrawBoardViewController alloc] initWithImage:self.backImage];
+    drawBoardVC.drawBoardDelegate = self;
+    [self presentViewController:drawBoardVC animated:NO completion:nil];
+}
+-(void)shareImage{
+    self.shareView = [BNCUMShare shareWithUMShare];
+    [self.shareView shareImg:[self p_ScreenShot]];
 }
 
 
-#pragma mark - DrawBoardDelegate
+#pragma mark - DrawBoardViewControllerDelegaete
 -(void)cancelEdit{
-    [self.navigationController.navigationBar setHidden:NO];
-    if ([self.view.subviews containsObject:self.drawBoard]) {
-        self.drawBoard.drawBoardDelegate = nil;
-        [self.drawBoard removeFromSuperview];
-        self.drawBoard = nil;
-    }
     [self.shareAndEditView showShareAndEditView];
-
 }
 
 -(void)finishEditWithImage:(UIImage *)finishImage{
+    self.backImage = finishImage;
     [self.backImageView setImage:finishImage];
-    
-    [self.navigationController.navigationBar setHidden:NO];
-    if ([self.view.subviews containsObject:self.drawBoard]) {
-        self.drawBoard.drawBoardDelegate = nil;
-        [self.drawBoard removeFromSuperview];
-        self.drawBoard = nil;
-    }
     [self.shareAndEditView showShareAndEditView];
 }
 
 
 
+-(UIImage *)p_ScreenShot{
+    UIImage *screenCapture = nil;
+    CGSize imageSize = CGSizeZero;
+    UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
+    if (UIInterfaceOrientationIsPortrait(orientation)) {
+        imageSize = [UIScreen mainScreen].bounds.size;
+    } else {
+        imageSize = CGSizeMake([UIScreen mainScreen].bounds.size.height, [UIScreen mainScreen].bounds.size.width);
+    }
+    
+    UIGraphicsBeginImageContextWithOptions(imageSize, NO, 0);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    for (UIWindow *window in [[UIApplication sharedApplication] windows]) {
+        CGContextSaveGState(context);
+        CGContextTranslateCTM(context, window.center.x, window.center.y);
+        CGContextConcatCTM(context, window.transform);
+        CGContextTranslateCTM(context, -window.bounds.size.width * window.layer.anchorPoint.x, -window.bounds.size.height * window.layer.anchorPoint.y);
+        if (orientation == UIInterfaceOrientationLandscapeLeft) {
+            CGContextRotateCTM(context, M_PI_2);
+            CGContextTranslateCTM(context, 0, -imageSize.width);
+        } else if (orientation == UIInterfaceOrientationLandscapeRight) {
+            CGContextRotateCTM(context, -M_PI_2);
+            CGContextTranslateCTM(context, -imageSize.height, 0);
+        } else if (orientation == UIInterfaceOrientationPortraitUpsideDown) {
+            CGContextRotateCTM(context, M_PI);
+            CGContextTranslateCTM(context, -imageSize.width, -imageSize.height);
+        }
+        if ([window respondsToSelector:@selector(drawViewHierarchyInRect:afterScreenUpdates:)]) {
+            [window drawViewHierarchyInRect:window.bounds afterScreenUpdates:YES];
+        } else {
+            [window.layer renderInContext:context];
+        }
+        CGContextRestoreGState(context);
+    }
+    
+    screenCapture = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return screenCapture;
+}
 
 -(UIImageView *)backImageView{
     if (!_backImageView) {
         _backImageView =  [[UIImageView alloc] initWithFrame:self.view.bounds];
         _backImageView.userInteractionEnabled = YES;
-        [_backImageView setImage:[UIImage imageNamed:@"background"]];
+        [_backImageView setImage:self.backImage];
     }
     return _backImageView;
 }
 
--(DrawBoard *)drawBoard{
-    if (!_drawBoard) {
-        _drawBoard = [[DrawBoard alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT)];
-        _drawBoard.drawBoardDelegate = self;
+-(UIImage *)backImage{
+    if (!_backImage) {
+        _backImage = [UIImage imageNamed:@"background"];
     }
-    return _drawBoard;
+    return _backImage;
 }
-
 @end

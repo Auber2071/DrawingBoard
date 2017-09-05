@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		262188131F4FC42C00A58A09 /* DrawBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = 262188121F4FC42C00A58A09 /* DrawBoard.m */; };
+		261072DA1F5D2D320085BB64 /* DrawBoardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 261072D91F5D2D320085BB64 /* DrawBoardViewController.m */; };
+		26203C311F5E720500934900 /* InputCharacterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26203C301F5E720500934900 /* InputCharacterViewController.m */; };
+		26203C341F5E86F500934900 /* UIView+HKYExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 26203C331F5E86F500934900 /* UIView+HKYExtension.m */; };
 		262320481F4EC302008A043D /* CollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 262320471F4EC302008A043D /* CollectionView.m */; };
 		263C23521F5BCC8D006BEDDE /* icon-dx.png in Resources */ = {isa = PBXBuildFile; fileRef = 263C23371F5BCC8D006BEDDE /* icon-dx.png */; };
 		263C23531F5BCC8D006BEDDE /* icon-dx@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 263C23381F5BCC8D006BEDDE /* icon-dx@2x.png */; };
@@ -52,8 +54,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		262188111F4FC42C00A58A09 /* DrawBoard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawBoard.h; sourceTree = "<group>"; };
-		262188121F4FC42C00A58A09 /* DrawBoard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawBoard.m; sourceTree = "<group>"; };
+		261072D81F5D2D320085BB64 /* DrawBoardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawBoardViewController.h; sourceTree = "<group>"; };
+		261072D91F5D2D320085BB64 /* DrawBoardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawBoardViewController.m; sourceTree = "<group>"; };
+		26203C2F1F5E720500934900 /* InputCharacterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputCharacterViewController.h; sourceTree = "<group>"; };
+		26203C301F5E720500934900 /* InputCharacterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InputCharacterViewController.m; sourceTree = "<group>"; };
+		26203C321F5E86F500934900 /* UIView+HKYExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+HKYExtension.h"; sourceTree = "<group>"; };
+		26203C331F5E86F500934900 /* UIView+HKYExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+HKYExtension.m"; sourceTree = "<group>"; };
 		262320461F4EC302008A043D /* CollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionView.h; sourceTree = "<group>"; };
 		262320471F4EC302008A043D /* CollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionView.m; sourceTree = "<group>"; };
 		262A11DB1F52707B00D2283F /* CollectionCellDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionCellDelegate.h; sourceTree = "<group>"; };
@@ -223,8 +229,12 @@
 				26FFE9081F593AF200B828B5 /* TempViewController.m */,
 				26FFE90C1F5953F700B828B5 /* ShareAndEditPhotoView.h */,
 				26FFE90D1F5953F700B828B5 /* ShareAndEditPhotoView.m */,
-				262188111F4FC42C00A58A09 /* DrawBoard.h */,
-				262188121F4FC42C00A58A09 /* DrawBoard.m */,
+				261072D81F5D2D320085BB64 /* DrawBoardViewController.h */,
+				261072D91F5D2D320085BB64 /* DrawBoardViewController.m */,
+				26203C2F1F5E720500934900 /* InputCharacterViewController.h */,
+				26203C301F5E720500934900 /* InputCharacterViewController.m */,
+				26203C321F5E86F500934900 /* UIView+HKYExtension.h */,
+				26203C331F5E86F500934900 /* UIView+HKYExtension.m */,
 				266F52CF1F54152D00E0CD1E /* Model */,
 				266F52CE1F54152600E0CD1E /* View */,
 				266F52D01F54155700E0CD1E /* Other */,
@@ -413,16 +423,18 @@
 			files = (
 				262320481F4EC302008A043D /* CollectionView.m in Sources */,
 				26CFBE321F4C004A00CA1E58 /* ViewController.m in Sources */,
+				26203C311F5E720500934900 /* InputCharacterViewController.m in Sources */,
 				26CFBE2F1F4C004A00CA1E58 /* AppDelegate.m in Sources */,
 				26CFBE2C1F4C004A00CA1E58 /* main.m in Sources */,
 				265102681F51AEF700D461D7 /* TypeLineCollectionCell.m in Sources */,
 				26CFBE481F4C25B700CA1E58 /* EditView.m in Sources */,
 				26FFE9091F593AF200B828B5 /* TempViewController.m in Sources */,
+				261072DA1F5D2D320085BB64 /* DrawBoardViewController.m in Sources */,
 				263C23721F5BD5E0006BEDDE /* BNCUMShare.m in Sources */,
 				26FFE90E1F5953F700B828B5 /* ShareAndEditPhotoView.m in Sources */,
 				26CFBE431F4C05EE00CA1E58 /* DrawBoardView.m in Sources */,
-				262188131F4FC42C00A58A09 /* DrawBoard.m in Sources */,
 				264E9F971F50789D00806F5D /* LineModel.m in Sources */,
+				26203C341F5E86F500934900 /* UIView+HKYExtension.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
