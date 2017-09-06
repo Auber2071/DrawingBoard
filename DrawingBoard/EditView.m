@@ -7,20 +7,11 @@
 //
 
 #import "EditView.h"
-#import "CollectionView.h"
 
 @interface EditView ()
 @property (nonatomic, strong) UIScrollView *actionScrollView;
 @property (nonatomic, strong) UIButton *lastButton;
 
-@property (nonatomic, strong) UIScrollView *colorBackGroundView;
-@property (nonatomic, strong) NSArray *colorArr;
-
-@property (nonatomic, strong) UIButton *lastBtn;
-@property (nonatomic, assign) UIEdgeInsets buttonInset;
-@property (nonatomic, assign) CGFloat normalWidth;
-@property (nonatomic, assign) CGFloat largeWidth;
-@property (nonatomic, assign) CGFloat padding;
 @end
 
 @implementation EditView
@@ -32,7 +23,6 @@
         self.userInteractionEnabled = YES;
         [self setBackgroundColor:[UIColor clearColor]];
         [self p_addActionBtns];
-        [self p_addColorView];
     }
     return self;
 }
@@ -119,85 +109,6 @@
     if (self.editViewDelegate && [self.editViewDelegate respondsToSelector:@selector(EditView:changedDrawingOption:)]) {
         [self.editViewDelegate EditView:self changedDrawingOption:sender.tag];
     }
-}
-
-
-
-
-
-
-
--(void)p_addColorView{
-    [self addSubview:self.colorBackGroundView];
-    [self p_addColorOptions];
-    
-}
-
--(UIScrollView *)colorBackGroundView{
-    if (!_colorBackGroundView) {
-        _colorBackGroundView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, -SCREEN_HEIGHT*0.1, SCREEN_WIDTH, SCREEN_HEIGHT*0.1)];
-        _colorBackGroundView.showsHorizontalScrollIndicator = NO;
-        _colorBackGroundView.backgroundColor = [UIColor clearColor];
-    }
-    return _colorBackGroundView;
-}
-
--(void)p_addColorOptions{
-    self.buttonInset = UIEdgeInsetsMake(0, SCREEN_WIDTH*0.074, 0, SCREEN_WIDTH*0.074);
-    self.normalWidth = 0.07*SCREEN_WIDTH;
-    self.largeWidth = 0.1*SCREEN_WIDTH;
-    self.padding = (SCREEN_WIDTH - self.buttonInset.left - self.buttonInset.right - self.normalWidth*self.colorArr.count)/(self.colorArr.count-1);
-    
-    
-    for (int i = 0; i<self.colorArr.count; i++) {
-        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-        [button setBackgroundColor:self.colorArr[i]];
-        [button setFrame:CGRectMake(0, 0, self.normalWidth, self.normalWidth)];
-        
-        button.center = CGPointMake(self.buttonInset.left+self.normalWidth/2.f +i*(self.normalWidth+self.padding), CGRectGetHeight(self.colorBackGroundView.frame)/2.f);
-        
-        button.layer.cornerRadius = button.size.width/2.f;
-        
-        button.tag = (NSInteger)i;
-        [button addTarget:self action:@selector(p_clickColorOption:) forControlEvents:UIControlEventTouchUpInside];
-        [self.colorBackGroundView addSubview:button];
-        
-        if (i == 0) {
-            self.lastBtn = button;
-            button.selected = YES;
-            [self p_reserBtnFrameWithButton:button isLast:NO tag:(NSUInteger)i];
-        }
-    }
-}
-
-
--(void)p_clickColorOption:(UIButton *)sender{
-    if (!sender.isSelected) {
-        self.lastBtn.selected = !self.lastBtn.selected;
-        sender.selected = !sender.selected;
-        
-        [self p_reserBtnFrameWithButton:sender isLast:NO tag:sender.tag];
-        [self p_reserBtnFrameWithButton:self.lastBtn isLast:YES tag:self.lastBtn.tag];
-        self.lastBtn = sender;
-    }
-}
-
--(void)p_reserBtnFrameWithButton:(UIButton *)sender isLast:(BOOL)isLast tag:(NSInteger)tag{
-    if (isLast) {
-        sender.size = CGSizeMake(self.normalWidth, self.normalWidth);
-    }else{
-        sender.size = CGSizeMake(self.largeWidth, self.largeWidth);
-    }
-    sender.layer.cornerRadius = sender.size.width/2.f;
-    sender.center = CGPointMake(self.buttonInset.left+self.normalWidth/2.f +tag*(self.normalWidth+self.padding), CGRectGetHeight(self.colorBackGroundView.frame)/2.f);
-}
-
-
--(NSArray *)colorArr{
-    if (!_colorArr) {
-        _colorArr = @[[UIColor blackColor],[UIColor redColor],[UIColor greenColor],[UIColor blueColor],[UIColor yellowColor],[UIColor purpleColor]];
-    }
-    return _colorArr;
 }
 
 @end

@@ -12,8 +12,9 @@
 
 @optional
 
--(void)changeLineColor:(UIColor *)lineColor;
 -(void)changeLineWidth:(CGFloat)lineWidth;
+
+-(void)changeRectTypeOption:(RectTypeOptions)rectTypeOption;
 
 @end
 

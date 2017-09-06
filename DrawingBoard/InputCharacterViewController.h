@@ -19,5 +19,6 @@
 @interface InputCharacterViewController : UIViewController
 
 @property (nonatomic, assign) id<InputCharacterViewControllerDelegate> inPutCharacterDelegate;
+- (instancetype)initWithColorArr:(NSArray *)colorArr defaultColorIndex:(NSInteger)defaultColorIndex;
 
 @end

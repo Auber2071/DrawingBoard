@@ -10,6 +10,7 @@
 #import <Foundation/Foundation.h>
 #import "EditView.h"
 
+
 typedef NS_ENUM(NSInteger,DrawingStatus){
     DrawingStatusBegin,//准备绘制
     DrawingStatusMove,//正在绘制
@@ -30,6 +31,7 @@ typedef NS_ENUM(NSInteger,DrawingStatus){
 @property (nonatomic, assign) EditMenuTypeOptions drawOption;
 @property (nonatomic, assign) CGFloat lineWidth;//当前线条宽度
 @property (nonatomic, strong) UIColor *lineColor;//当前线条颜色
+@property (nonatomic, assign) RectTypeOptions rectTypeOption;
 
 
 -(void)addLabelWithText:(NSString *)text textColor:(UIColor *)textColor;

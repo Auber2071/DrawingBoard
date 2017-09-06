@@ -13,6 +13,7 @@
 // You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
 
 #import "UIView+HKYExtension.h"
+#import "DrawingBoardHeader.h"
 
 //-------------------16进制色值转换-------------------------
 #define UIColorFromRGB(rgbValue) [UIColor \

@@ -10,15 +10,32 @@
 #import "DrawBoardView.h"
 #import "EditView.h"
 #import "InputCharacterViewController.h"
+#import "ColorPaletteView.h"
 
-@interface DrawBoardViewController ()<DrawBoardViewDeletage,EditViewDelegate,InputCharacterViewControllerDelegate>
+
+@interface DrawBoardViewController ()<DrawBoardViewDeletage,ColorPaletteViewDelegate,EditViewDelegate,InputCharacterViewControllerDelegate>
 
 @property (nonatomic, strong) DrawBoardView *drawBoardView;
 @property (nonatomic, strong) EditView *editView;
+@property (nonatomic, strong) ColorPaletteView *colorPaletteView;
+
 @property (nonatomic, strong) UIImageView *drawBoardBackImgV;
 @property (nonatomic, strong) UIImage *drawBoardBackImg;
 @property (nonatomic, strong) UIButton *cancelBtn;
 @property (nonatomic, strong) UIButton *finishBtn;
+
+@property (nonatomic, assign) EditMenuTypeOptions tempOption;
+
+@property (nonatomic, strong) NSArray *colorArr;
+
+//初始默认值
+@property (nonatomic, assign) NSInteger defaultColorTag;
+@property (nonatomic, assign) NSInteger defaultLineW;
+@property (nonatomic, assign) NSInteger rectWidth;
+
+@property (nonatomic, assign) RectTypeOptions defaultRectOption;
+
+
 
 @end
 
@@ -28,6 +45,11 @@
     self = [super init];
     if (self) {
         _drawBoardBackImg = backImage;
+        _defaultLineW = 10.f;
+        _rectWidth = 5.f;
+        _defaultColorTag = 1;
+        _defaultRectOption = RectTypeOptionEllipse;
+        
     }
     return self;
 }
@@ -38,12 +60,11 @@
     [super viewDidLoad];
     [self.view addSubview:self.drawBoardBackImgV];
     [self.view addSubview:self.drawBoardView];
+    [self.view  addSubview:self.colorPaletteView];
     [self.view addSubview:self.editView];
-
+    
     [self.view addSubview:self.cancelBtn];
     [self.view addSubview:self.finishBtn];
-
-    
 }
 
 
@@ -61,15 +82,19 @@
     switch (drawingStatus) {
         case DrawingStatusBegin:{
             [UIView animateWithDuration:timerInterval animations:^{
-                CGFloat Y =  CGRectGetHeight(tempSelf.view.frame);
-                [tempSelf.editView setFrame:CGRectMake(0, Y, CGRectGetWidth(tempSelf.view.frame), CGRectGetHeight(tempSelf.view.frame) - Y)];
+                tempSelf.editView.y = SCREEN_HEIGHT;
+                if (tempSelf.tempOption == EditMenuTypeOptionLine || tempSelf.tempOption == EditMenuTypeOptionRect) {
+                    tempSelf.colorPaletteView.y = SCREEN_HEIGHT;
+                }
             }];
         }
             break;
         case DrawingStatusEnd:{
-            CGFloat Y = CGRectGetHeight(tempSelf.view.frame)/10*9;
             [UIView animateWithDuration:timerInterval animations:^{
-                [tempSelf.editView setFrame:CGRectMake(0, Y, CGRectGetWidth(tempSelf.view.frame), CGRectGetHeight(tempSelf.view.frame) - Y)];
+                tempSelf.editView.y = SCREEN_HEIGHT*0.9;
+                if (tempSelf.tempOption == EditMenuTypeOptionLine || tempSelf.tempOption == EditMenuTypeOptionRect) {
+                    tempSelf.colorPaletteView.y = SCREEN_HEIGHT*(1- 0.1 - 0.15);
+                }
             }];
         }
             break;
@@ -78,27 +103,71 @@
     }
 }
 
+#pragma mark - ColorPaletteViewDelegate
 
-#pragma mark - EditViewDelegate
--(void)EditView:(EditView *)sender changedDrawingOption:(EditMenuTypeOptions)drawingOption{
-    if (drawingOption == EditMenuTypeOptionCharacter) {
-        InputCharacterViewController *inputCharacterVC = [[InputCharacterViewController alloc] init];
-        inputCharacterVC.inPutCharacterDelegate = self;
-        [self presentViewController:inputCharacterVC animated:YES completion:nil];
-        return;
-    }
-    
-    self.drawBoardView.drawOption = drawingOption;
-    self.drawBoardView.lineColor = [UIColor redColor];
-    self.drawBoardView.lineWidth = 2.f;
+- (void)colorPaletteViewWithColor:(UIColor *)color rectTypeOption:(RectTypeOptions)rectTypeOption lineWidth:(NSUInteger)lineWidth{
+    self.defaultLineW = lineWidth;
+    self.drawBoardView.drawOption = self.tempOption;
+    self.drawBoardView.lineColor = color;
+    self.drawBoardView.lineWidth = lineWidth;
+    self.drawBoardView.rectTypeOption = rectTypeOption;
 }
+
 
 #pragma mark - InputCharacterViewControllerDelegate
 -(void)InputCharacterView:(InputCharacterViewController *)inputCharacter text:(NSString *)text textColor:(UIColor *)textColor{
     [self.drawBoardView addLabelWithText:text textColor:textColor];
 }
 
-#pragma mark - Private Method
+#pragma mark - EditViewDelegate
+-(void)EditView:(EditView *)sender changedDrawingOption:(EditMenuTypeOptions)drawingOption{
+    self.tempOption = drawingOption;
+    self.drawBoardView.drawOption = drawingOption;
+    
+    if (drawingOption == EditMenuTypeOptionLine || drawingOption == EditMenuTypeOptionRect || drawingOption == EditMenuTypeOptionEraser ) {
+        self.drawBoardView.userInteractionEnabled = YES;
+        self.drawBoardView.lineWidth = self.defaultLineW;
+    }else{
+        self.drawBoardView.userInteractionEnabled = NO;
+    }
+    
+    __weak typeof(self) tempSelf = self;
+    NSTimeInterval timerInterval = 0.2f;
+    switch (drawingOption) {
+        case EditMenuTypeOptionLine:
+        case EditMenuTypeOptionRect:{
+            [UIView animateWithDuration:timerInterval animations:^{
+                tempSelf.colorPaletteView.y = SCREEN_HEIGHT*(1-0.1 - 0.15);
+            }];
+            if (drawingOption == EditMenuTypeOptionLine) {
+                [self.colorPaletteView scrollToPage:0];
+                
+            }else if(drawingOption == EditMenuTypeOptionRect){
+                [self.colorPaletteView scrollToPage:1];
+                self.drawBoardView.lineWidth = self.rectWidth;
+            }
+        }
+            break;
+        case EditMenuTypeOptionEraser:
+        case EditMenuTypeOptionBack:{
+            [UIView animateWithDuration:timerInterval animations:^{
+                tempSelf.colorPaletteView.y = SCREEN_HEIGHT;
+            }];
+        }
+            break;
+        case EditMenuTypeOptionCharacter:{
+            [UIView animateWithDuration:timerInterval animations:^{
+                tempSelf.colorPaletteView.y = SCREEN_HEIGHT;
+            }];
+            InputCharacterViewController *inputCharacterVC = [[InputCharacterViewController alloc] initWithColorArr:self.colorArr defaultColorIndex:self.defaultColorTag];
+            inputCharacterVC.inPutCharacterDelegate = self;
+            [self presentViewController:inputCharacterVC animated:YES completion:nil];
+        }
+            break;
+    }
+}
+
+#pragma mark - Private Methods
 
 -(void)p_cancelEdit{
     if (self.drawBoardDelegate && [self.drawBoardDelegate respondsToSelector:@selector(cancelEdit)]) {
@@ -163,7 +232,11 @@
 #pragma mark - Get Method
 -(DrawBoardView *)drawBoardView{
     if (!_drawBoardView) {
-        _drawBoardView = [[DrawBoardView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame))];
+        _drawBoardView = [[DrawBoardView alloc] initWithFrame:CGRectMake(0, 0,SCREEN_WIDTH, SCREEN_HEIGHT)];
+        _drawBoardView.userInteractionEnabled = NO;
+        _drawBoardView.lineWidth = self.defaultLineW;
+        _drawBoardView.lineColor = self.colorArr[self.defaultColorTag];
+        _drawBoardView.rectTypeOption = self.defaultRectOption;
         _drawBoardView.delegate = self;
     }
     return _drawBoardView;
@@ -171,8 +244,8 @@
 
 -(EditView *)editView{
     if (!_editView) {
-        CGFloat Y = CGRectGetHeight(self.view.frame)/10*9;
-        _editView = [[EditView alloc] initWithFrame:CGRectMake(0, Y, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame) - Y)];
+        CGFloat Y = SCREEN_HEIGHT*0.9;
+        _editView = [[EditView alloc] initWithFrame:CGRectMake(0, Y, SCREEN_WIDTH, SCREEN_HEIGHT*0.1)];
         _editView.editViewDelegate = self;
     }
     return _editView;
@@ -210,5 +283,25 @@
     return _finishBtn;
 }
 
+-(ColorPaletteView *)colorPaletteView{
+    if (!_colorPaletteView) {
+        CGRect frame = CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT*0.15);
+        _colorPaletteView = [[ColorPaletteView alloc] initWithFrame:frame
+                                                           ColorArr:self.colorArr
+                                                  defaultColorIndex:self.defaultColorTag
+                                                   defaultLineWidth:self.defaultLineW
+                                              defaultRectTypeOption:self.defaultRectOption defaultRectWidth:self.rectWidth];
+        _colorPaletteView.colorPaletteViewDelegate = self;
+    }
+    return _colorPaletteView;
+}
+
+
+-(NSArray *)colorArr{
+    if (!_colorArr) {
+        _colorArr = @[[UIColor blackColor],[UIColor redColor],[UIColor greenColor],[UIColor blueColor],[UIColor yellowColor],[UIColor purpleColor]];
+    }
+    return _colorArr;
+}
 
 @end

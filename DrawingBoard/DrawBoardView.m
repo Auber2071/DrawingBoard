@@ -64,7 +64,20 @@
             CGPoint point1 = [[self.pointMutArr firstObject] CGPointValue];
             CGPoint point2 = [[self.pointMutArr lastObject] CGPointValue];
             CGRect frame = CGRectMake(point1.x, point1.y, point2.x-point1.x, point2.y-point1.y);
-            CGContextStrokeRect(context, frame);
+            switch (self.rectTypeOption) {
+                case RectTypeOptionEllipse:{
+                    CGContextStrokeEllipseInRect(context, frame);
+                }
+                    break;
+                case RectTypeOptionSquare:{
+                    CGContextStrokeRect(context, frame);
+                }
+                    break;
+                case RectTypeOptionArrows:{
+                    
+                }
+                    break;
+            }
         }
             break;
         default:{
@@ -92,7 +105,20 @@
                 CGPoint point1 = [[line.lineTrackMutArr firstObject] CGPointValue];
                 CGPoint point2 = [[line.lineTrackMutArr lastObject] CGPointValue];
                 CGRect frame = CGRectMake(point1.x, point1.y, point2.x-point1.x, point2.y-point1.y);
-                CGContextStrokeRect(context, frame);
+                switch (line.rectType) {
+                    case RectTypeOptionEllipse:{
+                        CGContextStrokeEllipseInRect(context, frame);
+                    }
+                        break;
+                    case RectTypeOptionSquare:{
+                        CGContextStrokeRect(context, frame);
+                    }
+                        break;
+                    case RectTypeOptionArrows:{
+                        
+                    }
+                        break;
+                }
             }
                 break;
             default:{
@@ -157,7 +183,7 @@
     NSLog(@"touch end x:%f y:%f",point.x,point.y);
     
     if (self.pointMutArr.count>1) {
-        LineModel *line = [[LineModel alloc] initWithLineTrack:[self.pointMutArr copy] lineColor:self.lineColor lineWidth:self.lineWidth lineType:self.drawOption];
+        LineModel *line = [[LineModel alloc] initWithLineTrack:[self.pointMutArr copy] lineColor:self.lineColor lineWidth:self.lineWidth lineType:self.drawOption rectType:self.rectTypeOption];
         [self.linesMutArr addObject:line];
     }
     [self.pointMutArr removeAllObjects];

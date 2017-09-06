@@ -15,6 +15,7 @@
 @property (nonatomic, strong) UITextView *textView;
 @property (nonatomic, strong) UIScrollView *colorBackGroundView;
 @property (nonatomic, strong) NSArray *colorArr;
+@property (nonatomic, assign) NSInteger defaultColorIndex;
 
 
 @property (nonatomic, strong) UIButton *lastBtn;
@@ -26,6 +27,15 @@
 @end
 
 @implementation InputCharacterViewController
+
+- (instancetype)initWithColorArr:(NSArray *)colorArr defaultColorIndex:(NSInteger)defaultColorIndex{
+    self = [super init];
+    if (self) {
+        _colorArr = colorArr;
+        _defaultColorIndex = defaultColorIndex;
+    }
+    return self;
+}
 -(BOOL)prefersStatusBarHidden{
     return YES;
 }
@@ -62,7 +72,7 @@
         [button addTarget:self action:@selector(p_clickColorOption:) forControlEvents:UIControlEventTouchUpInside];
         [self.colorBackGroundView addSubview:button];
         
-        if (i == 0) {
+        if (i == _defaultColorIndex) {
             self.lastBtn = button;
             button.selected = YES;
             [self p_reserBtnFrameWithButton:button isLast:NO tag:(NSUInteger)i];
@@ -101,7 +111,7 @@
 }
 -(void)p_finishClick{
     [self p_resignFirstResponder];
-    if (self.inPutCharacterDelegate && [self.inPutCharacterDelegate respondsToSelector:@selector(InputCharacterView:text:textColor:)]) {
+    if (self.textView.text.length>0 && self.inPutCharacterDelegate && [self.inPutCharacterDelegate respondsToSelector:@selector(InputCharacterView:text:textColor:)]) {
         [self.inPutCharacterDelegate InputCharacterView:self text:self.textView.text textColor:self.textView.textColor];
     }
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -179,11 +189,5 @@
     return _colorBackGroundView;
 }
 
--(NSArray *)colorArr{
-    if (!_colorArr) {
-        _colorArr = @[[UIColor blackColor],[UIColor redColor],[UIColor greenColor],[UIColor blueColor],[UIColor yellowColor],[UIColor purpleColor]];
-    }
-    return _colorArr;
-}
 
 @end

@@ -13,4 +13,6 @@
 
 @property (nonatomic, assign) id<CollectionCellDelegate> typeLineDelegate;
 
+@property (nonatomic, assign) NSUInteger defaultLineWidth;
+
 @end
