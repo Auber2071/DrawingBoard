@@ -135,6 +135,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		26191C201F61191C00BA256B /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				261072D81F5D2D320085BB64 /* DrawBoardViewController.h */,
+				261072D91F5D2D320085BB64 /* DrawBoardViewController.m */,
+				26203C2F1F5E720500934900 /* InputCharacterViewController.h */,
+				26203C301F5E720500934900 /* InputCharacterViewController.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		26191C211F611E7500BA256B /* Share */ = {
+			isa = PBXGroup;
+			children = (
+				263C23701F5BD5E0006BEDDE /* BNCUMShare.h */,
+				263C23711F5BD5E0006BEDDE /* BNCUMShare.m */,
+			);
+			name = Share;
+			sourceTree = "<group>";
+		};
 		263C23361F5BCC8D006BEDDE /* Images */ = {
 			isa = PBXGroup;
 			children = (
@@ -172,6 +192,8 @@
 		266F52CE1F54152600E0CD1E /* View */ = {
 			isa = PBXGroup;
 			children = (
+				26FFE90C1F5953F700B828B5 /* ShareAndEditPhotoView.h */,
+				26FFE90D1F5953F700B828B5 /* ShareAndEditPhotoView.m */,
 				26CFBE411F4C05EE00CA1E58 /* DrawBoardView.h */,
 				26CFBE421F4C05EE00CA1E58 /* DrawBoardView.m */,
 				26CFBE461F4C25B700CA1E58 /* EditView.h */,
@@ -198,6 +220,7 @@
 		266F52D01F54155700E0CD1E /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				261A00571F60012300AFC5B2 /* DrawingBoardHeader.h */,
 				26203C321F5E86F500934900 /* UIView+HKYExtension.h */,
 				26203C331F5E86F500934900 /* UIView+HKYExtension.m */,
 				262A11DB1F52707B00D2283F /* CollectionCellDelegate.h */,
@@ -231,20 +254,13 @@
 				26CFBE301F4C004A00CA1E58 /* ViewController.h */,
 				26CFBE311F4C004A00CA1E58 /* ViewController.m */,
 				263C23731F5BD61D006BEDDE /* DrawingBoard.pch */,
-				263C23701F5BD5E0006BEDDE /* BNCUMShare.h */,
-				263C23711F5BD5E0006BEDDE /* BNCUMShare.m */,
 				26FFE9071F593AF200B828B5 /* TempViewController.h */,
 				26FFE9081F593AF200B828B5 /* TempViewController.m */,
-				26FFE90C1F5953F700B828B5 /* ShareAndEditPhotoView.h */,
-				26FFE90D1F5953F700B828B5 /* ShareAndEditPhotoView.m */,
-				261072D81F5D2D320085BB64 /* DrawBoardViewController.h */,
-				261072D91F5D2D320085BB64 /* DrawBoardViewController.m */,
-				26203C2F1F5E720500934900 /* InputCharacterViewController.h */,
-				26203C301F5E720500934900 /* InputCharacterViewController.m */,
-				261A00571F60012300AFC5B2 /* DrawingBoardHeader.h */,
-				266F52CF1F54152D00E0CD1E /* Model */,
+				26191C201F61191C00BA256B /* Controller */,
 				266F52CE1F54152600E0CD1E /* View */,
+				266F52CF1F54152D00E0CD1E /* Model */,
 				266F52D01F54155700E0CD1E /* Other */,
+				26191C211F611E7500BA256B /* Share */,
 				263C23361F5BCC8D006BEDDE /* Images */,
 				26CFBE2A1F4C004A00CA1E58 /* Supporting Files */,
 			);

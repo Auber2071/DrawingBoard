@@ -7,7 +7,6 @@
 //
 
 #import "ShareAndEditPhotoView.h"
-#import "DrawBoard.h"
 
 typedef enum : NSUInteger {
     quitShareAndEditViewOption,
@@ -19,7 +18,6 @@ static NSTimeInterval  const duration = 0.1f;
 
 @interface ShareAndEditPhotoView ()
 @property (nonatomic, strong) NSMutableArray<UIButton *> *btnMutArr;
-@property (nonatomic, strong) DrawBoard *drawBoard;
 
 
 @end

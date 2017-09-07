@@ -58,18 +58,14 @@
 }
 -(void)viewDidLoad{
     [super viewDidLoad];
-    [self.view addSubview:self.drawBoardBackImgV];
-    [self.view addSubview:self.drawBoardView];
-    [self.view  addSubview:self.colorPaletteView];
-    [self.view addSubview:self.editView];
+    self.view = self.drawBoardBackImgV;
+    [self.drawBoardBackImgV addSubview:self.drawBoardView];
+    [self.drawBoardBackImgV addSubview:self.colorPaletteView];
+    [self.drawBoardBackImgV addSubview:self.editView];
     
-    [self.view addSubview:self.cancelBtn];
-    [self.view addSubview:self.finishBtn];
+    [self.drawBoardBackImgV addSubview:self.cancelBtn];
+    [self.drawBoardBackImgV addSubview:self.finishBtn];
 }
-
-
-
-
 
 
 #pragma mark - DrawBoardViewDeletage
@@ -103,26 +99,29 @@
     }
 }
 
-#pragma mark - ColorPaletteViewDelegate
-
-- (void)colorPaletteViewWithColor:(UIColor *)color rectTypeOption:(RectTypeOptions)rectTypeOption lineWidth:(NSUInteger)lineWidth{
-    self.defaultLineW = lineWidth;
-    self.drawBoardView.drawOption = self.tempOption;
-    self.drawBoardView.lineColor = color;
-    self.drawBoardView.lineWidth = lineWidth;
-    self.drawBoardView.rectTypeOption = rectTypeOption;
-}
-
-
 #pragma mark - InputCharacterViewControllerDelegate
 -(void)InputCharacterView:(InputCharacterViewController *)inputCharacter text:(NSString *)text textColor:(UIColor *)textColor{
     [self.drawBoardView addLabelWithText:text textColor:textColor];
 }
 
+#pragma mark - ColorPaletteViewDelegate
+- (void)colorPaletteViewWithColor:(UIColor *)color rectTypeOption:(RectTypeOptions)rectTypeOption lineWidth:(NSUInteger)lineWidth{
+    if (self.tempOption == EditMenuTypeOptionRect) {
+        self.rectWidth = lineWidth;
+    }else if(self.tempOption == EditMenuTypeOptionLine){
+        self.defaultLineW = lineWidth;
+    }
+    
+    self.drawBoardView.editTypeOption = self.tempOption;
+    self.drawBoardView.lineColor = color;
+    self.drawBoardView.lineWidth = lineWidth;
+    self.drawBoardView.rectTypeOption = rectTypeOption;
+}
+
 #pragma mark - EditViewDelegate
 -(void)EditView:(EditView *)sender changedDrawingOption:(EditMenuTypeOptions)drawingOption{
     self.tempOption = drawingOption;
-    self.drawBoardView.drawOption = drawingOption;
+    self.drawBoardView.editTypeOption = drawingOption;
     
     if (drawingOption == EditMenuTypeOptionLine || drawingOption == EditMenuTypeOptionRect || drawingOption == EditMenuTypeOptionEraser ) {
         self.drawBoardView.userInteractionEnabled = YES;
@@ -134,18 +133,20 @@
     __weak typeof(self) tempSelf = self;
     NSTimeInterval timerInterval = 0.2f;
     switch (drawingOption) {
-        case EditMenuTypeOptionLine:
+        case EditMenuTypeOptionLine:{
+            [UIView animateWithDuration:timerInterval animations:^{
+                tempSelf.colorPaletteView.y = SCREEN_HEIGHT*(1-0.1 - 0.15);
+            }];
+            [self.colorPaletteView scrollToPage:0];
+            self.drawBoardView.lineWidth = self.defaultLineW;
+        }
+            break;
         case EditMenuTypeOptionRect:{
             [UIView animateWithDuration:timerInterval animations:^{
                 tempSelf.colorPaletteView.y = SCREEN_HEIGHT*(1-0.1 - 0.15);
             }];
-            if (drawingOption == EditMenuTypeOptionLine) {
-                [self.colorPaletteView scrollToPage:0];
-                
-            }else if(drawingOption == EditMenuTypeOptionRect){
-                [self.colorPaletteView scrollToPage:1];
-                self.drawBoardView.lineWidth = self.rectWidth;
-            }
+            [self.colorPaletteView scrollToPage:1];
+            self.drawBoardView.lineWidth = self.rectWidth;
         }
             break;
         case EditMenuTypeOptionEraser:
@@ -177,9 +178,15 @@
 }
 -(void)p_finishEdit{
     if (self.drawBoardDelegate && [self.drawBoardDelegate respondsToSelector:@selector(finishEditWithImage:)]) {
+        
+        [self.colorPaletteView removeFromSuperview];
         [self.editView removeFromSuperview];
         [self.cancelBtn removeFromSuperview];
         [self.finishBtn removeFromSuperview];
+        self.colorPaletteView = nil;
+        self.editView = nil;
+        self.cancelBtn = nil;
+        self.finishBtn = nil;
         
         [self.drawBoardDelegate finishEditWithImage:[self p_ScreenShot]];
     }
@@ -230,6 +237,15 @@
 
 
 #pragma mark - Get Method
+-(UIImageView *)drawBoardBackImgV{
+    if (!_drawBoardBackImgV) {
+        _drawBoardBackImgV = [[UIImageView alloc] initWithFrame:self.view.bounds];
+        [_drawBoardBackImgV setImage:self.drawBoardBackImg];
+        _drawBoardBackImgV.userInteractionEnabled = YES;
+    }
+    return _drawBoardBackImgV;
+}
+
 -(DrawBoardView *)drawBoardView{
     if (!_drawBoardView) {
         _drawBoardView = [[DrawBoardView alloc] initWithFrame:CGRectMake(0, 0,SCREEN_WIDTH, SCREEN_HEIGHT)];
@@ -251,13 +267,8 @@
     return _editView;
 }
 
--(UIImageView *)drawBoardBackImgV{
-    if (!_drawBoardBackImgV) {
-        _drawBoardBackImgV = [[UIImageView alloc] initWithFrame:self.view.bounds];
-        [_drawBoardBackImgV setImage:self.drawBoardBackImg];
-    }
-    return _drawBoardBackImgV;
-}
+
+
 -(UIButton *)cancelBtn{
     if (!_cancelBtn) {
         _cancelBtn = [UIButton buttonWithType:UIButtonTypeCustom];

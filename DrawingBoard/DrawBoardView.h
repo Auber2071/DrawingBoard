@@ -28,7 +28,7 @@ typedef NS_ENUM(NSInteger,DrawingStatus){
 @interface DrawBoardView : UIView
 
 @property (nonatomic, assign) id<DrawBoardViewDeletage> delegate;
-@property (nonatomic, assign) EditMenuTypeOptions drawOption;
+@property (nonatomic, assign) EditMenuTypeOptions editTypeOption;
 @property (nonatomic, assign) CGFloat lineWidth;//当前线条宽度
 @property (nonatomic, strong) UIColor *lineColor;//当前线条颜色
 @property (nonatomic, assign) RectTypeOptions rectTypeOption;

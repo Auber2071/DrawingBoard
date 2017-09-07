@@ -41,8 +41,8 @@
 }
 
 -(void)p_designNavigation{
-    [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
-    [self.navigationController.navigationBar setShadowImage:[[UIImage alloc]init]];
+//    [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
+//    [self.navigationController.navigationBar setShadowImage:[[UIImage alloc]init]];
     
     //rightNaviItem
     UIButton *shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -52,9 +52,7 @@
     UIBarButtonItem *shareBarBtnItem = [[UIBarButtonItem alloc] initWithCustomView:shareBtn];
     self.navigationItem.rightBarButtonItem = shareBarBtnItem;
 }
--(BOOL)prefersStatusBarHidden{
-    return NO;
-}
+
 
 
 
@@ -62,15 +60,21 @@
     [self.shareAndEditView showShareAndEditView];
 }
 
+
+
+
+
 #pragma mark - shareAndEditPhotoViewDelegate
 -(void)back{
     [self.backImageView setImage:[UIImage imageNamed:@"background"]];
 }
+
 -(void)EditPhoto{
     DrawBoardViewController *drawBoardVC = [[DrawBoardViewController alloc] initWithImage:self.backImage];
     drawBoardVC.drawBoardDelegate = self;
     [self presentViewController:drawBoardVC animated:NO completion:nil];
 }
+
 -(void)shareImage{
     self.shareView = [BNCUMShare shareWithUMShare];
     [self.shareView shareImg:[self p_ScreenShot]];

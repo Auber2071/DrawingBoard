@@ -28,7 +28,6 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 #   define DLog(...)
 #endif
 
-
 //-------------------屏幕尺寸-------------------------
 #define SCREEN_HEIGHT  [[UIScreen mainScreen] bounds].size.height
 #define SCREEN_WIDTH  [[UIScreen mainScreen] bounds].size.width
@@ -36,6 +35,7 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 #define StateBar_Height ([UIApplication sharedApplication].statusBarFrame.size.height)//20
 #define NavBar_Height (self.navigationController.navigationBar.frame.size.height)
 #define TabBar_Height self.tabBarController.tabBar.frame.size.height
+
 
 
 #endif /* DrawingBoard_pch */

@@ -12,22 +12,20 @@
 
 @property (nonatomic, strong, readwrite) UIColor *lineColor;
 @property (nonatomic, assign, readwrite) CGFloat lineWidth;
-@property (nonatomic, strong, readwrite) NSMutableArray<NSValue *> *lineTrackMutArr;
-@property (nonatomic, assign, readwrite) EditMenuTypeOptions lineType;
+@property (nonatomic, assign, readwrite) EditMenuTypeOptions editType;
 @property (nonatomic, assign, readwrite) RectTypeOptions rectType;
 
 @end
 
 @implementation LineModel
 
-- (instancetype)initWithLineTrack:(NSMutableArray<NSValue *> *)lineTrack lineColor:(UIColor *)lineColor lineWidth:(CGFloat)lineWidth lineType:(EditMenuTypeOptions)lineType rectType:(RectTypeOptions)rectType{
+- (instancetype)initWithLineColor:(UIColor *)lineColor lineWidth:(CGFloat)lineWidth editType:(EditMenuTypeOptions)editType rectType:(RectTypeOptions)rectType{
     
     self = [super init];
     if (self) {
         _lineColor = lineColor;
         _lineWidth = lineWidth;
-        _lineTrackMutArr = lineTrack;
-        _lineType = lineType;
+        _editType = editType;
         _rectType = rectType;
     }
     return self;

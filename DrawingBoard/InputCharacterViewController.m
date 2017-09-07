@@ -175,6 +175,7 @@
         _textView = [[UITextView alloc] initWithFrame:CGRectMake(textViewInset.left, CGRectGetMaxY(self.cancelBtn.frame)+textViewInset.top, width, SCREEN_HEIGHT/2.f)];
         _textView.backgroundColor = UIColorFromRGB(0xfafafa);
         _textView.font = [UIFont systemFontOfSize:16.f];
+        _textView.textColor = self.colorArr[self.defaultColorIndex];
         _textView.layer.cornerRadius = 5.f;
     }
     return _textView;

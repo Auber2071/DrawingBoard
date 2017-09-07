@@ -51,6 +51,7 @@ static NSString *CellRectIdentifierCell = @"CellRectIdentifierCell";
 
         _selectedColor = colorArr[defaultColorIndex];
         _defaultRectWidth = defaultRectWidth;
+        _page = 0;
         
         [self addSubview:self.collectionView];
         [self addSubview:self.colorBackGroundView];
@@ -148,7 +149,7 @@ static NSString *CellRectIdentifierCell = @"CellRectIdentifierCell";
     
     _selectedColor = self.colorArr[sender.tag];
     if (self.colorPaletteViewDelegate && [self.colorPaletteViewDelegate respondsToSelector:@selector(colorPaletteViewWithColor:rectTypeOption:lineWidth:)]) {
-        [self.colorPaletteViewDelegate colorPaletteViewWithColor:_selectedColor rectTypeOption:self.selectedRectType lineWidth:(self.page == 0?self.lineWidth:_defaultRectWidth)];
+        [self.colorPaletteViewDelegate colorPaletteViewWithColor:_selectedColor rectTypeOption:self.selectedRectType lineWidth:(self.page == 0 ? self.lineWidth:_defaultRectWidth)];
     }
 }
 

@@ -20,6 +20,7 @@
 @property (nonatomic, strong) NSMutableArray<LineModel *> *linesMutArr;
 @property (nonatomic, strong) NSMutableArray<LineModel *> *removedLinesMutArr;//删除的线条
 @property (nonatomic, strong) NSMutableArray<UILabel *> *labelMutArr;
+@property (nonatomic, strong) LineModel *currentLine;
 
 
 
@@ -49,22 +50,27 @@
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetLineCap(context, kCGLineCapRound);
     
-    [self p_drawOldPath:context];
-    [self p_drawCurrentPath:context];
+    [self p_drawPath:context line:self.currentLine];
+    for (int j = 0 ; j < [self.linesMutArr count]; j++) {
+        LineModel *line = [self.linesMutArr objectAtIndex:j];
+        [self p_drawPath:context line:line];
+    }
 }
 
--(void)p_drawCurrentPath:(CGContextRef)context{
-    CGContextSetStrokeColorWithColor(context, self.lineColor.CGColor);
-    CGContextSetLineWidth(context, self.lineWidth);
-    CGBlendMode blendMode = self.drawOption == EditMenuTypeOptionEraser ? kCGBlendModeDestinationIn : kCGBlendModeNormal;
+-(void)p_drawPath:(CGContextRef)context line:(LineModel *)line{
+    UIColor *color = (line.editType == EditMenuTypeOptionEraser ? [UIColor clearColor] : line.lineColor);
+    CGContextSetStrokeColorWithColor(context, color.CGColor);
+    CGContextSetLineWidth(context, line.lineWidth);
+    CGBlendMode blendMode = (line.editType == EditMenuTypeOptionEraser ? kCGBlendModeDestinationIn : kCGBlendModeNormal);
     CGContextSetBlendMode(context, blendMode);
     
-    switch (self.drawOption) {
+    switch (line.editType) {
+            
         case EditMenuTypeOptionRect:{
-            CGPoint point1 = [[self.pointMutArr firstObject] CGPointValue];
-            CGPoint point2 = [[self.pointMutArr lastObject] CGPointValue];
+            CGPoint point1 = [[line.lineTrackMutArr firstObject] CGPointValue];
+            CGPoint point2 = [[line.lineTrackMutArr lastObject] CGPointValue];
             CGRect frame = CGRectMake(point1.x, point1.y, point2.x-point1.x, point2.y-point1.y);
-            switch (self.rectTypeOption) {
+            switch (line.rectType) {
                 case RectTypeOptionEllipse:{
                     CGContextStrokeEllipseInRect(context, frame);
                 }
@@ -81,9 +87,10 @@
         }
             break;
         default:{
-            for (int i = 0; i<((int)self.pointMutArr.count - 1); i++) {
-                CGPoint point1 = [[self.pointMutArr objectAtIndex:i] CGPointValue];
-                CGPoint point2 = [[self.pointMutArr objectAtIndex:(i+1)] CGPointValue];
+            
+            for (int i = 1;i < line.lineTrackMutArr.count; i++){
+                CGPoint point1 = [[line.lineTrackMutArr objectAtIndex:i-1] CGPointValue];
+                CGPoint point2 = [[line.lineTrackMutArr objectAtIndex:(i)] CGPointValue];
                 CGContextMoveToPoint(context, point1.x, point1.y);
                 CGContextAddLineToPoint(context, point2.x, point2.y);
                 CGContextStrokePath(context);
@@ -92,63 +99,14 @@
             break;
     }
 }
-
--(void)p_drawOldPath:(CGContextRef)context{//历史path
-    for (int j = 0 ; j < [self.linesMutArr count]; j++) {
-        LineModel *line = [self.linesMutArr objectAtIndex:j];
-        CGContextSetStrokeColorWithColor(context, line.lineColor.CGColor);
-        CGContextSetLineWidth(context, line.lineWidth);
-        
-        switch (line.lineType) {
-
-            case EditMenuTypeOptionRect:{
-                CGPoint point1 = [[line.lineTrackMutArr firstObject] CGPointValue];
-                CGPoint point2 = [[line.lineTrackMutArr lastObject] CGPointValue];
-                CGRect frame = CGRectMake(point1.x, point1.y, point2.x-point1.x, point2.y-point1.y);
-                switch (line.rectType) {
-                    case RectTypeOptionEllipse:{
-                        CGContextStrokeEllipseInRect(context, frame);
-                    }
-                        break;
-                    case RectTypeOptionSquare:{
-                        CGContextStrokeRect(context, frame);
-                    }
-                        break;
-                    case RectTypeOptionArrows:{
-                        
-                    }
-                        break;
-                }
-            }
-                break;
-            default:{
-                //直线或曲线
-                CGBlendMode blendMode = kCGBlendModeNormal;
-                if (line.lineType == EditMenuTypeOptionEraser) {
-                    blendMode = kCGBlendModeDestinationIn;
-                }
-                CGContextSetBlendMode(context, blendMode);
-
-                for (int i = 0;i < line.lineTrackMutArr.count-1; i++){
-                    CGPoint point1 = [[line.lineTrackMutArr objectAtIndex:i] CGPointValue];
-                    CGPoint point2 = [[line.lineTrackMutArr objectAtIndex:(i+1)] CGPointValue];
-                    CGContextMoveToPoint(context, point1.x, point1.y);
-                    CGContextAddLineToPoint(context, point2.x, point2.y);
-                    CGContextStrokePath(context);
-                }
-            }
-                break;
-        }
-    }
-}
-
-
 #pragma mark - touch系列方法
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-    
+    self.currentLine = [[LineModel alloc] initWithLineColor:self.lineColor lineWidth:self.lineWidth editType:self.editTypeOption rectType:self.rectTypeOption];
+
     CGPoint point = [self touchPointWithTouchEvent:event];
-    NSLog(@"touch begin x:%f y:%f",point.x,point.y);
+    //NSLog(@"touch begin x:%f y:%f",point.x,point.y);
     [self.pointMutArr addObject:[NSValue valueWithCGPoint:point]];
+    self.currentLine.lineTrackMutArr = [self.pointMutArr copy];
     
     if (self.delegate && [self.delegate respondsToSelector:@selector(drawBoard:drawingStatus:)]) {
         if (self.drawStatus == DrawingStatusEnd) {
@@ -165,8 +123,9 @@
     CGPoint point = [self touchPointWithTouchEvent:event];
     NSValue *pointValue = [NSValue valueWithCGPoint:point];
     [self.pointMutArr addObject: pointValue];
+    self.currentLine.lineTrackMutArr = [self.pointMutArr copy];
+
     [self setNeedsDisplay];
-    
     if (self.delegate && [self.delegate respondsToSelector:@selector(drawBoard:drawingStatus:)]) {
         [self.delegate drawBoard:self drawingStatus:DrawingStatusMove];
     }
@@ -179,13 +138,11 @@
         [self.pointMutArr removeAllObjects];
         return;
     }
-    CGPoint point = [self touchPointWithTouchEvent:event];
-    NSLog(@"touch end x:%f y:%f",point.x,point.y);
     
     if (self.pointMutArr.count>1) {
-        LineModel *line = [[LineModel alloc] initWithLineTrack:[self.pointMutArr copy] lineColor:self.lineColor lineWidth:self.lineWidth lineType:self.drawOption rectType:self.rectTypeOption];
-        [self.linesMutArr addObject:line];
+        [self.linesMutArr addObject:self.currentLine];
     }
+    
     [self.pointMutArr removeAllObjects];
     [self setNeedsDisplay];
     
@@ -205,9 +162,9 @@
 
 
 #pragma mark - Resert SET Method
--(void)setDrawOption:(EditMenuTypeOptions)drawOption{
-    _drawOption = drawOption;
-    switch (drawOption) {
+-(void)setEditTypeOption:(EditMenuTypeOptions)editTypeOption{
+    _editTypeOption = editTypeOption;
+    switch (editTypeOption) {
         case EditMenuTypeOptionCharacter://文本
         case EditMenuTypeOptionLine://线条
         case EditMenuTypeOptionRect://方形
@@ -249,6 +206,7 @@
     label.layer.borderWidth = 1.f;
     label.text = text;
     label.textColor = textColor;
+    label.textAlignment = NSTextAlignmentCenter;
     label.userInteractionEnabled = YES;
     [self addSubview:label];
     
