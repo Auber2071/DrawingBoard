@@ -70,9 +70,7 @@
 
 #pragma mark - DrawBoardViewDeletage
 
--(void)drawBoard:(DrawBoardView *)drawView drawingStatus:(DrawingStatus)drawingStatus{
-    NSLog(@"drawingStatus:%ld",(long)drawingStatus);
-    
+-(void)drawBoard:(DrawBoardView *)drawView drawingStatus:(DrawingStatus)drawingStatus{    
     __weak typeof(self) tempSelf = self;
     NSTimeInterval timerInterval = 0.2f;
     switch (drawingStatus) {

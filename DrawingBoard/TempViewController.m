@@ -7,42 +7,26 @@
 //
 
 #import "TempViewController.h"
-#import "ShareAndEditPhotoView.h"
-#import "DrawBoardViewController.h"
-
-#import "BNCUMShare.h"
-
-
-@interface TempViewController ()<shareAndEditPhotoViewDelegate,DrawBoardViewControllerDelegaete>
-@property (nonatomic, strong) UIImageView *backImageView;
-@property (nonatomic, strong) UIImage *backImage;
-@property (nonatomic, strong) BNCUMShare *shareView;
-
-
-
-@property (nonatomic, strong) ShareAndEditPhotoView *shareAndEditView ;
-
-@end
+#import "ShareAndEditPhotoViewController.h"
 
 @implementation TempViewController
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.view addSubview:self.backImageView];
+    
+    UIImageView *imageView =  [[UIImageView alloc] initWithFrame:self.view.bounds];
+    imageView.userInteractionEnabled = YES;
+    [imageView setImage:[UIImage imageNamed:@"background"]];
+    [self.view addSubview:imageView];
 
+    
+    
     [self p_designNavigation];
-    [self p_addShareAndEditView];
-
 }
 
--(void)p_addShareAndEditView{
-    self.shareAndEditView = [[ShareAndEditPhotoView alloc] init];
-    self.shareAndEditView.shareAndEditDelegate = self;
-    [self.view addSubview:self.shareAndEditView];
-}
 
 -(void)p_designNavigation{
-//    [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
-//    [self.navigationController.navigationBar setShadowImage:[[UIImage alloc]init]];
+    [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setShadowImage:[[UIImage alloc]init]];
     
     //rightNaviItem
     UIButton *shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -57,41 +41,9 @@
 
 
 -(void)showEditView:(UIButton *)sender{
-    [self.shareAndEditView showShareAndEditView];
+    ShareAndEditPhotoViewController *shareAndEditPhotoVC = [[ShareAndEditPhotoViewController alloc]initWithImage:[self p_ScreenShot]];
+    [self presentViewController:shareAndEditPhotoVC animated:NO completion:nil];
 }
-
-
-
-
-
-#pragma mark - shareAndEditPhotoViewDelegate
--(void)back{
-    [self.backImageView setImage:[UIImage imageNamed:@"background"]];
-}
-
--(void)EditPhoto{
-    DrawBoardViewController *drawBoardVC = [[DrawBoardViewController alloc] initWithImage:self.backImage];
-    drawBoardVC.drawBoardDelegate = self;
-    [self presentViewController:drawBoardVC animated:NO completion:nil];
-}
-
--(void)shareImage{
-    self.shareView = [BNCUMShare shareWithUMShare];
-    [self.shareView shareImg:[self p_ScreenShot]];
-}
-
-
-#pragma mark - DrawBoardViewControllerDelegaete
--(void)cancelEdit{
-    [self.shareAndEditView showShareAndEditView];
-}
-
--(void)finishEditWithImage:(UIImage *)finishImage{
-    self.backImage = finishImage;
-    [self.backImageView setImage:finishImage];
-    [self.shareAndEditView showShareAndEditView];
-}
-
 
 
 -(UIImage *)p_ScreenShot{
@@ -134,19 +86,4 @@
     return screenCapture;
 }
 
--(UIImageView *)backImageView{
-    if (!_backImageView) {
-        _backImageView =  [[UIImageView alloc] initWithFrame:self.view.bounds];
-        _backImageView.userInteractionEnabled = YES;
-        [_backImageView setImage:self.backImage];
-    }
-    return _backImageView;
-}
-
--(UIImage *)backImage{
-    if (!_backImage) {
-        _backImage = [UIImage imageNamed:@"background"];
-    }
-    return _backImage;
-}
 @end

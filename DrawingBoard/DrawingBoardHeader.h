@@ -16,13 +16,4 @@ typedef NS_ENUM(NSInteger,RectTypeOptions) {
     RectTypeOptionArrows
 };
 
-//-------------------16进制色值转换-------------------------
-#define UIColorFromRGB(rgbValue) [UIColor \
-colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 \
-green:((float)((rgbValue & 0xFF00) >> 8))/255.0 \
-blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
-//-------------------屏幕尺寸-------------------------
-#define SCREEN_HEIGHT  [[UIScreen mainScreen] bounds].size.height
-#define SCREEN_WIDTH  [[UIScreen mainScreen] bounds].size.width
-
 #endif /* DrawingBoard_h */
