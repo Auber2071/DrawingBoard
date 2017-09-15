@@ -1,0 +1,44 @@
+//
+//  PrefixHeader.pch
+//  DrawBoard
+//
+//  Created by hankai on 2017/9/11.
+//  Copyright © 2017年 Vencent. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+
+#import "UIView+HKYExtension.h"
+#import "DrawingBoardHeader.h"
+
+#define DrawBoardBundle [NSBundle bundleWithURL:[[NSBundle mainBundle] URLForResource:@"DrawBoardBundle" withExtension:@"bundle"]]
+
+
+//-------------------16进制色值转换-------------------------
+#define UIColorFromRGB(rgbValue) [UIColor \
+colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 \
+green:((float)((rgbValue & 0xFF00) >> 8))/255.0 \
+blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
+
+//-------------------打印日志-------------------------
+#ifdef DEBUG
+#   define DLog(...) NSLog(__VA_ARGS__);
+#else
+#   define DLog(...)
+#endif
+
+//-------------------屏幕尺寸-------------------------
+#define SCREEN_HEIGHT  [[UIScreen mainScreen] bounds].size.height
+#define SCREEN_WIDTH  [[UIScreen mainScreen] bounds].size.width
+
+#define StateBar_Height ([UIApplication sharedApplication].statusBarFrame.size.height)//20
+#define NavBar_Height (self.navigationController.navigationBar.frame.size.height)
+#define TabBar_Height self.tabBarController.tabBar.frame.size.height
+
+
+#endif /* PrefixHeader_pch */

@@ -1,0 +1,6 @@
+framework module DrawBoardSDK {
+  umbrella header "DrawBoardSDK.h"
+
+  export *
+  module * { export * }
+}

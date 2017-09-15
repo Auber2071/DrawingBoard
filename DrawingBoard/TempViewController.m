@@ -7,7 +7,7 @@
 //
 
 #import "TempViewController.h"
-#import "ShareAndEditPhotoViewController.h"
+#import <DrawBoardSDK/DrawBoardSDK.h>
 
 @implementation TempViewController
 - (void)viewDidLoad {
