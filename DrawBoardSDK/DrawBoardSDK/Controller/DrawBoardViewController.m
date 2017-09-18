@@ -35,8 +35,6 @@
 
 @property (nonatomic, assign) RectTypeOptions defaultRectOption;
 
-
-
 @end
 
 @implementation DrawBoardViewController
@@ -62,7 +60,6 @@
     [self.drawBoardBackImgV addSubview:self.drawBoardView];
     [self.drawBoardBackImgV addSubview:self.colorPaletteView];
     [self.drawBoardBackImgV addSubview:self.editView];
-    
     [self.drawBoardBackImgV addSubview:self.cancelBtn];
     [self.drawBoardBackImgV addSubview:self.finishBtn];
 }
@@ -85,9 +82,9 @@
             break;
         case DrawingStatusEnd:{
             [UIView animateWithDuration:timerInterval animations:^{
-                tempSelf.editView.y = SCREEN_HEIGHT*0.9;
+                tempSelf.editView.y = 49.f;
                 if (tempSelf.tempOption == EditMenuTypeOptionLine || tempSelf.tempOption == EditMenuTypeOptionRect) {
-                    tempSelf.colorPaletteView.y = SCREEN_HEIGHT*(1- 0.1 - 0.15);
+                    tempSelf.colorPaletteView.y = SCREEN_HEIGHT - tempSelf.colorPaletteView.height - tempSelf.editView.height;
                 }
             }];
         }
@@ -125,36 +122,29 @@
         self.drawBoardView.lineWidth = self.defaultLineW;
     }
     
-    __weak typeof(self) tempSelf = self;
-    NSTimeInterval timerInterval = 0.2f;
+    
     switch (drawingOption) {
         case EditMenuTypeOptionLine:{
-            [UIView animateWithDuration:timerInterval animations:^{
-                tempSelf.colorPaletteView.y = SCREEN_HEIGHT*(1-0.1 - 0.15);
-            }];
+            [self p_showColorPaletteView];
             [self.colorPaletteView scrollToPage:0];
             self.drawBoardView.lineWidth = self.defaultLineW;
         }
             break;
         case EditMenuTypeOptionRect:{
-            [UIView animateWithDuration:timerInterval animations:^{
-                tempSelf.colorPaletteView.y = SCREEN_HEIGHT*(1-0.1 - 0.15);
-            }];
+            [self p_showColorPaletteView];
+            
             [self.colorPaletteView scrollToPage:1];
             self.drawBoardView.lineWidth = self.rectWidth;
         }
             break;
         case EditMenuTypeOptionEraser:
         case EditMenuTypeOptionBack:{
-            [UIView animateWithDuration:timerInterval animations:^{
-                tempSelf.colorPaletteView.y = SCREEN_HEIGHT;
-            }];
+            [self p_dismissColorPaletteView];
         }
             break;
         case EditMenuTypeOptionCharacter:{
-            [UIView animateWithDuration:timerInterval animations:^{
-                tempSelf.colorPaletteView.y = SCREEN_HEIGHT;
-            }];
+            [self p_dismissColorPaletteView];
+            
             InputCharacterViewController *inputCharacterVC = [[InputCharacterViewController alloc] initWithColorArr:self.colorArr defaultColorIndex:self.defaultColorTag];
             inputCharacterVC.inPutCharacterDelegate = self;
             [self presentViewController:inputCharacterVC animated:YES completion:nil];
@@ -164,6 +154,21 @@
 }
 
 #pragma mark - Private Methods
+
+-(void)p_showColorPaletteView{
+    NSTimeInterval timerInterval = 0.2f;
+    __weak typeof(self) tempSelf = self;
+    [UIView animateWithDuration:timerInterval animations:^{
+        tempSelf.colorPaletteView.y = SCREEN_HEIGHT - tempSelf.colorPaletteView.height - tempSelf.editView.height;
+    }];}
+
+-(void)p_dismissColorPaletteView{
+    NSTimeInterval timerInterval = 0.2f;
+    __weak typeof(self) tempSelf = self;
+    [UIView animateWithDuration:timerInterval animations:^{
+        tempSelf.colorPaletteView.y = SCREEN_HEIGHT;
+    }];}
+
 
 -(void)p_cancelEdit{
     if (self.drawBoardDelegate && [self.drawBoardDelegate respondsToSelector:@selector(cancelEdit)]) {
@@ -242,6 +247,30 @@
     return _drawBoardBackImgV;
 }
 
+-(UIButton *)cancelBtn{
+    if (!_cancelBtn) {
+        _cancelBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_cancelBtn setTitle:@"取消" forState:UIControlStateNormal];
+        [_cancelBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [_cancelBtn setBackgroundColor:UIColorFromRGBP(0Xafafaf, 0.7)];
+        [_cancelBtn.layer setCornerRadius:4.f];
+        [_cancelBtn addTarget:self action:@selector(p_cancelEdit) forControlEvents:UIControlEventTouchUpInside];
+        [_cancelBtn setFrame:CGRectMake(12, 10, 69, 32)];
+    }
+    return _cancelBtn;
+}
+-(UIButton *)finishBtn{
+    if (!_finishBtn) {
+        _finishBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_finishBtn setTitle:@"确定" forState:UIControlStateNormal];
+        [_finishBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [_finishBtn setBackgroundColor:UIColorFromRGBP(0x0fa424,0.7)];
+        [_finishBtn.layer setCornerRadius:4.f];
+        [_finishBtn addTarget:self action:@selector(p_finishEdit) forControlEvents:UIControlEventTouchUpInside];
+        [_finishBtn setFrame:CGRectMake(SCREEN_WIDTH - 81, 10, 69, 32)];
+    }
+    return _finishBtn;
+}
 -(DrawBoardView *)drawBoardView{
     if (!_drawBoardView) {
         _drawBoardView = [[DrawBoardView alloc] initWithFrame:CGRectMake(0, 0,SCREEN_WIDTH, SCREEN_HEIGHT)];
@@ -256,43 +285,16 @@
 
 -(EditView *)editView{
     if (!_editView) {
-        CGFloat Y = SCREEN_HEIGHT*0.9;
-        _editView = [[EditView alloc] initWithFrame:CGRectMake(0, Y, SCREEN_WIDTH, SCREEN_HEIGHT*0.1)];
+        CGFloat height = 49.f;
+        CGFloat Y = SCREEN_HEIGHT - height;
+        _editView = [[EditView alloc] initWithFrame:CGRectMake(0, Y, SCREEN_WIDTH, height)];
         _editView.editViewDelegate = self;
     }
     return _editView;
 }
-
-
-
--(UIButton *)cancelBtn{
-    if (!_cancelBtn) {
-        _cancelBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_cancelBtn setTitle:@"取消" forState:UIControlStateNormal];
-        [_cancelBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [_cancelBtn setBackgroundColor:UIColorFromRGB(0xc7c7c7)];
-        [_cancelBtn.layer setCornerRadius:5.f];
-        [_cancelBtn addTarget:self action:@selector(p_cancelEdit) forControlEvents:UIControlEventTouchUpInside];
-        [_cancelBtn setFrame:CGRectMake(10, 20, 60, 30)];
-    }
-    return _cancelBtn;
-}
--(UIButton *)finishBtn{
-    if (!_finishBtn) {
-        _finishBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_finishBtn setTitle:@"确定" forState:UIControlStateNormal];
-        [_finishBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [_finishBtn setBackgroundColor:UIColorFromRGB(0x56c166)];
-        [_finishBtn.layer setCornerRadius:5.f];
-        [_finishBtn addTarget:self action:@selector(p_finishEdit) forControlEvents:UIControlEventTouchUpInside];
-        [_finishBtn setFrame:CGRectMake(SCREEN_WIDTH - 70, 20, 60, 30)];
-    }
-    return _finishBtn;
-}
-
 -(ColorPaletteView *)colorPaletteView{
     if (!_colorPaletteView) {
-        CGRect frame = CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT*0.15);
+        CGRect frame = CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, 83);
         _colorPaletteView = [[ColorPaletteView alloc] initWithFrame:frame
                                                            ColorArr:self.colorArr
                                                   defaultColorIndex:self.defaultColorTag
@@ -306,7 +308,7 @@
 
 -(NSArray *)colorArr{
     if (!_colorArr) {
-        _colorArr = @[[UIColor blackColor],[UIColor redColor],[UIColor greenColor],[UIColor blueColor],[UIColor yellowColor],[UIColor purpleColor]];
+        _colorArr = @[UIColorFromRGB(0x030303),UIColorFromRGB(0xff2d20),UIColorFromRGB(0x0064df),UIColorFromRGB(0x35d800),UIColorFromRGB(0xead709),UIColorFromRGB(0xc340bb)];
     }
     return _colorArr;
 }

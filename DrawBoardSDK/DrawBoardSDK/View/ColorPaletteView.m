@@ -43,7 +43,7 @@ static NSString *CellRectIdentifierCell = @"CellRectIdentifierCell";
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [UIColor colorWithWhite:1.f alpha:0.5f];
+        self.backgroundColor = UIColorFromRGBP(0xffffff, 0.9);
         _colorArr = colorArr;
         _selectedRectType = defaultTypeOption;
         _lineWidth = defaultLineWidth;
@@ -107,16 +107,15 @@ static NSString *CellRectIdentifierCell = @"CellRectIdentifierCell";
 
 -(void)p_addColorOptions{
     self.buttonInset = UIEdgeInsetsMake(0, SCREEN_WIDTH*0.074, 0, SCREEN_WIDTH*0.074);
-    self.normalWidth = 0.07*SCREEN_WIDTH;
-    self.largeWidth = 0.1*SCREEN_WIDTH;
+    self.normalWidth = 22;
+    self.largeWidth = 30;
     self.padding = (SCREEN_WIDTH - self.buttonInset.left - self.buttonInset.right - self.normalWidth*self.colorArr.count)/(self.colorArr.count-1);
     
     
     for (int i = 0; i<self.colorArr.count; i++) {
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         [button setBackgroundColor:self.colorArr[i]];
-        [button setFrame:CGRectMake(0, 0, self.normalWidth, self.normalWidth)];
-        
+        [button setBounds:CGRectMake(0, 0, self.normalWidth, self.normalWidth)];
         button.center = CGPointMake(self.buttonInset.left+self.normalWidth/2.f +i*(self.normalWidth+self.padding), CGRectGetHeight(self.colorBackGroundView.frame)/2.f);
         
         button.layer.cornerRadius = button.size.width/2.f;
@@ -182,7 +181,7 @@ static NSString *CellRectIdentifierCell = @"CellRectIdentifierCell";
         case 1:{
             TypeRectCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellRectIdentifierCell forIndexPath:indexPath];
             cell.rectTypeDelegate = self;
-            cell.defaultRectType = self.selectedRectType;
+//            cell.defaultRectType = self.selectedRectType;
             return cell;
         }
             break;
@@ -204,7 +203,7 @@ static NSString *CellRectIdentifierCell = @"CellRectIdentifierCell";
         viewLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
         viewLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
         
-        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame)*0.5) collectionViewLayout:viewLayout];
+        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.frame), CGRectGetHeight(self.frame)*0.36) collectionViewLayout:viewLayout];
         _collectionView.backgroundColor = [UIColor clearColor];
         _collectionView.dataSource = self;
         _collectionView.pagingEnabled = YES;
@@ -219,7 +218,7 @@ static NSString *CellRectIdentifierCell = @"CellRectIdentifierCell";
 
 -(UIScrollView *)colorBackGroundView{
     if (!_colorBackGroundView) {
-        _colorBackGroundView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(self.frame)*0.5, SCREEN_WIDTH, CGRectGetHeight(self.frame)*0.5)];
+        _colorBackGroundView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.collectionView.frame), SCREEN_WIDTH, CGRectGetHeight(self.frame)-CGRectGetHeight(self.collectionView.frame))];
         _colorBackGroundView.showsHorizontalScrollIndicator = NO;
         _colorBackGroundView.backgroundColor = [UIColor clearColor];
     }

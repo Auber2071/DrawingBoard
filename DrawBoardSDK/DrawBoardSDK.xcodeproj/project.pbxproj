@@ -77,8 +77,8 @@
 		261880791F6B7F9E0043B25A /* LineModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LineModel.m; sourceTree = "<group>"; };
 		2618807B1F6B7F9E0043B25A /* CollectionCellDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionCellDelegate.h; sourceTree = "<group>"; };
 		2618807C1F6B7F9E0043B25A /* DrawingBoardHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawingBoardHeader.h; sourceTree = "<group>"; };
-		2618807D1F6B7F9E0043B25A /* HKYLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKYLabel.h; sourceTree = "<group>"; };
-		2618807E1F6B7F9E0043B25A /* HKYLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKYLabel.m; sourceTree = "<group>"; };
+		2618807D1F6B7F9E0043B25A /* HKYLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HKYLabel.h; path = ../Other/HKYLabel.h; sourceTree = "<group>"; };
+		2618807E1F6B7F9E0043B25A /* HKYLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HKYLabel.m; path = ../Other/HKYLabel.m; sourceTree = "<group>"; };
 		2618807F1F6B7F9E0043B25A /* UIView+HKYExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+HKYExtension.h"; sourceTree = "<group>"; };
 		261880801F6B7F9E0043B25A /* UIView+HKYExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+HKYExtension.m"; sourceTree = "<group>"; };
 		261880821F6B7F9E0043B25A /* BNCUMShare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNCUMShare.h; sourceTree = "<group>"; };
@@ -178,8 +178,6 @@
 				2618808F1F6B7F9E0043B25A /* PrefixHeader.pch */,
 				2618807B1F6B7F9E0043B25A /* CollectionCellDelegate.h */,
 				2618807C1F6B7F9E0043B25A /* DrawingBoardHeader.h */,
-				2618807D1F6B7F9E0043B25A /* HKYLabel.h */,
-				2618807E1F6B7F9E0043B25A /* HKYLabel.m */,
 				2618807F1F6B7F9E0043B25A /* UIView+HKYExtension.h */,
 				261880801F6B7F9E0043B25A /* UIView+HKYExtension.m */,
 			);
@@ -208,6 +206,8 @@
 				2618808C1F6B7F9E0043B25A /* TypeLineCollectionCell.m */,
 				2618808D1F6B7F9E0043B25A /* TypeRectCollectionCell.h */,
 				2618808E1F6B7F9E0043B25A /* TypeRectCollectionCell.m */,
+				2618807D1F6B7F9E0043B25A /* HKYLabel.h */,
+				2618807E1F6B7F9E0043B25A /* HKYLabel.m */,
 			);
 			path = View;
 			sourceTree = "<group>";

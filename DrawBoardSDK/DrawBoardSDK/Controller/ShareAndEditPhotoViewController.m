@@ -73,13 +73,12 @@ static NSTimeInterval  const duration = 0.1f;
     CGFloat btnCount = 3;
     CGFloat padding = 50.f;
     CGFloat btnW = (CGRectGetWidth(self.editBackView.frame) - padding*(btnCount+1))/btnCount;
-    CGFloat btnH = btnW;
     
     for (int i = 0; i<btnCount; i++) {
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         [button addTarget:self action:@selector(p_clickButton:) forControlEvents:UIControlEventTouchUpInside];
         button.tag = i;
-        [button setFrame:CGRectMake(padding+i*(padding+btnW), (CGRectGetHeight(self.editBackView.frame)-btnH)/2.f, btnW, btnH)];
+        [button setFrame:CGRectMake(padding+i*(padding+btnW), (CGRectGetHeight(self.editBackView.frame)-btnW)/2.f, btnW, btnW)];
         button.layer.cornerRadius = btnW/2.f;
         button.layer.masksToBounds = YES;
         
@@ -100,21 +99,21 @@ static NSTimeInterval  const duration = 0.1f;
                 UIImageView *v2 = [[UIImageView alloc] initWithFrame:CGRectMake(0,100, 50, 50)];
                 v2.image = [UIImage imageNamed:@"APPBaseSDKBundle.bundle/zhuanqian"];
                 */
-                UIImage *image = [UIImage imageWithContentsOfFile:[DrawBoardBundle pathForResource:@"back@2x" ofType:@"png" inDirectory:@"Images/otherImage"]];
+                UIImage *image = [UIImage imageWithContentsOfFile:[DrawBoardBundle pathForResource:@"fanhui@3x" ofType:@"png" inDirectory:@"Images/otherImage"]];
                 [button setBackgroundImage:image forState:UIControlStateNormal];
             }
                 break;
             case 1:{
                 button.tag = EditPhotoOption;
                 
-                UIImage *image = [UIImage imageWithContentsOfFile:[DrawBoardBundle pathForResource:@"edit@2x" ofType:@"png" inDirectory:@"Images/otherImage"]];
+                UIImage *image = [UIImage imageWithContentsOfFile:[DrawBoardBundle pathForResource:@"bianji@3x" ofType:@"png" inDirectory:@"Images/otherImage"]];
                 [button setBackgroundImage:image forState:UIControlStateNormal];
             }
                 break;
             case 2:{
                 button.tag = SharePhotoOption;
                 [button setBackgroundColor:[UIColor whiteColor]];
-                UIImage *image = [UIImage imageWithContentsOfFile:[DrawBoardBundle pathForResource:@"finish@2x" ofType:@"png" inDirectory:@"Images/otherImage"]];
+                UIImage *image = [UIImage imageWithContentsOfFile:[DrawBoardBundle pathForResource:@"duihao@3x" ofType:@"png" inDirectory:@"Images/otherImage"]];
 
                 [button setBackgroundImage:image forState:UIControlStateNormal];
             }

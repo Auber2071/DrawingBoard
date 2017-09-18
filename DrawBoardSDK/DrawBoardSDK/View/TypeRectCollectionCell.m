@@ -13,6 +13,7 @@
 @property (nonatomic, strong) NSMutableArray *btnMutArr;
 
 @property (nonatomic, strong) UIButton *lastBtn;
+@property (nonatomic, strong) UIView *indicatorView;
 
 @end
 
@@ -32,29 +33,35 @@
     _defaultRectType = defaultRectType;
     for (UIButton *tempBtn in self.btnMutArr) {
         if (tempBtn.tag == defaultRectType) {
-            tempBtn.selected = YES;
+            tempBtn.enabled = NO;
             self.lastBtn = tempBtn;
         }else{
-            tempBtn.selected = NO;
+            tempBtn.enabled = YES;
         }
-    }
-}
-
--(void)layoutSubviews{
-    UIEdgeInsets btnInset = UIEdgeInsetsMake(0, SCREEN_WIDTH/5, 0, SCREEN_WIDTH/5);
-    CGFloat btnWidth = (SCREEN_WIDTH-btnInset.left-btnInset.right)/3.f;
-    for (int i = 0; i<self.btnMutArr.count; i++) {
-        UIButton *tempBtn = self.btnMutArr[i];
-        [tempBtn setFrame:CGRectMake(btnInset.left + i*btnWidth, 0, btnWidth, CGRectGetHeight(self.frame))];
+        [UIView animateWithDuration:0.25f animations:^{
+            self.indicatorView.width = tempBtn.titleLabel.width;
+            self.indicatorView.centerX = tempBtn.centerX;
+        }];
     }
 }
 
 -(void)p_addRectOptions{
+    self.indicatorView = [[UIView alloc] init];
+    self.indicatorView.backgroundColor = UIColorFromRGB(0xffa500);
+    self.indicatorView.height = 2;
+    self.indicatorView.y = CGRectGetHeight(self.frame) - self.indicatorView.height;
+    [self.contentView addSubview:self.indicatorView];
+    
+    
+    UIEdgeInsets btnInset = UIEdgeInsetsMake(0, SCREEN_WIDTH/5, 0, SCREEN_WIDTH/5);
+    CGFloat btnWidth = (SCREEN_WIDTH-btnInset.left-btnInset.right)/3.f;
     for (int i = 0; i< self.titleArr.count; i++) {
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         [button setTitle:self.titleArr[i] forState:UIControlStateNormal];
-        [button setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-        [button setTitleColor:[UIColor orangeColor] forState:UIControlStateSelected];
+        [button.titleLabel setFont:[UIFont systemFontOfSize:14.f]];
+        [button setTitleColor:UIColorFromRGB(0x999999) forState:UIControlStateNormal];
+        [button setTitleColor:UIColorFromRGB(0xffa500) forState:UIControlStateDisabled];
+        [button setFrame:CGRectMake(btnInset.left + i*btnWidth, 0, btnWidth, CGRectGetHeight(self.frame)-2)];
         [button addTarget:self action:@selector(p_clickColorOption:) forControlEvents:UIControlEventTouchUpInside];
         [self.contentView addSubview:button];
         [self.btnMutArr addObject:button];
@@ -72,20 +79,28 @@
             }
                 break;
         }
-        if (button.tag == _defaultRectType) {
-            button.selected = YES;
+        if (i == self.defaultRectType) {
+            button.enabled = NO;
             self.lastBtn = button;
+            [button.titleLabel sizeToFit];
+            self.indicatorView.width = button.titleLabel.width;
+            self.indicatorView.centerX = button.centerX;
         }
+        
     }
 }
 
 
 -(void)p_clickColorOption:(UIButton *)sender{
-    if (!sender.isSelected) {
-        self.lastBtn.selected = !self.lastBtn.selected;
-        sender.selected = !sender.selected;
-        self.lastBtn = sender;
-    }
+    self.lastBtn.enabled = YES;
+    sender.enabled = NO;
+    self.lastBtn = sender;
+    
+    [UIView animateWithDuration:0.25f animations:^{
+        self.indicatorView.width = sender.titleLabel.width;
+        self.indicatorView.centerX = sender.centerX;
+    }];
+    
     
     if (self.rectTypeDelegate && [self.rectTypeDelegate respondsToSelector:@selector(changeRectTypeOption:)]) {
         [self.rectTypeDelegate changeRectTypeOption:sender.tag];

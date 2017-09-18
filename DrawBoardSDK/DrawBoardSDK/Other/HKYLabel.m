@@ -43,6 +43,7 @@
 -(void)tapLabel:(UITapGestureRecognizer *)gesture{
     NSLog(@"tap:>>>>>>%s-------%ld",__FUNCTION__,(long)gesture.state);
 }
+
 #pragma mark 拖动
 -(void)panLabel:(UIPanGestureRecognizer *)gesture{
     if (gesture.state==UIGestureRecognizerStateChanged) {
