@@ -142,7 +142,7 @@
 
 #pragma mark - touch系列方法
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-    ///NSLog(@"%s",__FUNCTION__);
+    //NSLog(@"%s",__FUNCTION__);
 
     self.currentLine = [[LineModel alloc] initWithLineColor:self.lineColor lineWidth:self.lineWidth editType:self.editTypeOption rectType:self.rectTypeOption];
 
@@ -245,4 +245,6 @@
     [self addSubview:label];
     [self.labelMutArr addObject:label];
 }
+
+
 @end

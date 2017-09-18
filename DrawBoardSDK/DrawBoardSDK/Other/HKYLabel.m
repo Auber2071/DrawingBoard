@@ -12,6 +12,7 @@
 -(instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if (self) {
+        self.layer.borderColor = [UIColor whiteColor].CGColor;
         self.textAlignment = NSTextAlignmentCenter;
         self.userInteractionEnabled = YES;
         [self addGestureTarget];
@@ -40,7 +41,7 @@
 
 #pragma mark 点击
 -(void)tapLabel:(UITapGestureRecognizer *)gesture{
-    
+    NSLog(@"%s",__func__);
 }
 
 #pragma mark 拖动
@@ -51,7 +52,7 @@
         gesture.view.center = CGPointMake(gesture.view.center.x + translation.x,
                                           gesture.view.center.y + translation.y);
         [gesture setTranslation:CGPointZero inView:self.superview];
-        NSLog(@"%s-------%ld",__FUNCTION__,(long)gesture.state);
+        //NSLog(@"%s-------%ld",__FUNCTION__,(long)gesture.state);
     }else{
         NSLog(@"out-%s-------%ld",__FUNCTION__,(long)gesture.state);
     }
@@ -76,7 +77,9 @@
     }
 }
 
--(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{}
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    NSLog(@"%s",__func__);
+}
 -(void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{}
 -(void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{}
 
