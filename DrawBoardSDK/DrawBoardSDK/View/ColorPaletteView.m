@@ -181,7 +181,7 @@ static NSString *CellRectIdentifierCell = @"CellRectIdentifierCell";
         case 1:{
             TypeRectCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellRectIdentifierCell forIndexPath:indexPath];
             cell.rectTypeDelegate = self;
-//            cell.defaultRectType = self.selectedRectType;
+            cell.defaultRectType = self.selectedRectType;
             return cell;
         }
             break;
@@ -197,7 +197,7 @@ static NSString *CellRectIdentifierCell = @"CellRectIdentifierCell";
     if (!_collectionView) {
         
         UICollectionViewFlowLayout *viewLayout = [[UICollectionViewFlowLayout alloc]init];
-        viewLayout.itemSize = CGSizeMake(CGRectGetWidth(self.frame), CGRectGetHeight(self.frame));
+        viewLayout.itemSize = CGSizeMake(CGRectGetWidth(self.frame), CGRectGetHeight(self.frame)*0.36);
         viewLayout.minimumLineSpacing = 0.f;
         viewLayout.minimumInteritemSpacing = 0.f;
         viewLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);

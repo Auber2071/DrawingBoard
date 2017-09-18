@@ -11,20 +11,15 @@
 #import "HKYLabel.h"
 
 
-#define PI 3.14159265358979323846
-
 @interface DrawBoardView ()
 @property (nonatomic, assign) DrawingStatus drawStatus;//绘制状态
 
 @property (nonatomic, strong) NSMutableArray<NSValue*> *pointMutArr;//当前绘制的线条的点坐标集合
 
-
 @property (nonatomic, strong) NSMutableArray<LineModel *> *linesMutArr;
 @property (nonatomic, strong) NSMutableArray<LineModel *> *removedLinesMutArr;//删除的线条
 @property (nonatomic, strong) NSMutableArray<UILabel *> *labelMutArr;
 @property (nonatomic, strong) LineModel *currentLine;
-
-
 
 @end
 
@@ -43,7 +38,6 @@
         _labelMutArr = [NSMutableArray array];
                 
         _drawStatus = DrawingStatusEnd;
-        
     }
     return self;
 }
@@ -60,6 +54,9 @@
 }
 
 -(void)p_drawPath:(CGContextRef)context line:(LineModel *)line{
+    if (line == nil) {
+        return;
+    }
     UIColor *color = (line.editType == EditMenuTypeOptionEraser ? [UIColor clearColor] : line.lineColor);
     CGContextSetStrokeColorWithColor(context, color.CGColor);
     CGContextSetLineWidth(context, line.lineWidth);
@@ -82,14 +79,48 @@
                 }
                     break;
                 case RectTypeOptionArrows:{
+                    CGFloat width = 20.f;
                     
+                    CGFloat xDistance = point2.x - point1.x;
+                    CGFloat yDistance = point2.y - point1.y;
+                    CGFloat angle = atan2f(yDistance, xDistance);
+                    CGFloat angle1 = angle + M_PI/6.f;
+                    CGFloat angle2 = angle - M_PI/6.f;
+                    
+                    CGPoint upPoint = [self p_newPointWithAngle:angle1 point:point2 trigonWidth:width];
+                    CGPoint downPoint = [self p_newPointWithAngle:angle2 point:point2 trigonWidth:width];
+
+                    CGContextMoveToPoint(context, point2.x, point2.y);
+                    CGContextAddLineToPoint(context, upPoint.x, upPoint.y);
+                    CGContextAddLineToPoint(context, downPoint.x, downPoint.y);
+                    CGContextAddLineToPoint(context, point2.x, point2.y);
+                    CGContextSetLineWidth(context, 3);
+                    CGContextSetFillColorWithColor(context,color.CGColor);
+                    CGContextFillPath(context);
+                    CGContextStrokePath(context);
+
+                    
+                    
+                    xDistance = point2.x - upPoint.x;
+                    yDistance = point2.y - upPoint.y;
+                    CGPoint pointBottom1 = CGPointMake(point2.x - xDistance/2.f, point2.y - yDistance/2.f);
+                    xDistance = point2.x - downPoint.x;
+                    yDistance = point2.y - downPoint.y;
+                    CGPoint pointBottom2 = CGPointMake(point2.x - xDistance/2.f, point2.y - yDistance/2.f);
+                    CGContextMoveToPoint(context, pointBottom1.x, pointBottom1.y);
+                    CGContextAddLineToPoint(context, pointBottom2.x, pointBottom2.y);
+                    CGContextAddLineToPoint(context, point1.x, point1.y);
+                    CGContextAddLineToPoint(context, pointBottom1.x, pointBottom1.y);
+                    CGContextSetLineWidth(context, 3);
+                    CGContextSetFillColorWithColor(context,color.CGColor);
+                    CGContextFillPath(context);
+                    CGContextStrokePath(context);
                 }
                     break;
             }
         }
             break;
         default:{
-            
             for (int i = 1;i < line.lineTrackMutArr.count; i++){
                 CGPoint point1 = [[line.lineTrackMutArr objectAtIndex:i-1] CGPointValue];
                 CGPoint point2 = [[line.lineTrackMutArr objectAtIndex:(i)] CGPointValue];
@@ -101,14 +132,22 @@
             break;
     }
 }
+
+-(CGPoint)p_newPointWithAngle:(CGFloat)angle point:(CGPoint)point trigonWidth:(CGFloat)trigonWidth{
+    CGFloat yDist = sin(angle)*trigonWidth;
+    CGFloat xDist = cos(angle)*trigonWidth;
+    CGPoint newPoint = CGPointMake(point.x - xDist, point.y - yDist);
+    return newPoint;
+}
+
 #pragma mark - touch系列方法
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-    NSLog(@"%s",__FUNCTION__);
+    ///NSLog(@"%s",__FUNCTION__);
 
     self.currentLine = [[LineModel alloc] initWithLineColor:self.lineColor lineWidth:self.lineWidth editType:self.editTypeOption rectType:self.rectTypeOption];
 
     CGPoint point = [self touchPointWithTouchEvent:event];
-    NSLog(@"touch begin x:%f y:%f",point.x,point.y);
+    //NSLog(@"touch begin x:%f y:%f",point.x,point.y);
     [self.pointMutArr addObject:[NSValue valueWithCGPoint:point]];
     self.currentLine.lineTrackMutArr = [self.pointMutArr copy];
     
@@ -124,8 +163,7 @@
 }
 
 -(void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-    
-    NSLog(@"%s",__FUNCTION__);
+    //NSLog(@"%s",__FUNCTION__);
 
     CGPoint point = [self touchPointWithTouchEvent:event];
     NSValue *pointValue = [NSValue valueWithCGPoint:point];
@@ -136,12 +174,11 @@
     if (self.delegate && [self.delegate respondsToSelector:@selector(drawBoard:drawingStatus:)]) {
         [self.delegate drawBoard:self drawingStatus:DrawingStatusMove];
     }
-    
     self.drawStatus = DrawingStatusMove;
 }
 
 -(void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-    NSLog(@"%s",__FUNCTION__);
+    //NSLog(@"%s",__FUNCTION__);
 
     if (self.drawStatus != DrawingStatusMove) {
         [self.pointMutArr removeAllObjects];
@@ -154,7 +191,7 @@
     
     [self.pointMutArr removeAllObjects];
     [self setNeedsDisplay];
-    
+    self.currentLine = nil;
     
     if (self.delegate && [self.delegate respondsToSelector:@selector(drawBoard:drawingStatus:)]) {
         [self.delegate drawBoard:self drawingStatus:DrawingStatusEnd];
@@ -192,16 +229,6 @@
             break;
     }
 }
--(void)setLineWidth:(CGFloat)lineWidth{
-    _lineWidth = lineWidth;
-}
-
--(void)setLineColor:(UIColor *)lineColor{
-    _lineColor = lineColor;
-}
-
-
-
 
 
 #pragma mark - 文字输入&缩放移动手势
@@ -216,7 +243,6 @@
     label.text = text;
     label.textColor = textColor;
     [self addSubview:label];
-    
     [self.labelMutArr addObject:label];
 }
 @end

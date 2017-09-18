@@ -82,7 +82,7 @@
             break;
         case DrawingStatusEnd:{
             [UIView animateWithDuration:timerInterval animations:^{
-                tempSelf.editView.y = 49.f;
+                tempSelf.editView.y = SCREEN_HEIGHT - tempSelf.editView.height;
                 if (tempSelf.tempOption == EditMenuTypeOptionLine || tempSelf.tempOption == EditMenuTypeOptionRect) {
                     tempSelf.colorPaletteView.y = SCREEN_HEIGHT - tempSelf.colorPaletteView.height - tempSelf.editView.height;
                 }
@@ -152,6 +152,8 @@
             break;
     }
 }
+
+
 
 #pragma mark - Private Methods
 

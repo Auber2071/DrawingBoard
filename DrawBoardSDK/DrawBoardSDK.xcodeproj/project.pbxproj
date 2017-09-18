@@ -196,12 +196,12 @@
 		261880841F6B7F9E0043B25A /* View */ = {
 			isa = PBXGroup;
 			children = (
-				261880851F6B7F9E0043B25A /* ColorPaletteView.h */,
-				261880861F6B7F9E0043B25A /* ColorPaletteView.m */,
 				261880871F6B7F9E0043B25A /* DrawBoardView.h */,
 				261880881F6B7F9E0043B25A /* DrawBoardView.m */,
 				261880891F6B7F9E0043B25A /* EditView.h */,
 				2618808A1F6B7F9E0043B25A /* EditView.m */,
+				261880851F6B7F9E0043B25A /* ColorPaletteView.h */,
+				261880861F6B7F9E0043B25A /* ColorPaletteView.m */,
 				2618808B1F6B7F9E0043B25A /* TypeLineCollectionCell.h */,
 				2618808C1F6B7F9E0043B25A /* TypeLineCollectionCell.m */,
 				2618808D1F6B7F9E0043B25A /* TypeRectCollectionCell.h */,

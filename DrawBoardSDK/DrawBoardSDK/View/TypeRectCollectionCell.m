@@ -18,7 +18,7 @@
 @end
 
 @implementation TypeRectCollectionCell
-
+static NSTimeInterval duration = 0.1f;
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -35,15 +35,16 @@
         if (tempBtn.tag == defaultRectType) {
             tempBtn.enabled = NO;
             self.lastBtn = tempBtn;
+            [UIView animateWithDuration:duration animations:^{
+                self.indicatorView.width = tempBtn.titleLabel.width;
+                self.indicatorView.centerX = tempBtn.centerX;
+            }];
         }else{
             tempBtn.enabled = YES;
         }
-        [UIView animateWithDuration:0.25f animations:^{
-            self.indicatorView.width = tempBtn.titleLabel.width;
-            self.indicatorView.centerX = tempBtn.centerX;
-        }];
     }
 }
+
 
 -(void)p_addRectOptions{
     self.indicatorView = [[UIView alloc] init];
@@ -51,7 +52,6 @@
     self.indicatorView.height = 2;
     self.indicatorView.y = CGRectGetHeight(self.frame) - self.indicatorView.height;
     [self.contentView addSubview:self.indicatorView];
-    
     
     UIEdgeInsets btnInset = UIEdgeInsetsMake(0, SCREEN_WIDTH/5, 0, SCREEN_WIDTH/5);
     CGFloat btnWidth = (SCREEN_WIDTH-btnInset.left-btnInset.right)/3.f;
@@ -62,9 +62,11 @@
         [button setTitleColor:UIColorFromRGB(0x999999) forState:UIControlStateNormal];
         [button setTitleColor:UIColorFromRGB(0xffa500) forState:UIControlStateDisabled];
         [button setFrame:CGRectMake(btnInset.left + i*btnWidth, 0, btnWidth, CGRectGetHeight(self.frame)-2)];
+        [button layoutIfNeeded];
         [button addTarget:self action:@selector(p_clickColorOption:) forControlEvents:UIControlEventTouchUpInside];
         [self.contentView addSubview:button];
         [self.btnMutArr addObject:button];
+        
         switch (i) {
             case 0:{
                 button.tag = RectTypeOptionSquare;
@@ -96,11 +98,10 @@
     sender.enabled = NO;
     self.lastBtn = sender;
     
-    [UIView animateWithDuration:0.25f animations:^{
+    [UIView animateWithDuration:duration animations:^{
         self.indicatorView.width = sender.titleLabel.width;
         self.indicatorView.centerX = sender.centerX;
     }];
-    
     
     if (self.rectTypeDelegate && [self.rectTypeDelegate respondsToSelector:@selector(changeRectTypeOption:)]) {
         [self.rectTypeDelegate changeRectTypeOption:sender.tag];

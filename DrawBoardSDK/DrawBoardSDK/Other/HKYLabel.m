@@ -29,7 +29,6 @@
     UIPanGestureRecognizer *panGesture=[[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(panLabel:)];
     [self addGestureRecognizer:panGesture];
     
-    
     /*添加捏合手势*/
     UIPinchGestureRecognizer *pinchGesture=[[UIPinchGestureRecognizer alloc]initWithTarget:self action:@selector(pinchLabel:)];
     [self addGestureRecognizer:pinchGesture];
@@ -41,7 +40,7 @@
 
 #pragma mark 点击
 -(void)tapLabel:(UITapGestureRecognizer *)gesture{
-    NSLog(@"tap:>>>>>>%s-------%ld",__FUNCTION__,(long)gesture.state);
+    
 }
 
 #pragma mark 拖动
@@ -58,9 +57,9 @@
     }
 }
 
+
 #pragma mark 捏合
 -(void)pinchLabel:(UIPinchGestureRecognizer *)gesture{
-    
     if (gesture.state==UIGestureRecognizerStateChanged) {
         //捏合手势中scale属性记录的缩放比例
         gesture.view.transform = CGAffineTransformScale(gesture.view.transform, gesture.scale, gesture.scale);
@@ -77,9 +76,7 @@
     }
 }
 
--(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-    
-}
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{}
 -(void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{}
 -(void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{}
 
