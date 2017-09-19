@@ -7,6 +7,8 @@
 //
 
 #import "HKYInputCharacterViewController.h"
+#import "HKYTextModel.h"
+
 
 @interface HKYInputCharacterViewController ()
 @property (nonatomic, strong) UIButton *cancelBtn;
@@ -23,6 +25,7 @@
 @property (nonatomic, assign) CGFloat normalWidth;
 @property (nonatomic, assign) CGFloat largeWidth;
 @property (nonatomic, assign) CGFloat padding;
+
 
 @end
 
@@ -90,7 +93,6 @@
         [self p_reserBtnFrameWithButton:sender isLast:NO tag:sender.tag];
         [self p_reserBtnFrameWithButton:self.lastBtn isLast:YES tag:self.lastBtn.tag];
         self.lastBtn = sender;
-
     }
 }
 
@@ -111,8 +113,12 @@
 }
 -(void)p_finishClick{
     [self p_resignFirstResponder];
-    if (self.textView.text.length>0 && self.inPutCharacterDelegate && [self.inPutCharacterDelegate respondsToSelector:@selector(InputCharacterView:text:textColor:)]) {
-        [self.inPutCharacterDelegate InputCharacterView:self text:self.textView.text textColor:self.textView.textColor];
+    if (self.inPutCharacterDelegate && [self.inPutCharacterDelegate respondsToSelector:@selector(InputCharacterView:textModel:)]) {
+
+        self.fixedTextModel.text = self.textView.text;
+        self.fixedTextModel.textColor = self.textView.textColor;
+        self.fixedTextModel.textColorIndex = self.lastBtn.tag;
+        [self.inPutCharacterDelegate InputCharacterView:self textModel:self.fixedTextModel];
     }
     [self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -175,7 +181,8 @@
         _textView = [[UITextView alloc] initWithFrame:CGRectMake(textViewInset.left, CGRectGetMaxY(self.cancelBtn.frame)+textViewInset.top, width, SCREEN_HEIGHT/2.f)];
         _textView.backgroundColor = UIColorFromRGB(0xfafafa);
         _textView.font = [UIFont systemFontOfSize:16.f];
-        _textView.textColor = self.colorArr[self.defaultColorIndex];
+        _textView.text = self.fixedTextModel.text;
+        _textView.textColor = self.fixedTextModel.textColor;;
         _textView.layer.cornerRadius = 5.f;
     }
     return _textView;
@@ -190,5 +197,16 @@
     return _colorBackGroundView;
 }
 
+
+-(HKYTextModel *)fixedTextModel{
+    if (!_fixedTextModel) {
+        _fixedTextModel = [[HKYTextModel alloc] init];
+        _fixedTextModel.text = @"";
+        _fixedTextModel.textColor = self.colorArr[self.defaultColorIndex];
+        _fixedTextModel.isFixed = NO;
+        _fixedTextModel.textColorIndex = self.defaultColorIndex;
+    }
+    return _fixedTextModel;
+}
 
 @end

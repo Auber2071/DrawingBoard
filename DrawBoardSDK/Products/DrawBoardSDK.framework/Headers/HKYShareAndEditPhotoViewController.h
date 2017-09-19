@@ -1,5 +1,5 @@
 //
-//  ShareAndEditPhotoViewController.h
+//  HKYShareAndEditPhotoViewController.h
 //  DrawingBoard
 //
 //  Created by hankai on 2017/9/7.
@@ -8,15 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
-@protocol ShareAndEditPhotoViewControllerDelegate <NSObject>
+@protocol HKYShareAndEditPhotoViewControllerDelegate <NSObject>
 
 -(void)shareBtnClick;
 
 @end
 
-@interface ShareAndEditPhotoViewController : UIViewController
+@interface HKYShareAndEditPhotoViewController : UIViewController
 
-@property (nonatomic, assign) id<ShareAndEditPhotoViewControllerDelegate> delegate;
+@property (nonatomic, assign) id<HKYShareAndEditPhotoViewControllerDelegate> delegate;
 
 //分享的图片
 @property (nonatomic, strong) UIImage *shareImg;

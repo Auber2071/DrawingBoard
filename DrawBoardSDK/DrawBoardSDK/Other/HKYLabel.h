@@ -8,6 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+
+@class HKYLabel;
+
+@protocol HKYLabelDelegate <NSObject>
+-(void)tapLabelWithTag:(NSInteger)tag;
+
+@end
+
 @interface HKYLabel : UILabel
+@property (nonatomic, assign) id<HKYLabelDelegate> labelDelegate;
 
 @end

@@ -10,8 +10,7 @@
 #import "HKYLineModel.h"
 #import "HKYLabel.h"
 
-
-@interface HKYDrawBoardView ()
+@interface HKYDrawBoardView ()<HKYLabelDelegate>
 @property (nonatomic, assign) DrawingStatus drawStatus;//绘制状态
 
 @property (nonatomic, strong) NSMutableArray<NSValue*> *pointMutArr;//当前绘制的线条的点坐标集合
@@ -232,18 +231,51 @@
 
 
 #pragma mark - 文字输入&缩放移动手势
--(void)addLabelWithText:(NSString *)text textColor:(UIColor *)textColor{
-    CGFloat width = 100.f;
-    CGFloat height = 40.f;
-    CGFloat X = ([[UIScreen mainScreen]bounds].size.width-width)/2.f;
-    CGFloat Y = ([[UIScreen mainScreen]bounds].size.height-height)/2.f;
-    
-    HKYLabel *label = [[HKYLabel alloc] initWithFrame:CGRectMake(X, Y, width, height)];
+-(void)setupLabelWithTextModel:(HKYTextModel *)textModel{
 
-    label.text = text;
-    label.textColor = textColor;
-    [self addSubview:label];
-    [self.labelMutArr addObject:label];
+    CGFloat height = 40.f;
+    CGFloat width = [self calculateRowWidth:textModel.text withHeight:height];
+    
+    if (!textModel.isFixed && textModel.text.length >0) {
+        CGFloat X = ([[UIScreen mainScreen]bounds].size.width-width)/2.f;
+        CGFloat Y = ([[UIScreen mainScreen]bounds].size.height-height)/2.f;
+        
+        HKYLabel *label = [[HKYLabel alloc] initWithFrame:CGRectMake(X, Y, width, height)];
+        label.labelDelegate = self;
+        label.text = textModel.text;
+        label.textColor = textModel.textColor;
+        label.tag = textModel.tag;
+        [self addSubview:label];
+        [self.labelMutArr addObject:label];
+    }else{
+        for (UILabel *label in self.labelMutArr) {
+            if (textModel.text.length<1) {
+                [self.labelMutArr removeObject:label];
+                [label removeFromSuperview];
+                textModel.isFixed = NO;
+                return;
+            }
+            if (label.tag == textModel.tag) {
+                label.width = width;
+                label.text = textModel.text;
+                label.textColor = textModel.textColor;
+                textModel.isFixed = NO;
+            }
+        }
+    }
+}
+
+-(void)tapLabelWithTag:(NSInteger)tag{
+    if (self.delegate && [self.delegate respondsToSelector:@selector(drawBoardBtnClickWithTag:)]) {
+        [self.delegate drawBoardBtnClickWithTag:tag];
+    }
+}
+
+- (CGFloat)calculateRowWidth:(NSString *)string withHeight:(CGFloat)height{
+    NSDictionary *dic = @{NSFontAttributeName:[UIFont systemFontOfSize:17]};
+    CGRect rect = [string boundingRectWithSize:CGSizeMake(0, height) options:NSStringDrawingUsesLineFragmentOrigin |
+                   NSStringDrawingUsesFontLeading attributes:dic context:nil];
+    return rect.size.width;
 }
 
 

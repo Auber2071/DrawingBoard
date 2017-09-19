@@ -9,6 +9,7 @@
 #import "HKYLabel.h"
 
 
+
 static NSTimeInterval HKYTimerInterval = 2.f;
 @implementation HKYLabel
 -(instancetype)initWithFrame:(CGRect)frame{
@@ -48,7 +49,10 @@ static NSTimeInterval HKYTimerInterval = 2.f;
 
 #pragma mark 点击
 -(void)tapLabel:(UITapGestureRecognizer *)gesture{
-    NSLog(@"%s",__func__);
+    //NSLog(@"%s",__func__);
+    if (self.labelDelegate && [self.labelDelegate respondsToSelector:@selector(tapLabelWithTag:)]) {
+        [self.labelDelegate tapLabelWithTag:self.tag];
+    }
 }
 
 #pragma mark 拖动
@@ -61,7 +65,7 @@ static NSTimeInterval HKYTimerInterval = 2.f;
         [gesture setTranslation:CGPointZero inView:self.superview];
         //NSLog(@"%s-------%ld",__FUNCTION__,(long)gesture.state);
     }else{
-        NSLog(@"out-%s-------%ld",__FUNCTION__,(long)gesture.state);
+        //NSLog(@"out-%s-------%ld",__FUNCTION__,(long)gesture.state);
     }
 }
 
@@ -84,7 +88,7 @@ static NSTimeInterval HKYTimerInterval = 2.f;
 }
 
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-    NSLog(@"%s",__func__);
+    //NSLog(@"%s",__func__);
 }
 
 -(void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{}

@@ -146,6 +146,7 @@ static NSTimeInterval  const duration = 0.1f;
                 BNCUMShare *shareView = [BNCUMShare shareWithUMShare];
                 [shareView shareImg:self.shareImg];
             }
+            [self dismissViewControllerAnimated:NO completion:nil];
         }
             break;
     }

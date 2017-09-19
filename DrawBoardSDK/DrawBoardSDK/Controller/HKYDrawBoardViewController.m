@@ -37,6 +37,9 @@
 
 @property (nonatomic, assign) RectTypeOptions defaultRectOption;
 
+@property (nonatomic, strong) NSMutableArray *textModelMutArr;
+
+
 @end
 
 @implementation HKYDrawBoardViewController
@@ -69,6 +72,23 @@
 
 #pragma mark - DrawBoardViewDeletage
 
+-(void)drawBoardBtnClickWithTag:(NSInteger)tag{
+
+    for (HKYTextModel *textModel in self.textModelMutArr) {
+        if (textModel.tag == tag) {
+            HKYInputCharacterViewController *inputCharacterVC = [[HKYInputCharacterViewController alloc] initWithColorArr:self.colorArr defaultColorIndex:textModel.textColorIndex];
+            inputCharacterVC.inPutCharacterDelegate = self;
+            textModel.isFixed = YES;
+            inputCharacterVC.fixedTextModel = textModel;
+            [self presentViewController:inputCharacterVC animated:YES completion:nil];
+
+        }
+    }
+    
+    
+    
+}
+
 -(void)drawBoard:(HKYDrawBoardView *)drawView drawingStatus:(DrawingStatus)drawingStatus{
     __weak typeof(self) tempSelf = self;
     NSTimeInterval timerInterval = 0.2f;
@@ -97,8 +117,11 @@
 }
 
 #pragma mark - InputCharacterViewControllerDelegate
--(void)InputCharacterView:(HKYInputCharacterViewController *)inputCharacter text:(NSString *)text textColor:(UIColor *)textColor{
-    [self.drawBoardView addLabelWithText:text textColor:textColor];
+-(void)InputCharacterView:(HKYInputCharacterViewController *)inputCharacter textModel:(HKYTextModel *)textModel{
+    if (!textModel.isFixed) {
+        [self.textModelMutArr addObject:textModel];
+    }
+    [self.drawBoardView setupLabelWithTextModel:textModel];
 }
 
 #pragma mark - ColorPaletteViewDelegate
@@ -272,5 +295,10 @@
     }
     return _colorArr;
 }
-
+-(NSMutableArray *)textModelMutArr{
+    if (!_textModelMutArr) {
+        _textModelMutArr = [NSMutableArray array];
+    }
+    return _textModelMutArr;
+}
 @end

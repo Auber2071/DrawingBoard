@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 #import "HKYEditView.h"
+#import "HKYTextModel.h"
 
 
 typedef NS_ENUM(NSInteger,DrawingStatus){
@@ -17,10 +18,10 @@ typedef NS_ENUM(NSInteger,DrawingStatus){
     DrawingStatusEnd//结束绘制
 };
 
-
+@class HKYTextModel;
 @class HKYDrawBoardView;
 @protocol HKYDrawBoardViewDeletage <NSObject>
-
+- (void)drawBoardBtnClickWithTag:(NSInteger)tag;
 - (void)drawBoard:(HKYDrawBoardView *)drawView drawingStatus:(DrawingStatus)drawingStatus;
 
 @end
@@ -33,8 +34,8 @@ typedef NS_ENUM(NSInteger,DrawingStatus){
 @property (nonatomic, strong) UIColor *lineColor;//当前线条颜色
 @property (nonatomic, assign) RectTypeOptions rectTypeOption;
 
+-(void)setupLabelWithTextModel:(HKYTextModel *)textModel;
 
--(void)addLabelWithText:(NSString *)text textColor:(UIColor *)textColor;
 
 
 

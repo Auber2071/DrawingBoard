@@ -9,16 +9,20 @@
 #import <UIKit/UIKit.h>
 
 @class HKYInputCharacterViewController;
+@class HKYTextModel;
 
 @protocol HKYInputCharacterViewControllerDelegate <NSObject>
 
--(void)InputCharacterView:(HKYInputCharacterViewController *)inputCharacter text:(NSString *)text textColor:(UIColor *)textColor;
+-(void)InputCharacterView:(HKYInputCharacterViewController *)inputCharacter textModel:(HKYTextModel *)textModel;
 
 @end
 
 @interface HKYInputCharacterViewController : UIViewController
 
 @property (nonatomic, assign) id<HKYInputCharacterViewControllerDelegate> inPutCharacterDelegate;
+@property (nonatomic, strong) HKYTextModel *fixedTextModel;
+
 - (instancetype)initWithColorArr:(NSArray *)colorArr defaultColorIndex:(NSInteger)defaultColorIndex;
+
 
 @end

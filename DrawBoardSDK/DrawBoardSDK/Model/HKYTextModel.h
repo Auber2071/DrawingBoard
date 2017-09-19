@@ -14,7 +14,6 @@
 @property (nonatomic, strong) UIColor *textColor;
 @property (nonatomic, assign) NSInteger tag;
 @property (nonatomic, assign) NSInteger textColorIndex;
-
-
+@property (nonatomic, assign) BOOL isFixed;
 
 @end
