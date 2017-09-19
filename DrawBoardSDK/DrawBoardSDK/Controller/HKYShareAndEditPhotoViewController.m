@@ -47,12 +47,6 @@ static NSTimeInterval  const duration = 0.1f;
     [super viewWillAppear:animated];
     [self showShareAndEditView];
 }
--(UIView *)editBackView{
-    if (!_editBackView) {
-        _editBackView = [[UIView alloc] initWithFrame:CGRectMake(0, [[UIScreen mainScreen] bounds].size.height, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height/6.f)];
-    }
-    return _editBackView;
-}
 
 
 -(void)layoutSubviews{
@@ -187,6 +181,15 @@ static NSTimeInterval  const duration = 0.1f;
     [self.backImageView setImage:self.shareImg];
     
     [self showShareAndEditView];
+}
+
+#pragma mark - Get Method
+
+-(UIView *)editBackView{
+    if (!_editBackView) {
+        _editBackView = [[UIView alloc] initWithFrame:CGRectMake(0, [[UIScreen mainScreen] bounds].size.height, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height/6.f)];
+    }
+    return _editBackView;
 }
 
 -(UIImageView *)backImageView{
