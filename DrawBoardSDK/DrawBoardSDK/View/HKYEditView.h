@@ -1,5 +1,5 @@
 //
-//  EditView.h
+//  HKYEditView.h
 //  DrawingBoard
 //
 //  Created by hankai on 2017/8/22.
@@ -16,16 +16,16 @@ typedef NS_ENUM(NSInteger,EditMenuTypeOptions) {
     EditMenuTypeOptionBack
 };
 
-@class EditView;
+@class HKYEditView;
 
-@protocol EditViewDelegate <NSObject>
--(void)EditView:(EditView *)sender changedDrawingOption:(EditMenuTypeOptions)drawingOption;
+@protocol HKYEditViewDelegate <NSObject>
+-(void)HKYEditView:(HKYEditView *)sender changedDrawingOption:(EditMenuTypeOptions)drawingOption;
 
 
 @end
 
-@interface EditView : UIView
-@property (nonatomic, assign) id<EditViewDelegate> editViewDelegate;
+@interface HKYEditView : UIView
+@property (nonatomic, assign) id<HKYEditViewDelegate> editViewDelegate;
 
 
 @end

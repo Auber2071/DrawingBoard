@@ -1,5 +1,5 @@
 //
-//  DrawBoardViewController.h
+//  HKYDrawBoardViewController.h
 //  DrawingBoard
 //
 //  Created by hankai on 2017/9/4.
@@ -8,17 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
-@class DrawBoardViewController;
-@protocol DrawBoardViewControllerDelegaete <NSObject>
+@class HKYDrawBoardViewController;
+@protocol HKYDrawBoardViewControllerDelegaete <NSObject>
 
 -(void)cancelEdit;
 -(void)finishEditWithImage:(UIImage *)finishImage;
 
 @end
 
-@interface DrawBoardViewController : UIViewController
+@interface HKYDrawBoardViewController : UIViewController
 
 -(instancetype)initWithImage:(UIImage *)backImage;
-@property (nonatomic, assign) id<DrawBoardViewControllerDelegaete> drawBoardDelegate;
+@property (nonatomic, assign) id<HKYDrawBoardViewControllerDelegaete> drawBoardDelegate;
 
 @end

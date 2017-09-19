@@ -1,19 +1,19 @@
 //
-//  ColorPaletteView.m
+//  HKYColorPaletteView.m
 //  DrawingBoard
 //
 //  Created by hankai on 2017/8/24.
 //  Copyright © 2017年 Vencent. All rights reserved.
 //
 
-#import "ColorPaletteView.h"
-#import "TypeLineCollectionCell.h"
+#import "HKYColorPaletteView.h"
+#import "HKYTypeLineCollectionCell.h"
 
 
 static NSString *CellLineIdentifierCell = @"CellLineIdentifierCell";
 static NSString *CellRectIdentifierCell = @"CellRectIdentifierCell";
 
-@interface ColorPaletteView ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,CollectionCellDelegate>
+@interface HKYColorPaletteView ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,HKYCollectionCellDelegate>
 @property (nonatomic, strong) UICollectionView *collectionView;
 
 @property (nonatomic, strong) UIScrollView *colorBackGroundView;
@@ -37,7 +37,7 @@ static NSString *CellRectIdentifierCell = @"CellRectIdentifierCell";
 
 @end
 
-@implementation ColorPaletteView
+@implementation HKYColorPaletteView
 
 - (instancetype)initWithFrame:(CGRect)frame ColorArr:(NSArray *)colorArr defaultColorIndex:(NSInteger)defaultColorIndex defaultLineWidth:(NSUInteger)defaultLineWidth defaultRectTypeOption:(RectTypeOptions)defaultTypeOption defaultRectWidth:(NSUInteger)defaultRectWidth
 {
@@ -172,14 +172,14 @@ static NSString *CellRectIdentifierCell = @"CellRectIdentifierCell";
     
     switch (indexPath.item) {
         case 0:{
-            TypeLineCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellLineIdentifierCell forIndexPath:indexPath];
+            HKYTypeLineCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellLineIdentifierCell forIndexPath:indexPath];
             cell.typeLineDelegate = self;
             cell.defaultLineWidth = self.lineWidth;
             return cell;
         }
             break;
         case 1:{
-            TypeRectCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellRectIdentifierCell forIndexPath:indexPath];
+            HKYTypeRectCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellRectIdentifierCell forIndexPath:indexPath];
             cell.rectTypeDelegate = self;
             cell.defaultRectType = self.selectedRectType;
             return cell;
@@ -209,8 +209,8 @@ static NSString *CellRectIdentifierCell = @"CellRectIdentifierCell";
         _collectionView.pagingEnabled = YES;
         _collectionView.showsHorizontalScrollIndicator = NO;
         _collectionView.scrollEnabled = NO;
-        [_collectionView registerClass:[TypeLineCollectionCell class] forCellWithReuseIdentifier:CellLineIdentifierCell];
-        [_collectionView registerClass:[TypeRectCollectionCell class] forCellWithReuseIdentifier:CellRectIdentifierCell];
+        [_collectionView registerClass:[HKYTypeLineCollectionCell class] forCellWithReuseIdentifier:CellLineIdentifierCell];
+        [_collectionView registerClass:[HKYTypeRectCollectionCell class] forCellWithReuseIdentifier:CellRectIdentifierCell];
     }
     return _collectionView;
 }

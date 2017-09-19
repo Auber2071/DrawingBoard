@@ -1,5 +1,5 @@
 //
-//  TypeRectCollectionCell.h
+//  HKYTypeRectCollectionCell.h
 //  DrawingBoard
 //
 //  Created by hankai on 2017/9/6.
@@ -7,12 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CollectionCellDelegate.h"
+#import "HKYCollectionCellDelegate.h"
 
 
-@interface TypeRectCollectionCell : UICollectionViewCell
+@interface HKYTypeRectCollectionCell : UICollectionViewCell
 
-@property (nonatomic, assign) id<CollectionCellDelegate> rectTypeDelegate;
+@property (nonatomic, assign) id<HKYCollectionCellDelegate> rectTypeDelegate;
 
 @property (nonatomic, assign) RectTypeOptions defaultRectType;
 

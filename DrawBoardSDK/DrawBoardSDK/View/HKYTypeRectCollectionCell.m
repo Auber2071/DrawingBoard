@@ -1,14 +1,14 @@
 //
-//  TypeRectCollectionCell.m
+//  HKYTypeRectCollectionCell.m
 //  DrawingBoard
 //
 //  Created by hankai on 2017/9/6.
 //  Copyright © 2017年 Vencent. All rights reserved.
 //
 
-#import "TypeRectCollectionCell.h"
+#import "HKYTypeRectCollectionCell.h"
 
-@interface TypeRectCollectionCell ()
+@interface HKYTypeRectCollectionCell ()
 @property (nonatomic, strong) NSArray *titleArr;
 @property (nonatomic, strong) NSMutableArray *btnMutArr;
 
@@ -17,7 +17,7 @@
 
 @end
 
-@implementation TypeRectCollectionCell
+@implementation HKYTypeRectCollectionCell
 static NSTimeInterval duration = 0.1f;
 - (instancetype)initWithFrame:(CGRect)frame
 {

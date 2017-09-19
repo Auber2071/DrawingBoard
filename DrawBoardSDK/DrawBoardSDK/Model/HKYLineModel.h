@@ -1,5 +1,5 @@
 //
-//  LineModel.h
+//  HKYLineModel.h
 //  DrawingBoard
 //
 //  Created by hankai on 2017/8/25.
@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "EditView.h"
+#import "HKYEditView.h"
 
-@interface LineModel : NSObject
+@interface HKYLineModel : NSObject
 
 @property (nonatomic, strong, readonly) UIColor *lineColor;
 @property (nonatomic, assign, readonly) CGFloat lineWidth;

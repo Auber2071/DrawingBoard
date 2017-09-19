@@ -14,7 +14,7 @@
 
 
 #import "UIView+HKYExtension.h"
-#import "DrawingBoardHeader.h"
+#import "HKYDrawingBoardHeader.h"
 
 #define DrawBoardBundle [NSBundle bundleWithURL:[[NSBundle mainBundle] URLForResource:@"DrawBoardBundle" withExtension:@"bundle"]]
 

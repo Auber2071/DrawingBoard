@@ -1,5 +1,5 @@
 //
-//  ColorPaletteView.h
+//  HKYColorPaletteView.h
 //  DrawingBoard
 //
 //  Created by hankai on 2017/8/24.
@@ -7,20 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "TypeRectCollectionCell.h"
+#import "HKYTypeRectCollectionCell.h"
 
 
-@class ColorPaletteView;
-@protocol ColorPaletteViewDelegate <NSObject>
+@class HKYColorPaletteView;
+@protocol HKYColorPaletteViewDelegate <NSObject>
 
 - (void)colorPaletteViewWithColor:(UIColor *)color rectTypeOption:(RectTypeOptions)rectTypeOption lineWidth:(NSUInteger)lineWidth;
 
 
 @end
 
-@interface ColorPaletteView : UIView
+@interface HKYColorPaletteView : UIView
 
-@property (nonatomic, assign) id<ColorPaletteViewDelegate> colorPaletteViewDelegate;
+@property (nonatomic, assign) id<HKYColorPaletteViewDelegate> colorPaletteViewDelegate;
 - (instancetype)initWithFrame:(CGRect)frame ColorArr:(NSArray *)colorArr defaultColorIndex:(NSInteger)defaultColorIndex defaultLineWidth:(NSUInteger)defaultLineWidth defaultRectTypeOption:(RectTypeOptions)defaultTypeOption defaultRectWidth:(NSUInteger)defaultRectWidth;
 
 

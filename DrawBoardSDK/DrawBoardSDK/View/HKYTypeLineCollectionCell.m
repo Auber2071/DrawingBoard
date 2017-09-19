@@ -1,20 +1,20 @@
 //
-//  TypeLineCollectionCell.m
+//  HKYTypeLineCollectionCell.m
 //  DrawingBoard
 //
 //  Created by hankai on 2017/8/26.
 //  Copyright © 2017年 Vencent. All rights reserved.
 //
 
-#import "TypeLineCollectionCell.h"
+#import "HKYTypeLineCollectionCell.h"
 
-@interface TypeLineCollectionCell ()
+@interface HKYTypeLineCollectionCell ()
 @property (nonatomic, strong) UISlider *slider;
 
 
 @end
 
-@implementation TypeLineCollectionCell
+@implementation HKYTypeLineCollectionCell
 
 - (instancetype)initWithFrame:(CGRect)frame
 {

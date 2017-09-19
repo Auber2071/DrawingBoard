@@ -1,20 +1,20 @@
 //
-//  EditView.m
+//  HKYEditView.m
 //  DrawingBoard
 //
 //  Created by hankai on 2017/8/22.
 //  Copyright © 2017年 Vencent. All rights reserved.
 //
 
-#import "EditView.h"
+#import "HKYEditView.h"
 
-@interface EditView ()
+@interface HKYEditView ()
 @property (nonatomic, strong) UIScrollView *actionScrollView;
 @property (nonatomic, strong) UIButton *lastButton;
 
 @end
 
-@implementation EditView
+@implementation HKYEditView
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
@@ -112,8 +112,8 @@
         self.lastButton = sender;
     }
     
-    if (self.editViewDelegate && [self.editViewDelegate respondsToSelector:@selector(EditView:changedDrawingOption:)]) {
-        [self.editViewDelegate EditView:self changedDrawingOption:sender.tag];
+    if (self.editViewDelegate && [self.editViewDelegate respondsToSelector:@selector(HKYEditView:changedDrawingOption:)]) {
+        [self.editViewDelegate HKYEditView:self changedDrawingOption:sender.tag];
     }
 }
 

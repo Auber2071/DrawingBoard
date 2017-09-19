@@ -8,14 +8,21 @@
 
 #import "HKYLabel.h"
 
+
+static NSTimeInterval HKYTimerInterval = 2.f;
 @implementation HKYLabel
 -(instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if (self) {
         self.layer.borderColor = [UIColor whiteColor].CGColor;
+        self.layer.borderWidth = 1.f;
         self.textAlignment = NSTextAlignmentCenter;
         self.userInteractionEnabled = YES;
         [self addGestureTarget];
+        __weak typeof(self) tempSelf = self;
+        [NSTimer scheduledTimerWithTimeInterval:HKYTimerInterval repeats:NO block:^(NSTimer * _Nonnull timer) {
+            tempSelf.layer.borderWidth = 0.f;
+        }];
     }
     return self;
 }
@@ -27,15 +34,15 @@
     [self addGestureRecognizer:tapGesture];
     
     /*添加拖动手势*/
-    UIPanGestureRecognizer *panGesture=[[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(panLabel:)];
+    UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(panLabel:)];
     [self addGestureRecognizer:panGesture];
     
     /*添加捏合手势*/
-    UIPinchGestureRecognizer *pinchGesture=[[UIPinchGestureRecognizer alloc]initWithTarget:self action:@selector(pinchLabel:)];
+    UIPinchGestureRecognizer *pinchGesture = [[UIPinchGestureRecognizer alloc]initWithTarget:self action:@selector(pinchLabel:)];
     [self addGestureRecognizer:pinchGesture];
     
     /*添加旋转手势*/
-    UIRotationGestureRecognizer *rotationGesture=[[UIRotationGestureRecognizer alloc]initWithTarget:self action:@selector(rotateLabel:)];
+    UIRotationGestureRecognizer *rotationGesture = [[UIRotationGestureRecognizer alloc]initWithTarget:self action:@selector(rotateLabel:)];
     [self addGestureRecognizer:rotationGesture];
 }
 
@@ -58,7 +65,6 @@
     }
 }
 
-
 #pragma mark 捏合
 -(void)pinchLabel:(UIPinchGestureRecognizer *)gesture{
     if (gesture.state==UIGestureRecognizerStateChanged) {
@@ -80,6 +86,7 @@
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     NSLog(@"%s",__func__);
 }
+
 -(void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{}
 -(void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{}
 

@@ -1,5 +1,5 @@
 //
-//  TypeLineCollectionCell.h
+//  HKYTypeLineCollectionCell.h
 //  DrawingBoard
 //
 //  Created by hankai on 2017/8/26.
@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CollectionCellDelegate.h"
+#import "HKYCollectionCellDelegate.h"
 
-@interface TypeLineCollectionCell : UICollectionViewCell
+@interface HKYTypeLineCollectionCell : UICollectionViewCell
 
-@property (nonatomic, assign) id<CollectionCellDelegate> typeLineDelegate;
+@property (nonatomic, assign) id<HKYCollectionCellDelegate> typeLineDelegate;
 
 @property (nonatomic, assign) NSUInteger defaultLineWidth;
 

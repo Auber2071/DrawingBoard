@@ -1,5 +1,5 @@
 //
-//  CollectionCellDelegate.h
+//  HKYCollectionCellDelegate.h
 //  DrawingBoard
 //
 //  Created by hankai on 2017/8/27.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@protocol CollectionCellDelegate <NSObject>
+@protocol HKYCollectionCellDelegate <NSObject>
 
 @optional
 

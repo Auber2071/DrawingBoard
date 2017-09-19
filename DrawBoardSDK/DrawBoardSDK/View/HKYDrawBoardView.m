@@ -1,29 +1,29 @@
 //
-//  DrawBoardView.m
+//  HKYDrawBoardView.m
 //  DrawingBoard
 //
 //  Created by hankai on 2017/8/22.
 //  Copyright © 2017年 Vencent. All rights reserved.
 //
 
-#import "DrawBoardView.h"
-#import "LineModel.h"
+#import "HKYDrawBoardView.h"
+#import "HKYLineModel.h"
 #import "HKYLabel.h"
 
 
-@interface DrawBoardView ()
+@interface HKYDrawBoardView ()
 @property (nonatomic, assign) DrawingStatus drawStatus;//绘制状态
 
 @property (nonatomic, strong) NSMutableArray<NSValue*> *pointMutArr;//当前绘制的线条的点坐标集合
 
-@property (nonatomic, strong) NSMutableArray<LineModel *> *linesMutArr;
-@property (nonatomic, strong) NSMutableArray<LineModel *> *removedLinesMutArr;//删除的线条
+@property (nonatomic, strong) NSMutableArray<HKYLineModel *> *linesMutArr;
+@property (nonatomic, strong) NSMutableArray<HKYLineModel *> *removedLinesMutArr;//删除的线条
 @property (nonatomic, strong) NSMutableArray<UILabel *> *labelMutArr;
-@property (nonatomic, strong) LineModel *currentLine;
+@property (nonatomic, strong) HKYLineModel *currentLine;
 
 @end
 
-@implementation DrawBoardView
+@implementation HKYDrawBoardView
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
@@ -48,12 +48,12 @@
     
     [self p_drawPath:context line:self.currentLine];
     for (int j = 0 ; j < [self.linesMutArr count]; j++) {
-        LineModel *line = [self.linesMutArr objectAtIndex:j];
+        HKYLineModel *line = [self.linesMutArr objectAtIndex:j];
         [self p_drawPath:context line:line];
     }
 }
 
--(void)p_drawPath:(CGContextRef)context line:(LineModel *)line{
+-(void)p_drawPath:(CGContextRef)context line:(HKYLineModel *)line{
     if (line == nil) {
         return;
     }
@@ -144,7 +144,7 @@
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     //NSLog(@"%s",__FUNCTION__);
 
-    self.currentLine = [[LineModel alloc] initWithLineColor:self.lineColor lineWidth:self.lineWidth editType:self.editTypeOption rectType:self.rectTypeOption];
+    self.currentLine = [[HKYLineModel alloc] initWithLineColor:self.lineColor lineWidth:self.lineWidth editType:self.editTypeOption rectType:self.rectTypeOption];
 
     CGPoint point = [self touchPointWithTouchEvent:event];
     //NSLog(@"touch begin x:%f y:%f",point.x,point.y);
@@ -220,7 +220,7 @@
             break;
         case EditMenuTypeOptionBack:{
             if (self.linesMutArr.count>0) {
-                LineModel *tempLastLine = [self.linesMutArr lastObject];
+                HKYLineModel *tempLastLine = [self.linesMutArr lastObject];
                 [self.removedLinesMutArr addObject:tempLastLine];
                 [self.linesMutArr removeLastObject];
                 [self setNeedsDisplay];

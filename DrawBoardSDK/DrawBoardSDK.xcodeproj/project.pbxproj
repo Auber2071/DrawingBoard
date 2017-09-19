@@ -22,35 +22,39 @@
 
 /* Begin PBXBuildFile section */
 		261880431F6B7EE80043B25A /* DrawBoardSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 261880411F6B7EE80043B25A /* DrawBoardSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		261880901F6B7F9E0043B25A /* DrawBoardViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 2618804A1F6B7F9E0043B25A /* DrawBoardViewController.h */; };
-		261880911F6B7F9E0043B25A /* DrawBoardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2618804B1F6B7F9E0043B25A /* DrawBoardViewController.m */; };
-		261880921F6B7F9E0043B25A /* InputCharacterViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 2618804C1F6B7F9E0043B25A /* InputCharacterViewController.h */; };
-		261880931F6B7F9E0043B25A /* InputCharacterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2618804D1F6B7F9E0043B25A /* InputCharacterViewController.m */; };
-		261880941F6B7F9E0043B25A /* ShareAndEditPhotoViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 2618804E1F6B7F9E0043B25A /* ShareAndEditPhotoViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		261880951F6B7F9E0043B25A /* ShareAndEditPhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2618804F1F6B7F9E0043B25A /* ShareAndEditPhotoViewController.m */; };
-		261880BA1F6B7F9E0043B25A /* LineModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 261880781F6B7F9E0043B25A /* LineModel.h */; };
-		261880BB1F6B7F9E0043B25A /* LineModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 261880791F6B7F9E0043B25A /* LineModel.m */; };
-		261880BC1F6B7F9E0043B25A /* CollectionCellDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 2618807B1F6B7F9E0043B25A /* CollectionCellDelegate.h */; };
-		261880BD1F6B7F9E0043B25A /* DrawingBoardHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = 2618807C1F6B7F9E0043B25A /* DrawingBoardHeader.h */; };
+		261880901F6B7F9E0043B25A /* HKYDrawBoardViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 2618804A1F6B7F9E0043B25A /* HKYDrawBoardViewController.h */; };
+		261880911F6B7F9E0043B25A /* HKYDrawBoardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2618804B1F6B7F9E0043B25A /* HKYDrawBoardViewController.m */; };
+		261880921F6B7F9E0043B25A /* HKYInputCharacterViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 2618804C1F6B7F9E0043B25A /* HKYInputCharacterViewController.h */; };
+		261880931F6B7F9E0043B25A /* HKYInputCharacterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2618804D1F6B7F9E0043B25A /* HKYInputCharacterViewController.m */; };
+		261880941F6B7F9E0043B25A /* HKYShareAndEditPhotoViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 2618804E1F6B7F9E0043B25A /* HKYShareAndEditPhotoViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		261880951F6B7F9E0043B25A /* HKYShareAndEditPhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2618804F1F6B7F9E0043B25A /* HKYShareAndEditPhotoViewController.m */; };
+		261880BA1F6B7F9E0043B25A /* HKYLineModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 261880781F6B7F9E0043B25A /* HKYLineModel.h */; };
+		261880BB1F6B7F9E0043B25A /* HKYLineModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 261880791F6B7F9E0043B25A /* HKYLineModel.m */; };
+		261880BC1F6B7F9E0043B25A /* HKYCollectionCellDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 2618807B1F6B7F9E0043B25A /* HKYCollectionCellDelegate.h */; };
+		261880BD1F6B7F9E0043B25A /* HKYDrawingBoardHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = 2618807C1F6B7F9E0043B25A /* HKYDrawingBoardHeader.h */; };
 		261880BE1F6B7F9E0043B25A /* HKYLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = 2618807D1F6B7F9E0043B25A /* HKYLabel.h */; };
 		261880BF1F6B7F9E0043B25A /* HKYLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2618807E1F6B7F9E0043B25A /* HKYLabel.m */; };
 		261880C01F6B7F9E0043B25A /* UIView+HKYExtension.h in Headers */ = {isa = PBXBuildFile; fileRef = 2618807F1F6B7F9E0043B25A /* UIView+HKYExtension.h */; };
 		261880C11F6B7F9E0043B25A /* UIView+HKYExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 261880801F6B7F9E0043B25A /* UIView+HKYExtension.m */; };
 		261880C21F6B7F9E0043B25A /* BNCUMShare.h in Headers */ = {isa = PBXBuildFile; fileRef = 261880821F6B7F9E0043B25A /* BNCUMShare.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		261880C31F6B7F9E0043B25A /* BNCUMShare.m in Sources */ = {isa = PBXBuildFile; fileRef = 261880831F6B7F9E0043B25A /* BNCUMShare.m */; };
-		261880C41F6B7F9E0043B25A /* ColorPaletteView.h in Headers */ = {isa = PBXBuildFile; fileRef = 261880851F6B7F9E0043B25A /* ColorPaletteView.h */; };
-		261880C51F6B7F9E0043B25A /* ColorPaletteView.m in Sources */ = {isa = PBXBuildFile; fileRef = 261880861F6B7F9E0043B25A /* ColorPaletteView.m */; };
-		261880C61F6B7F9E0043B25A /* DrawBoardView.h in Headers */ = {isa = PBXBuildFile; fileRef = 261880871F6B7F9E0043B25A /* DrawBoardView.h */; };
-		261880C71F6B7F9E0043B25A /* DrawBoardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 261880881F6B7F9E0043B25A /* DrawBoardView.m */; };
-		261880C81F6B7F9E0043B25A /* EditView.h in Headers */ = {isa = PBXBuildFile; fileRef = 261880891F6B7F9E0043B25A /* EditView.h */; };
-		261880C91F6B7F9E0043B25A /* EditView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2618808A1F6B7F9E0043B25A /* EditView.m */; };
-		261880CA1F6B7F9E0043B25A /* TypeLineCollectionCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 2618808B1F6B7F9E0043B25A /* TypeLineCollectionCell.h */; };
-		261880CB1F6B7F9E0043B25A /* TypeLineCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2618808C1F6B7F9E0043B25A /* TypeLineCollectionCell.m */; };
-		261880CC1F6B7F9E0043B25A /* TypeRectCollectionCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 2618808D1F6B7F9E0043B25A /* TypeRectCollectionCell.h */; };
-		261880CD1F6B7F9E0043B25A /* TypeRectCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2618808E1F6B7F9E0043B25A /* TypeRectCollectionCell.m */; };
-		261880CE1F6B7F9E0043B25A /* PrefixHeader.pch in Headers */ = {isa = PBXBuildFile; fileRef = 2618808F1F6B7F9E0043B25A /* PrefixHeader.pch */; };
+		261880C41F6B7F9E0043B25A /* HKYColorPaletteView.h in Headers */ = {isa = PBXBuildFile; fileRef = 261880851F6B7F9E0043B25A /* HKYColorPaletteView.h */; };
+		261880C51F6B7F9E0043B25A /* HKYColorPaletteView.m in Sources */ = {isa = PBXBuildFile; fileRef = 261880861F6B7F9E0043B25A /* HKYColorPaletteView.m */; };
+		261880C61F6B7F9E0043B25A /* HKYDrawBoardView.h in Headers */ = {isa = PBXBuildFile; fileRef = 261880871F6B7F9E0043B25A /* HKYDrawBoardView.h */; };
+		261880C71F6B7F9E0043B25A /* HKYDrawBoardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 261880881F6B7F9E0043B25A /* HKYDrawBoardView.m */; };
+		261880C81F6B7F9E0043B25A /* HKYEditView.h in Headers */ = {isa = PBXBuildFile; fileRef = 261880891F6B7F9E0043B25A /* HKYEditView.h */; };
+		261880C91F6B7F9E0043B25A /* HKYEditView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2618808A1F6B7F9E0043B25A /* HKYEditView.m */; };
+		261880CA1F6B7F9E0043B25A /* HKYTypeLineCollectionCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 2618808B1F6B7F9E0043B25A /* HKYTypeLineCollectionCell.h */; };
+		261880CB1F6B7F9E0043B25A /* HKYTypeLineCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2618808C1F6B7F9E0043B25A /* HKYTypeLineCollectionCell.m */; };
+		261880CC1F6B7F9E0043B25A /* HKYTypeRectCollectionCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 2618808D1F6B7F9E0043B25A /* HKYTypeRectCollectionCell.h */; };
+		261880CD1F6B7F9E0043B25A /* HKYTypeRectCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2618808E1F6B7F9E0043B25A /* HKYTypeRectCollectionCell.m */; };
+		261880CE1F6B7F9E0043B25A /* HKYPrefixHeader.pch in Headers */ = {isa = PBXBuildFile; fileRef = 2618808F1F6B7F9E0043B25A /* HKYPrefixHeader.pch */; };
 		261880D01F6B7FAF0043B25A /* Images in Resources */ = {isa = PBXBuildFile; fileRef = 261880CF1F6B7FAF0043B25A /* Images */; };
 		261880DD1F6B80730043B25A /* Images in Resources */ = {isa = PBXBuildFile; fileRef = 261880CF1F6B7FAF0043B25A /* Images */; };
+		268197571F70AF0900C02D4E /* HKYScreenShot.h in Headers */ = {isa = PBXBuildFile; fileRef = 268197551F70AF0900C02D4E /* HKYScreenShot.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		268197581F70AF0900C02D4E /* HKYScreenShot.m in Sources */ = {isa = PBXBuildFile; fileRef = 268197561F70AF0900C02D4E /* HKYScreenShot.m */; };
+		2681975B1F70B2D100C02D4E /* HKYTextModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 268197591F70B2D100C02D4E /* HKYTextModel.h */; };
+		2681975C1F70B2D100C02D4E /* HKYTextModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2681975A1F70B2D100C02D4E /* HKYTextModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,36 +71,40 @@
 		2618803E1F6B7EE80043B25A /* DrawBoardSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DrawBoardSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		261880411F6B7EE80043B25A /* DrawBoardSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DrawBoardSDK.h; sourceTree = "<group>"; };
 		261880421F6B7EE80043B25A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../Info.plist; sourceTree = "<group>"; };
-		2618804A1F6B7F9E0043B25A /* DrawBoardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawBoardViewController.h; sourceTree = "<group>"; };
-		2618804B1F6B7F9E0043B25A /* DrawBoardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawBoardViewController.m; sourceTree = "<group>"; };
-		2618804C1F6B7F9E0043B25A /* InputCharacterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputCharacterViewController.h; sourceTree = "<group>"; };
-		2618804D1F6B7F9E0043B25A /* InputCharacterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InputCharacterViewController.m; sourceTree = "<group>"; };
-		2618804E1F6B7F9E0043B25A /* ShareAndEditPhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareAndEditPhotoViewController.h; sourceTree = "<group>"; };
-		2618804F1F6B7F9E0043B25A /* ShareAndEditPhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareAndEditPhotoViewController.m; sourceTree = "<group>"; };
-		261880781F6B7F9E0043B25A /* LineModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LineModel.h; sourceTree = "<group>"; };
-		261880791F6B7F9E0043B25A /* LineModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LineModel.m; sourceTree = "<group>"; };
-		2618807B1F6B7F9E0043B25A /* CollectionCellDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionCellDelegate.h; sourceTree = "<group>"; };
-		2618807C1F6B7F9E0043B25A /* DrawingBoardHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawingBoardHeader.h; sourceTree = "<group>"; };
+		2618804A1F6B7F9E0043B25A /* HKYDrawBoardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKYDrawBoardViewController.h; sourceTree = "<group>"; };
+		2618804B1F6B7F9E0043B25A /* HKYDrawBoardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKYDrawBoardViewController.m; sourceTree = "<group>"; };
+		2618804C1F6B7F9E0043B25A /* HKYInputCharacterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKYInputCharacterViewController.h; sourceTree = "<group>"; };
+		2618804D1F6B7F9E0043B25A /* HKYInputCharacterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKYInputCharacterViewController.m; sourceTree = "<group>"; };
+		2618804E1F6B7F9E0043B25A /* HKYShareAndEditPhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKYShareAndEditPhotoViewController.h; sourceTree = "<group>"; };
+		2618804F1F6B7F9E0043B25A /* HKYShareAndEditPhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKYShareAndEditPhotoViewController.m; sourceTree = "<group>"; };
+		261880781F6B7F9E0043B25A /* HKYLineModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKYLineModel.h; sourceTree = "<group>"; };
+		261880791F6B7F9E0043B25A /* HKYLineModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKYLineModel.m; sourceTree = "<group>"; };
+		2618807B1F6B7F9E0043B25A /* HKYCollectionCellDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKYCollectionCellDelegate.h; sourceTree = "<group>"; };
+		2618807C1F6B7F9E0043B25A /* HKYDrawingBoardHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKYDrawingBoardHeader.h; sourceTree = "<group>"; };
 		2618807D1F6B7F9E0043B25A /* HKYLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HKYLabel.h; path = ../Other/HKYLabel.h; sourceTree = "<group>"; };
 		2618807E1F6B7F9E0043B25A /* HKYLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HKYLabel.m; path = ../Other/HKYLabel.m; sourceTree = "<group>"; };
 		2618807F1F6B7F9E0043B25A /* UIView+HKYExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+HKYExtension.h"; sourceTree = "<group>"; };
 		261880801F6B7F9E0043B25A /* UIView+HKYExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+HKYExtension.m"; sourceTree = "<group>"; };
 		261880821F6B7F9E0043B25A /* BNCUMShare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNCUMShare.h; sourceTree = "<group>"; };
 		261880831F6B7F9E0043B25A /* BNCUMShare.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNCUMShare.m; sourceTree = "<group>"; };
-		261880851F6B7F9E0043B25A /* ColorPaletteView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorPaletteView.h; sourceTree = "<group>"; };
-		261880861F6B7F9E0043B25A /* ColorPaletteView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorPaletteView.m; sourceTree = "<group>"; };
-		261880871F6B7F9E0043B25A /* DrawBoardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawBoardView.h; sourceTree = "<group>"; };
-		261880881F6B7F9E0043B25A /* DrawBoardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawBoardView.m; sourceTree = "<group>"; };
-		261880891F6B7F9E0043B25A /* EditView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditView.h; sourceTree = "<group>"; };
-		2618808A1F6B7F9E0043B25A /* EditView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditView.m; sourceTree = "<group>"; };
-		2618808B1F6B7F9E0043B25A /* TypeLineCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TypeLineCollectionCell.h; sourceTree = "<group>"; };
-		2618808C1F6B7F9E0043B25A /* TypeLineCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TypeLineCollectionCell.m; sourceTree = "<group>"; };
-		2618808D1F6B7F9E0043B25A /* TypeRectCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TypeRectCollectionCell.h; sourceTree = "<group>"; };
-		2618808E1F6B7F9E0043B25A /* TypeRectCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TypeRectCollectionCell.m; sourceTree = "<group>"; };
-		2618808F1F6B7F9E0043B25A /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrefixHeader.pch; path = ../PrefixHeader.pch; sourceTree = "<group>"; };
+		261880851F6B7F9E0043B25A /* HKYColorPaletteView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKYColorPaletteView.h; sourceTree = "<group>"; };
+		261880861F6B7F9E0043B25A /* HKYColorPaletteView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKYColorPaletteView.m; sourceTree = "<group>"; };
+		261880871F6B7F9E0043B25A /* HKYDrawBoardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKYDrawBoardView.h; sourceTree = "<group>"; };
+		261880881F6B7F9E0043B25A /* HKYDrawBoardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKYDrawBoardView.m; sourceTree = "<group>"; };
+		261880891F6B7F9E0043B25A /* HKYEditView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKYEditView.h; sourceTree = "<group>"; };
+		2618808A1F6B7F9E0043B25A /* HKYEditView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKYEditView.m; sourceTree = "<group>"; };
+		2618808B1F6B7F9E0043B25A /* HKYTypeLineCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKYTypeLineCollectionCell.h; sourceTree = "<group>"; };
+		2618808C1F6B7F9E0043B25A /* HKYTypeLineCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKYTypeLineCollectionCell.m; sourceTree = "<group>"; };
+		2618808D1F6B7F9E0043B25A /* HKYTypeRectCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKYTypeRectCollectionCell.h; sourceTree = "<group>"; };
+		2618808E1F6B7F9E0043B25A /* HKYTypeRectCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKYTypeRectCollectionCell.m; sourceTree = "<group>"; };
+		2618808F1F6B7F9E0043B25A /* HKYPrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HKYPrefixHeader.pch; path = ../HKYPrefixHeader.pch; sourceTree = "<group>"; };
 		261880CF1F6B7FAF0043B25A /* Images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Images; sourceTree = "<group>"; };
 		261880D51F6B80290043B25A /* DrawBoardBundle.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DrawBoardBundle.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		261880D71F6B80290043B25A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		268197551F70AF0900C02D4E /* HKYScreenShot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKYScreenShot.h; sourceTree = "<group>"; };
+		268197561F70AF0900C02D4E /* HKYScreenShot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKYScreenShot.m; sourceTree = "<group>"; };
+		268197591F70B2D100C02D4E /* HKYTextModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HKYTextModel.h; sourceTree = "<group>"; };
+		2681975A1F70B2D100C02D4E /* HKYTextModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HKYTextModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,12 +160,12 @@
 		261880491F6B7F9E0043B25A /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				2618804A1F6B7F9E0043B25A /* DrawBoardViewController.h */,
-				2618804B1F6B7F9E0043B25A /* DrawBoardViewController.m */,
-				2618804C1F6B7F9E0043B25A /* InputCharacterViewController.h */,
-				2618804D1F6B7F9E0043B25A /* InputCharacterViewController.m */,
-				2618804E1F6B7F9E0043B25A /* ShareAndEditPhotoViewController.h */,
-				2618804F1F6B7F9E0043B25A /* ShareAndEditPhotoViewController.m */,
+				2618804E1F6B7F9E0043B25A /* HKYShareAndEditPhotoViewController.h */,
+				2618804F1F6B7F9E0043B25A /* HKYShareAndEditPhotoViewController.m */,
+				2618804A1F6B7F9E0043B25A /* HKYDrawBoardViewController.h */,
+				2618804B1F6B7F9E0043B25A /* HKYDrawBoardViewController.m */,
+				2618804C1F6B7F9E0043B25A /* HKYInputCharacterViewController.h */,
+				2618804D1F6B7F9E0043B25A /* HKYInputCharacterViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -165,8 +173,10 @@
 		261880771F6B7F9E0043B25A /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				261880781F6B7F9E0043B25A /* LineModel.h */,
-				261880791F6B7F9E0043B25A /* LineModel.m */,
+				261880781F6B7F9E0043B25A /* HKYLineModel.h */,
+				261880791F6B7F9E0043B25A /* HKYLineModel.m */,
+				268197591F70B2D100C02D4E /* HKYTextModel.h */,
+				2681975A1F70B2D100C02D4E /* HKYTextModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -175,11 +185,13 @@
 			isa = PBXGroup;
 			children = (
 				261880421F6B7EE80043B25A /* Info.plist */,
-				2618808F1F6B7F9E0043B25A /* PrefixHeader.pch */,
-				2618807B1F6B7F9E0043B25A /* CollectionCellDelegate.h */,
-				2618807C1F6B7F9E0043B25A /* DrawingBoardHeader.h */,
+				2618808F1F6B7F9E0043B25A /* HKYPrefixHeader.pch */,
+				2618807B1F6B7F9E0043B25A /* HKYCollectionCellDelegate.h */,
+				2618807C1F6B7F9E0043B25A /* HKYDrawingBoardHeader.h */,
 				2618807F1F6B7F9E0043B25A /* UIView+HKYExtension.h */,
 				261880801F6B7F9E0043B25A /* UIView+HKYExtension.m */,
+				268197551F70AF0900C02D4E /* HKYScreenShot.h */,
+				268197561F70AF0900C02D4E /* HKYScreenShot.m */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -196,16 +208,16 @@
 		261880841F6B7F9E0043B25A /* View */ = {
 			isa = PBXGroup;
 			children = (
-				261880871F6B7F9E0043B25A /* DrawBoardView.h */,
-				261880881F6B7F9E0043B25A /* DrawBoardView.m */,
-				261880891F6B7F9E0043B25A /* EditView.h */,
-				2618808A1F6B7F9E0043B25A /* EditView.m */,
-				261880851F6B7F9E0043B25A /* ColorPaletteView.h */,
-				261880861F6B7F9E0043B25A /* ColorPaletteView.m */,
-				2618808B1F6B7F9E0043B25A /* TypeLineCollectionCell.h */,
-				2618808C1F6B7F9E0043B25A /* TypeLineCollectionCell.m */,
-				2618808D1F6B7F9E0043B25A /* TypeRectCollectionCell.h */,
-				2618808E1F6B7F9E0043B25A /* TypeRectCollectionCell.m */,
+				261880871F6B7F9E0043B25A /* HKYDrawBoardView.h */,
+				261880881F6B7F9E0043B25A /* HKYDrawBoardView.m */,
+				261880891F6B7F9E0043B25A /* HKYEditView.h */,
+				2618808A1F6B7F9E0043B25A /* HKYEditView.m */,
+				261880851F6B7F9E0043B25A /* HKYColorPaletteView.h */,
+				261880861F6B7F9E0043B25A /* HKYColorPaletteView.m */,
+				2618808B1F6B7F9E0043B25A /* HKYTypeLineCollectionCell.h */,
+				2618808C1F6B7F9E0043B25A /* HKYTypeLineCollectionCell.m */,
+				2618808D1F6B7F9E0043B25A /* HKYTypeRectCollectionCell.h */,
+				2618808E1F6B7F9E0043B25A /* HKYTypeRectCollectionCell.m */,
 				2618807D1F6B7F9E0043B25A /* HKYLabel.h */,
 				2618807E1F6B7F9E0043B25A /* HKYLabel.m */,
 			);
@@ -227,22 +239,24 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				261880CE1F6B7F9E0043B25A /* PrefixHeader.pch in Headers */,
-				261880941F6B7F9E0043B25A /* ShareAndEditPhotoViewController.h in Headers */,
+				261880CE1F6B7F9E0043B25A /* HKYPrefixHeader.pch in Headers */,
+				261880941F6B7F9E0043B25A /* HKYShareAndEditPhotoViewController.h in Headers */,
+				2681975B1F70B2D100C02D4E /* HKYTextModel.h in Headers */,
 				261880C21F6B7F9E0043B25A /* BNCUMShare.h in Headers */,
-				261880CC1F6B7F9E0043B25A /* TypeRectCollectionCell.h in Headers */,
-				261880C81F6B7F9E0043B25A /* EditView.h in Headers */,
-				261880BA1F6B7F9E0043B25A /* LineModel.h in Headers */,
-				261880901F6B7F9E0043B25A /* DrawBoardViewController.h in Headers */,
+				268197571F70AF0900C02D4E /* HKYScreenShot.h in Headers */,
+				261880CC1F6B7F9E0043B25A /* HKYTypeRectCollectionCell.h in Headers */,
+				261880C81F6B7F9E0043B25A /* HKYEditView.h in Headers */,
+				261880BA1F6B7F9E0043B25A /* HKYLineModel.h in Headers */,
+				261880901F6B7F9E0043B25A /* HKYDrawBoardViewController.h in Headers */,
 				261880431F6B7EE80043B25A /* DrawBoardSDK.h in Headers */,
 				261880BE1F6B7F9E0043B25A /* HKYLabel.h in Headers */,
-				261880BD1F6B7F9E0043B25A /* DrawingBoardHeader.h in Headers */,
-				261880C61F6B7F9E0043B25A /* DrawBoardView.h in Headers */,
-				261880921F6B7F9E0043B25A /* InputCharacterViewController.h in Headers */,
+				261880BD1F6B7F9E0043B25A /* HKYDrawingBoardHeader.h in Headers */,
+				261880C61F6B7F9E0043B25A /* HKYDrawBoardView.h in Headers */,
+				261880921F6B7F9E0043B25A /* HKYInputCharacterViewController.h in Headers */,
 				261880C01F6B7F9E0043B25A /* UIView+HKYExtension.h in Headers */,
-				261880C41F6B7F9E0043B25A /* ColorPaletteView.h in Headers */,
-				261880CA1F6B7F9E0043B25A /* TypeLineCollectionCell.h in Headers */,
-				261880BC1F6B7F9E0043B25A /* CollectionCellDelegate.h in Headers */,
+				261880C41F6B7F9E0043B25A /* HKYColorPaletteView.h in Headers */,
+				261880CA1F6B7F9E0043B25A /* HKYTypeLineCollectionCell.h in Headers */,
+				261880BC1F6B7F9E0043B25A /* HKYCollectionCellDelegate.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -291,6 +305,7 @@
 		261880351F6B7EE80043B25A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = HKY;
 				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = Vencent;
 				TargetAttributes = {
@@ -370,18 +385,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				261880CB1F6B7F9E0043B25A /* TypeLineCollectionCell.m in Sources */,
-				261880911F6B7F9E0043B25A /* DrawBoardViewController.m in Sources */,
+				261880CB1F6B7F9E0043B25A /* HKYTypeLineCollectionCell.m in Sources */,
+				261880911F6B7F9E0043B25A /* HKYDrawBoardViewController.m in Sources */,
 				261880C11F6B7F9E0043B25A /* UIView+HKYExtension.m in Sources */,
-				261880931F6B7F9E0043B25A /* InputCharacterViewController.m in Sources */,
-				261880C71F6B7F9E0043B25A /* DrawBoardView.m in Sources */,
+				261880931F6B7F9E0043B25A /* HKYInputCharacterViewController.m in Sources */,
+				261880C71F6B7F9E0043B25A /* HKYDrawBoardView.m in Sources */,
+				2681975C1F70B2D100C02D4E /* HKYTextModel.m in Sources */,
 				261880BF1F6B7F9E0043B25A /* HKYLabel.m in Sources */,
-				261880951F6B7F9E0043B25A /* ShareAndEditPhotoViewController.m in Sources */,
-				261880CD1F6B7F9E0043B25A /* TypeRectCollectionCell.m in Sources */,
+				261880951F6B7F9E0043B25A /* HKYShareAndEditPhotoViewController.m in Sources */,
+				261880CD1F6B7F9E0043B25A /* HKYTypeRectCollectionCell.m in Sources */,
 				261880C31F6B7F9E0043B25A /* BNCUMShare.m in Sources */,
-				261880C51F6B7F9E0043B25A /* ColorPaletteView.m in Sources */,
-				261880C91F6B7F9E0043B25A /* EditView.m in Sources */,
-				261880BB1F6B7F9E0043B25A /* LineModel.m in Sources */,
+				261880C51F6B7F9E0043B25A /* HKYColorPaletteView.m in Sources */,
+				268197581F70AF0900C02D4E /* HKYScreenShot.m in Sources */,
+				261880C91F6B7F9E0043B25A /* HKYEditView.m in Sources */,
+				261880BB1F6B7F9E0043B25A /* HKYLineModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -515,7 +532,7 @@
 					"$(SRCROOT)/../Pods/UMengUShare/**",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(SRCROOT)/DrawBoardSDK/PrefixHeader.pch";
+				GCC_PREFIX_HEADER = "$(SRCROOT)/DrawBoardSDK/HKYPrefixHeader.pch";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../Pods/UMengUShare/**",
@@ -547,7 +564,7 @@
 					"$(SRCROOT)/../Pods/UMengUShare/**",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(SRCROOT)/DrawBoardSDK/PrefixHeader.pch";
+				GCC_PREFIX_HEADER = "$(SRCROOT)/DrawBoardSDK/HKYPrefixHeader.pch";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../Pods/UMengUShare/**",

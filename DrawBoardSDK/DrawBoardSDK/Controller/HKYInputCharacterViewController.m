@@ -1,14 +1,14 @@
 //
-//  InputCharacterViewController.m
+//  HKYInputCharacterViewController.m
 //  DrawingBoard
 //
 //  Created by hankai on 2017/9/5.
 //  Copyright © 2017年 Vencent. All rights reserved.
 //
 
-#import "InputCharacterViewController.h"
+#import "HKYInputCharacterViewController.h"
 
-@interface InputCharacterViewController ()
+@interface HKYInputCharacterViewController ()
 @property (nonatomic, strong) UIButton *cancelBtn;
 @property (nonatomic, strong) UIButton *finishBtn;
 
@@ -26,7 +26,7 @@
 
 @end
 
-@implementation InputCharacterViewController
+@implementation HKYInputCharacterViewController
 
 - (instancetype)initWithColorArr:(NSArray *)colorArr defaultColorIndex:(NSInteger)defaultColorIndex{
     self = [super init];

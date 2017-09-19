@@ -1,14 +1,14 @@
 //
-//  LineModel.m
+//  HKYLineModel.m
 //  DrawingBoard
 //
 //  Created by hankai on 2017/8/25.
 //  Copyright © 2017年 Vencent. All rights reserved.
 //
 
-#import "LineModel.h"
+#import "HKYLineModel.h"
 
-@interface LineModel ()
+@interface HKYLineModel ()
 
 @property (nonatomic, strong, readwrite) UIColor *lineColor;
 @property (nonatomic, assign, readwrite) CGFloat lineWidth;
@@ -17,7 +17,7 @@
 
 @end
 
-@implementation LineModel
+@implementation HKYLineModel
 
 - (instancetype)initWithLineColor:(UIColor *)lineColor lineWidth:(CGFloat)lineWidth editType:(EditMenuTypeOptions)editType rectType:(RectTypeOptions)rectType{
     

@@ -1,23 +1,25 @@
 //
-//  DrawBoardViewController.m
+//  HKYDrawBoardViewController.m
 //  DrawingBoard
 //
 //  Created by hankai on 2017/9/4.
 //  Copyright © 2017年 Vencent. All rights reserved.
 //
 
-#import "DrawBoardViewController.h"
-#import "DrawBoardView.h"
-#import "EditView.h"
-#import "InputCharacterViewController.h"
-#import "ColorPaletteView.h"
+#import "HKYDrawBoardViewController.h"
+#import "HKYInputCharacterViewController.h"
+
+#import "HKYDrawBoardView.h"
+#import "HKYEditView.h"
+#import "HKYColorPaletteView.h"
+#import "HKYScreenShot.h"
 
 
-@interface DrawBoardViewController ()<DrawBoardViewDeletage,ColorPaletteViewDelegate,EditViewDelegate,InputCharacterViewControllerDelegate>
+@interface HKYDrawBoardViewController ()<HKYDrawBoardViewDeletage,HKYColorPaletteViewDelegate,HKYEditViewDelegate,HKYInputCharacterViewControllerDelegate>
 
-@property (nonatomic, strong) DrawBoardView *drawBoardView;
-@property (nonatomic, strong) EditView *editView;
-@property (nonatomic, strong) ColorPaletteView *colorPaletteView;
+@property (nonatomic, strong) HKYDrawBoardView *drawBoardView;
+@property (nonatomic, strong) HKYEditView *editView;
+@property (nonatomic, strong) HKYColorPaletteView *colorPaletteView;
 
 @property (nonatomic, strong) UIImageView *drawBoardBackImgV;
 @property (nonatomic, strong) UIImage *drawBoardBackImg;
@@ -37,7 +39,7 @@
 
 @end
 
-@implementation DrawBoardViewController
+@implementation HKYDrawBoardViewController
 
 -(instancetype)initWithImage:(UIImage *)backImage{
     self = [super init];
@@ -67,7 +69,7 @@
 
 #pragma mark - DrawBoardViewDeletage
 
--(void)drawBoard:(DrawBoardView *)drawView drawingStatus:(DrawingStatus)drawingStatus{    
+-(void)drawBoard:(HKYDrawBoardView *)drawView drawingStatus:(DrawingStatus)drawingStatus{
     __weak typeof(self) tempSelf = self;
     NSTimeInterval timerInterval = 0.2f;
     switch (drawingStatus) {
@@ -95,7 +97,7 @@
 }
 
 #pragma mark - InputCharacterViewControllerDelegate
--(void)InputCharacterView:(InputCharacterViewController *)inputCharacter text:(NSString *)text textColor:(UIColor *)textColor{
+-(void)InputCharacterView:(HKYInputCharacterViewController *)inputCharacter text:(NSString *)text textColor:(UIColor *)textColor{
     [self.drawBoardView addLabelWithText:text textColor:textColor];
 }
 
@@ -114,7 +116,7 @@
 }
 
 #pragma mark - EditViewDelegate
--(void)EditView:(EditView *)sender changedDrawingOption:(EditMenuTypeOptions)drawingOption{
+-(void)HKYEditView:(HKYEditView *)sender changedDrawingOption:(EditMenuTypeOptions)drawingOption{
     self.tempOption = drawingOption;
     self.drawBoardView.editTypeOption = drawingOption;
     
@@ -145,7 +147,7 @@
         case EditMenuTypeOptionCharacter:{
             [self p_dismissColorPaletteView];
             
-            InputCharacterViewController *inputCharacterVC = [[InputCharacterViewController alloc] initWithColorArr:self.colorArr defaultColorIndex:self.defaultColorTag];
+            HKYInputCharacterViewController *inputCharacterVC = [[HKYInputCharacterViewController alloc] initWithColorArr:self.colorArr defaultColorIndex:self.defaultColorTag];
             inputCharacterVC.inPutCharacterDelegate = self;
             [self presentViewController:inputCharacterVC animated:YES completion:nil];
         }
@@ -191,53 +193,10 @@
         self.cancelBtn = nil;
         self.finishBtn = nil;
         
-        [self.drawBoardDelegate finishEditWithImage:[self p_ScreenShot]];
+        [self.drawBoardDelegate finishEditWithImage:[[HKYScreenShot shareScreenShot] screenShot]];
     }
     [self dismissViewControllerAnimated:NO completion:nil];
 }
-
-
--(UIImage *)p_ScreenShot{
-    UIImage *screenCapture = nil;
-    CGSize imageSize = CGSizeZero;
-    UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
-    if (UIInterfaceOrientationIsPortrait(orientation)) {
-        imageSize = [UIScreen mainScreen].bounds.size;
-    } else {
-        imageSize = CGSizeMake([UIScreen mainScreen].bounds.size.height, [UIScreen mainScreen].bounds.size.width);
-    }
-    
-    UIGraphicsBeginImageContextWithOptions(imageSize, NO, 0);
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    for (UIWindow *window in [[UIApplication sharedApplication] windows]) {
-        CGContextSaveGState(context);
-        CGContextTranslateCTM(context, window.center.x, window.center.y);
-        CGContextConcatCTM(context, window.transform);
-        CGContextTranslateCTM(context, -window.bounds.size.width * window.layer.anchorPoint.x, -window.bounds.size.height * window.layer.anchorPoint.y);
-        if (orientation == UIInterfaceOrientationLandscapeLeft) {
-            CGContextRotateCTM(context, M_PI_2);
-            CGContextTranslateCTM(context, 0, -imageSize.width);
-        } else if (orientation == UIInterfaceOrientationLandscapeRight) {
-            CGContextRotateCTM(context, -M_PI_2);
-            CGContextTranslateCTM(context, -imageSize.height, 0);
-        } else if (orientation == UIInterfaceOrientationPortraitUpsideDown) {
-            CGContextRotateCTM(context, M_PI);
-            CGContextTranslateCTM(context, -imageSize.width, -imageSize.height);
-        }
-        if ([window respondsToSelector:@selector(drawViewHierarchyInRect:afterScreenUpdates:)]) {
-            [window drawViewHierarchyInRect:window.bounds afterScreenUpdates:YES];
-        } else {
-            [window.layer renderInContext:context];
-        }
-        CGContextRestoreGState(context);
-    }
-    
-    screenCapture = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return screenCapture;
-}
-
-
 
 #pragma mark - Get Method
 -(UIImageView *)drawBoardBackImgV{
@@ -273,9 +232,9 @@
     }
     return _finishBtn;
 }
--(DrawBoardView *)drawBoardView{
+-(HKYDrawBoardView *)drawBoardView{
     if (!_drawBoardView) {
-        _drawBoardView = [[DrawBoardView alloc] initWithFrame:CGRectMake(0, 0,SCREEN_WIDTH, SCREEN_HEIGHT)];
+        _drawBoardView = [[HKYDrawBoardView alloc] initWithFrame:CGRectMake(0, 0,SCREEN_WIDTH, SCREEN_HEIGHT)];
         _drawBoardView.userInteractionEnabled = NO;
         _drawBoardView.lineWidth = self.defaultLineW;
         _drawBoardView.lineColor = self.colorArr[self.defaultColorTag];
@@ -285,19 +244,19 @@
     return _drawBoardView;
 }
 
--(EditView *)editView{
+-(HKYEditView *)editView{
     if (!_editView) {
         CGFloat height = 49.f;
         CGFloat Y = SCREEN_HEIGHT - height;
-        _editView = [[EditView alloc] initWithFrame:CGRectMake(0, Y, SCREEN_WIDTH, height)];
+        _editView = [[HKYEditView alloc] initWithFrame:CGRectMake(0, Y, SCREEN_WIDTH, height)];
         _editView.editViewDelegate = self;
     }
     return _editView;
 }
--(ColorPaletteView *)colorPaletteView{
+-(HKYColorPaletteView *)colorPaletteView{
     if (!_colorPaletteView) {
         CGRect frame = CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, 83);
-        _colorPaletteView = [[ColorPaletteView alloc] initWithFrame:frame
+        _colorPaletteView = [[HKYColorPaletteView alloc] initWithFrame:frame
                                                            ColorArr:self.colorArr
                                                   defaultColorIndex:self.defaultColorTag
                                                    defaultLineWidth:self.defaultLineW
@@ -306,7 +265,6 @@
     }
     return _colorPaletteView;
 }
-
 
 -(NSArray *)colorArr{
     if (!_colorArr) {

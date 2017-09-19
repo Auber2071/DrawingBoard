@@ -1,5 +1,5 @@
 //
-//  DrawBoardView.h
+//  HKYDrawBoardView.h
 //  DrawingBoard
 //
 //  Created by hankai on 2017/8/22.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
-#import "EditView.h"
+#import "HKYEditView.h"
 
 
 typedef NS_ENUM(NSInteger,DrawingStatus){
@@ -18,16 +18,16 @@ typedef NS_ENUM(NSInteger,DrawingStatus){
 };
 
 
-@class DrawBoardView;
-@protocol DrawBoardViewDeletage <NSObject>
+@class HKYDrawBoardView;
+@protocol HKYDrawBoardViewDeletage <NSObject>
 
-- (void)drawBoard:(DrawBoardView *)drawView drawingStatus:(DrawingStatus)drawingStatus;
+- (void)drawBoard:(HKYDrawBoardView *)drawView drawingStatus:(DrawingStatus)drawingStatus;
 
 @end
 
-@interface DrawBoardView : UIView
+@interface HKYDrawBoardView : UIView
 
-@property (nonatomic, assign) id<DrawBoardViewDeletage> delegate;
+@property (nonatomic, assign) id<HKYDrawBoardViewDeletage> delegate;
 @property (nonatomic, assign) EditMenuTypeOptions editTypeOption;
 @property (nonatomic, assign) CGFloat lineWidth;//当前线条宽度
 @property (nonatomic, strong) UIColor *lineColor;//当前线条颜色

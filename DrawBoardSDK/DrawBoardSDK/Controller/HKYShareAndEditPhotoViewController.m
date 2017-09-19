@@ -1,14 +1,13 @@
 //
-//  ShareAndEditPhotoViewController.m
+//  HKYShareAndEditPhotoViewController.m
 //  DrawingBoard
 //
 //  Created by hankai on 2017/9/7.
 //  Copyright © 2017年 Vencent. All rights reserved.
 //
 
-#import "ShareAndEditPhotoViewController.h"
-
-#import "DrawBoardViewController.h"
+#import "HKYShareAndEditPhotoViewController.h"
+#import "HKYDrawBoardViewController.h"
 #import "BNCUMShare.h"
 
 typedef enum : NSUInteger {
@@ -19,7 +18,7 @@ typedef enum : NSUInteger {
 
 static NSTimeInterval  const duration = 0.1f;
 
-@interface ShareAndEditPhotoViewController ()<DrawBoardViewControllerDelegaete>
+@interface HKYShareAndEditPhotoViewController ()<HKYDrawBoardViewControllerDelegaete>
 
 @property (nonatomic, strong) NSMutableArray<UIButton *> *btnMutArr;
 @property (nonatomic, strong) UIView *editBackView;
@@ -27,7 +26,7 @@ static NSTimeInterval  const duration = 0.1f;
 
 @end
 
-@implementation ShareAndEditPhotoViewController
+@implementation HKYShareAndEditPhotoViewController
 
 - (instancetype)initWithImage:(UIImage *)image {
     self = [super init];
@@ -135,7 +134,7 @@ static NSTimeInterval  const duration = 0.1f;
             break;
         case EditPhotoOption:{//画板面板弹出
             self.backImageView.userInteractionEnabled = NO;
-            DrawBoardViewController *drawBoardVC = [[DrawBoardViewController alloc] initWithImage:self.shareImg];
+            HKYDrawBoardViewController *drawBoardVC = [[HKYDrawBoardViewController alloc] initWithImage:self.shareImg];
             drawBoardVC.drawBoardDelegate = self;
             [self presentViewController:drawBoardVC animated:NO completion:nil];
         }
