@@ -11,7 +11,6 @@
 @class HKYDrawBoardViewController;
 @protocol HKYDrawBoardViewControllerDelegaete <NSObject>
 
--(void)cancelEdit;
 -(void)finishEditWithImage:(UIImage *)finishImage;
 
 @end

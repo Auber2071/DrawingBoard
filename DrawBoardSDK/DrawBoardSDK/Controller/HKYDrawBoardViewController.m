@@ -81,12 +81,8 @@
             textModel.isFixed = YES;
             inputCharacterVC.fixedTextModel = textModel;
             [self presentViewController:inputCharacterVC animated:YES completion:nil];
-
         }
     }
-    
-    
-    
 }
 
 -(void)drawBoard:(HKYDrawBoardView *)drawView drawingStatus:(DrawingStatus)drawingStatus{
@@ -198,9 +194,6 @@
 
 
 -(void)p_cancelEdit{
-    if (self.drawBoardDelegate && [self.drawBoardDelegate respondsToSelector:@selector(cancelEdit)]) {
-        [self.drawBoardDelegate cancelEdit];
-    }
     [self dismissViewControllerAnimated:NO completion:nil];
 }
 

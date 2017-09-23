@@ -41,6 +41,7 @@ static NSTimeInterval  const duration = 0.1f;
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    self.backImageView.userInteractionEnabled = YES;
     [self p_showShareAndEditView];
 }
 
@@ -68,10 +69,6 @@ static NSTimeInterval  const duration = 0.1f;
 }
 
 #pragma mark - DrawBoardViewControllerDelegaete
--(void)cancelEdit{
-    self.backImageView.userInteractionEnabled = YES;
-    [self p_showShareAndEditView];
-}
 
 -(void)finishEditWithImage:(UIImage *)finishImage{
     self.backImageView.userInteractionEnabled = YES;
@@ -118,7 +115,6 @@ static NSTimeInterval  const duration = 0.1f;
     if (!_backImageView) {
         _backImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
         _backImageView.image = self.shareImage;
-        _backImageView.userInteractionEnabled = YES;
     }
     return _backImageView;
 }
