@@ -136,6 +136,7 @@
 
 #pragma mark - EditViewDelegate
 -(void)HKYEditView:(HKYEditView *)sender changedDrawingOption:(EditMenuTypeOptions)drawingOption{
+
     self.tempOption = drawingOption;
     self.drawBoardView.editTypeOption = drawingOption;
     
@@ -251,7 +252,6 @@
 -(HKYDrawBoardView *)drawBoardView{
     if (!_drawBoardView) {
         _drawBoardView = [[HKYDrawBoardView alloc] initWithFrame:CGRectMake(0, 0,SCREEN_WIDTH, SCREEN_HEIGHT)];
-        _drawBoardView.userInteractionEnabled = NO;
         _drawBoardView.lineWidth = self.defaultLineW;
         _drawBoardView.lineColor = self.colorArr[self.defaultColorTag];
         _drawBoardView.rectTypeOption = self.defaultRectOption;

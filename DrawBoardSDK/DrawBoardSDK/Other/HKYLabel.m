@@ -8,9 +8,7 @@
 
 #import "HKYLabel.h"
 
-
-
-static NSTimeInterval HKYTimerInterval = 2.f;
+//static NSTimeInterval HKYTimerInterval = 2.f;
 @implementation HKYLabel
 -(instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
@@ -20,10 +18,13 @@ static NSTimeInterval HKYTimerInterval = 2.f;
         self.textAlignment = NSTextAlignmentCenter;
         self.userInteractionEnabled = YES;
         [self addGestureTarget];
-        __weak typeof(self) tempSelf = self;
-        [NSTimer scheduledTimerWithTimeInterval:HKYTimerInterval repeats:NO block:^(NSTimer * _Nonnull timer) {
-            tempSelf.layer.borderWidth = 0.f;
-        }];
+//        __weak typeof(self) tempSelf = self;
+//        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//            [NSTimer scheduledTimerWithTimeInterval:HKYTimerInterval repeats:NO block:^(NSTimer * _Nonnull timer) {
+//                __strong typeof(self) strongSelf = tempSelf;
+//                strongSelf.layer.borderWidth = 0.f;
+//            }];
+//        });
     }
     return self;
 }

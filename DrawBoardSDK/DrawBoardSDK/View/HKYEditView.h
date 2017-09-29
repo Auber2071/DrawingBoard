@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 typedef NS_ENUM(NSInteger,EditMenuTypeOptions) {
+    EditMenuTypeOptionNone,
     EditMenuTypeOptionCharacter,
     EditMenuTypeOptionLine,
     EditMenuTypeOptionRect,
