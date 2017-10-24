@@ -8,8 +8,7 @@
 
 #import "AppDelegate.h"
 
-#import "ViewController.h"
-
+#import "TempViewController.h"
 #import <UMSocialCore/UMSocialCore.h>
 #define USHARE_APPKEY @"592395994544cb50e20019e1"//友盟appKey
 
@@ -24,9 +23,10 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [self configureUMengSocialData];
     
-    ViewController *VC = [[ViewController alloc] init];
+    TempViewController *VC = [[TempViewController alloc] init];
+    UINavigationController *navi = [[UINavigationController alloc] initWithRootViewController:VC];
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    self.window.rootViewController = VC;
+    self.window.rootViewController = navi;
     [self.window makeKeyAndVisible];
     
     return YES;

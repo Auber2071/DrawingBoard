@@ -18,9 +18,6 @@
 
 @property (nonatomic, assign) id<HKYShareAndEditPhotoViewControllerDelegate> delegate;
 
-//分享的图片
-@property (nonatomic, strong) UIImage *shareImg;
-
 - (instancetype)initWithImage:(UIImage *)image;
 
 @end

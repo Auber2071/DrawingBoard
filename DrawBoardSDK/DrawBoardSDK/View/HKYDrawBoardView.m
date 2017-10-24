@@ -29,13 +29,12 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.opaque = NO;
-        self.userInteractionEnabled = NO;
         self.backgroundColor = [UIColor clearColor];
         _pointMutArr = [NSMutableArray array];
         _linesMutArr = [NSMutableArray array];
         _removedLinesMutArr = [NSMutableArray array];
         _labelMutArr = [NSMutableArray array];
-                
+        _editTypeOption = EditMenuTypeOptionNone;
         _drawStatus = DrawingStatusEnd;
     }
     return self;
@@ -141,6 +140,9 @@
 
 #pragma mark - touch系列方法
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    if (self.editTypeOption == EditMenuTypeOptionNone) {
+        return;
+    }
     //NSLog(@"%s",__FUNCTION__);
 
     self.currentLine = [[HKYLineModel alloc] initWithLineColor:self.lineColor lineWidth:self.lineWidth editType:self.editTypeOption rectType:self.rectTypeOption];
@@ -162,6 +164,9 @@
 }
 
 -(void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    if (self.editTypeOption == EditMenuTypeOptionNone) {
+        return;
+    }
     //NSLog(@"%s",__FUNCTION__);
 
     CGPoint point = [self touchPointWithTouchEvent:event];
@@ -177,6 +182,9 @@
 }
 
 -(void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    if (self.editTypeOption == EditMenuTypeOptionNone) {
+        return;
+    }
     //NSLog(@"%s",__FUNCTION__);
 
     if (self.drawStatus != DrawingStatusMove) {
@@ -210,9 +218,11 @@
 #pragma mark - Resert SET Method
 -(void)setEditTypeOption:(EditMenuTypeOptions)editTypeOption{
     _editTypeOption = editTypeOption;
-    self.userInteractionEnabled = YES;
     switch (editTypeOption) {
+        case EditMenuTypeOptionNone:
         case EditMenuTypeOptionCharacter://文本
+            _editTypeOption = EditMenuTypeOptionNone;
+            break;
         case EditMenuTypeOptionLine://线条
         case EditMenuTypeOptionRect://方形
         case EditMenuTypeOptionEraser://橡皮
@@ -224,6 +234,7 @@
                 [self.linesMutArr removeLastObject];
                 [self setNeedsDisplay];
             }
+            _editTypeOption = EditMenuTypeOptionNone;
         }
             break;
     }
@@ -247,6 +258,7 @@
         label.tag = textModel.tag;
         [self addSubview:label];
         [self.labelMutArr addObject:label];
+
     }else{
         for (UILabel *label in self.labelMutArr) {
             if (textModel.text.length<1) {
