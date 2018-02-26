@@ -18,5 +18,5 @@ FOUNDATION_EXPORT const unsigned char DrawBoardSDKVersionString[];
 
 
 #import <DrawBoardSDK/HKYShareAndEditPhotoViewController.h>
-#import <DrawBoardSDK/BNCUMShare.h>
+#import <DrawBoardSDK/HKYUMShare.h>
 #import <DrawBoardSDK/HKYScreenShot.h>

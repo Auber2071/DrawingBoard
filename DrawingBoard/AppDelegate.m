@@ -25,6 +25,7 @@
     
     TempViewController *VC = [[TempViewController alloc] init];
     UINavigationController *navi = [[UINavigationController alloc] initWithRootViewController:VC];
+    [navi.navigationBar setBarTintColor:[UIColor lightGrayColor]];
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.rootViewController = navi;
     [self.window makeKeyAndVisible];

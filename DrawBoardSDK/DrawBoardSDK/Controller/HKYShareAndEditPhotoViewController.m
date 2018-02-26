@@ -8,17 +8,18 @@
 
 #import "HKYShareAndEditPhotoViewController.h"
 #import "HKYShareAndEditView.h"
-
 #import "HKYDrawBoardViewController.h"
-#import "BNCUMShare.h"
+#import "HKYUMShare.h"
+#import "HKYSystemShare.h"
 
 static NSTimeInterval  const duration = 0.1f;
 
-@interface HKYShareAndEditPhotoViewController ()<HKYShareAndEditViewDelegate,HKYDrawBoardViewControllerDelegaete>
+@interface HKYShareAndEditPhotoViewController ()<HKYShareAndEditViewDelegate,HKYDrawBoardViewControllerDelegaete,HKYUMShareDelegate>
 
 @property (nonatomic, strong) HKYShareAndEditView *shareAndEditView;
 @property (nonatomic, strong) UIImageView *backImageView;
-@property (nonatomic, strong) UIImage *shareImage;
+@property (nonatomic, strong, readwrite) UIImage *shareImage;
+@property (nonatomic, assign) BOOL isOpenLog;
 
 @end
 
@@ -35,13 +36,19 @@ static NSTimeInterval  const duration = 0.1f;
     return self;
 }
 
+- (void)openLog:(BOOL)logOnOff{
+    _isOpenLog = logOnOff;
+}
+
 -(void)viewDidLoad{
     [super viewDidLoad];
+    self.sharePlatformType = HKYSystemPlatformShare;
+    self.view.backgroundColor = [UIColor whiteColor];
+
 }
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    self.backImageView.userInteractionEnabled = YES;
     [self p_showShareAndEditView];
 }
 
@@ -62,11 +69,29 @@ static NSTimeInterval  const duration = 0.1f;
     if (self.delegate && [self.delegate respondsToSelector:@selector(shareBtnClick)]) {
         [self.delegate shareBtnClick];
     }else{
-        BNCUMShare *shareView = [BNCUMShare shareWithUMShare];
-        [shareView shareImg:self.shareImage];
+        switch (self.sharePlatformType) {
+            case HKYUMSocialPlatformShare:{
+                HKYUMShare *shareView = [HKYUMShare shareWithUMShare];
+                shareView.bncShareDelegate = self;
+                [shareView openLog:self.isOpenLog];
+                [shareView shareImg:self.shareImage];
+            }
+                break;
+                
+            case HKYSystemPlatformShare:{
+                HKYSystemShare *systemShare = [[HKYSystemShare alloc] init];
+                [systemShare openLog:self.isOpenLog];
+                [systemShare shareWithSourceController:self.viewController Items:@[self.shareImage]];
+            }
+                break;
+            default:
+                break;
+        }
     }
     [self dismissViewControllerAnimated:NO completion:nil];
 }
+
+
 
 #pragma mark - DrawBoardViewControllerDelegaete
 
@@ -78,15 +103,18 @@ static NSTimeInterval  const duration = 0.1f;
     [self p_showShareAndEditView];
 }
 
+
+
 #pragma mark - Private Method
 
 -(void)p_showShareAndEditView{
-    if (self.shareAndEditView.y < SCREEN_HEIGHT) {
+    CGFloat tempY = (SCREEN_HEIGHT/6.f)*5;
+    if (self.shareAndEditView.y == tempY) {
         return;
     }
     __weak typeof(self) tempSelf = self;
     [UIView animateWithDuration:duration animations:^{
-        tempSelf.shareAndEditView.y = (SCREEN_HEIGHT/6.f)*5;
+        tempSelf.shareAndEditView.y = tempY;
     }];
 }
 
@@ -102,7 +130,10 @@ static NSTimeInterval  const duration = 0.1f;
     }];
 }
 
+
+
 #pragma mark - Get Method
+
 -(HKYShareAndEditView *)shareAndEditView{
     if (!_shareAndEditView) {
         _shareAndEditView = [[HKYShareAndEditView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT/6.f)];
@@ -115,6 +146,7 @@ static NSTimeInterval  const duration = 0.1f;
     if (!_backImageView) {
         _backImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
         _backImageView.image = self.shareImage;
+        _backImageView.userInteractionEnabled = YES;
     }
     return _backImageView;
 }

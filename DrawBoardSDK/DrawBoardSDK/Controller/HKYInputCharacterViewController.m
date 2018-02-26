@@ -149,15 +149,17 @@
 }
 
 #pragma mark - Get Method
+
 -(UIButton *)cancelBtn{
     if (!_cancelBtn) {
         _cancelBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         [_cancelBtn setTitle:@"取消" forState:UIControlStateNormal];
         [_cancelBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [_cancelBtn setBackgroundColor:UIColorFromRGB(0xc7c7c7)];
-        [_cancelBtn.layer setCornerRadius:5.f];
+        [_cancelBtn setBackgroundColor:UIColorFromRGBP(0xe5e5e5, 0.8)];
+        [_cancelBtn.layer setCornerRadius:4.f];
+        [_finishBtn.titleLabel setFont:[UIFont systemFontOfSize:14.f]];
         [_cancelBtn addTarget:self action:@selector(p_cancelClick) forControlEvents:UIControlEventTouchUpInside];
-        [_cancelBtn setFrame:CGRectMake(10, 20, 60, 30)];
+        [_cancelBtn setFrame:CGRectMake(12, 28, 69, 32)];
     }
     return _cancelBtn;
 }
@@ -166,10 +168,11 @@
         _finishBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         [_finishBtn setTitle:@"确定" forState:UIControlStateNormal];
         [_finishBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [_finishBtn setBackgroundColor:UIColorFromRGB(0x56c16)];
-        [_finishBtn.layer setCornerRadius:5.f];
+        [_finishBtn setBackgroundColor:UIColorFromRGBP(0xffbf00,0.8)];
+        [_finishBtn.layer setCornerRadius:4.f];
+        [_finishBtn.titleLabel setFont:[UIFont systemFontOfSize:14.f]];
         [_finishBtn addTarget:self action:@selector(p_finishClick) forControlEvents:UIControlEventTouchUpInside];
-        [_finishBtn setFrame:CGRectMake(SCREEN_WIDTH - 70, 20, 60, 30)];
+        [_finishBtn setFrame:CGRectMake(SCREEN_WIDTH - 81, 28, 69, 32)];
     }
     return _finishBtn;
 }

@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "HKYTypeRectCollectionCell.h"
+#import "HKYColorPaletteViewModel.h"
 
 
 @class HKYColorPaletteView;
@@ -15,15 +16,13 @@
 
 - (void)colorPaletteViewWithColor:(UIColor *)color rectTypeOption:(RectTypeOptions)rectTypeOption lineWidth:(NSUInteger)lineWidth;
 
-
 @end
 
 @interface HKYColorPaletteView : UIView
 
 @property (nonatomic, assign) id<HKYColorPaletteViewDelegate> colorPaletteViewDelegate;
-- (instancetype)initWithFrame:(CGRect)frame ColorArr:(NSArray *)colorArr defaultColorIndex:(NSInteger)defaultColorIndex defaultLineWidth:(NSUInteger)defaultLineWidth defaultRectTypeOption:(RectTypeOptions)defaultTypeOption defaultRectWidth:(NSUInteger)defaultRectWidth;
-
 
 - (void)scrollToPage:(NSUInteger)page;
+- (void)setupColorPaletteViewDataSource:(HKYColorPaletteViewModel *)colorPaletteViewModel;
 
 @end

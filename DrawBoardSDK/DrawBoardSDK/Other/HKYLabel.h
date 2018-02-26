@@ -19,4 +19,5 @@
 @interface HKYLabel : UILabel
 @property (nonatomic, assign) id<HKYLabelDelegate> labelDelegate;
 
+-(void)hideBorder;
 @end

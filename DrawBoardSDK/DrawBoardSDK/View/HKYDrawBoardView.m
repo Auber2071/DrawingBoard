@@ -12,9 +12,7 @@
 
 @interface HKYDrawBoardView ()<HKYLabelDelegate>
 @property (nonatomic, assign) DrawingStatus drawStatus;//绘制状态
-
 @property (nonatomic, strong) NSMutableArray<NSValue*> *pointMutArr;//当前绘制的线条的点坐标集合
-
 @property (nonatomic, strong) NSMutableArray<HKYLineModel *> *linesMutArr;
 @property (nonatomic, strong) NSMutableArray<HKYLineModel *> *removedLinesMutArr;//删除的线条
 @property (nonatomic, strong) NSMutableArray<UILabel *> *labelMutArr;
@@ -24,8 +22,7 @@
 
 @implementation HKYDrawBoardView
 
-- (instancetype)initWithFrame:(CGRect)frame
-{
+- (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
         self.opaque = NO;
@@ -242,6 +239,9 @@
 
 
 #pragma mark - 文字输入&缩放移动手势
+
+static NSTimeInterval HKYTimerInterval = 2.f;
+
 -(void)setupLabelWithTextModel:(HKYTextModel *)textModel{
 
     CGFloat height = 40.f;
@@ -258,7 +258,7 @@
         label.tag = textModel.tag;
         [self addSubview:label];
         [self.labelMutArr addObject:label];
-
+        [NSTimer scheduledTimerWithTimeInterval:HKYTimerInterval target:label selector:@selector(hideBorder) userInfo:nil repeats:NO];
     }else{
         for (UILabel *label in self.labelMutArr) {
             if (textModel.text.length<1) {
@@ -278,8 +278,8 @@
 }
 
 -(void)tapLabelWithTag:(NSInteger)tag{
-    if (self.delegate && [self.delegate respondsToSelector:@selector(drawBoardBtnClickWithTag:)]) {
-        [self.delegate drawBoardBtnClickWithTag:tag];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(drawBoard:drawBoardBtnClickWithTag:)]) {
+        [self.delegate drawBoard:self drawBoardBtnClickWithTag:tag];
     }
 }
 

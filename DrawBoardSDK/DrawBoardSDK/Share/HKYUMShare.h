@@ -1,5 +1,5 @@
 //
-//  BNCUMShare.h
+//  HKYUMShare.h
 //  PrimaryLevel_JX
 //
 //  Created by hankai on 2017/6/7.
@@ -8,9 +8,22 @@
 
 #import <UIKit/UIKit.h>
 
-typedef NS_ENUM(NSUInteger, PositionType){
-    PositionType_Bottom,//显示在底部
-    PositionType_Middle,//显示在中间
+typedef NS_ENUM(NSInteger,HKYUMSocialPlatformType)
+{
+    HKYUMSocialPlatformType_Sina               = 0, //新浪
+    HKYUMSocialPlatformType_WechatSession      = 1, //微信聊天
+    HKYUMSocialPlatformType_WechatTimeLine     = 2, //微信朋友圈
+    HKYUMSocialPlatformType_WechatFavorite     = 3, //微信收藏
+    HKYUMSocialPlatformType_QQ                 = 4, //QQ聊天页面
+    HKYUMSocialPlatformType_Qzone              = 5, //qq空间
+    HKYUMSocialPlatformType_TencentWb          = 6, //腾讯微博
+    HKYUMSocialPlatformType_Sms                = 13,//短信
+    HKYUMSocialPlatformType_Email              = 14,//邮件
+};
+
+typedef NS_ENUM(NSUInteger, HKYPositionType){
+    HKYPositionType_Bottom,//显示在底部
+    HKYPositionType_Middle,//显示在中间
 };
 
 @protocol HKYUMShareDelegate <NSObject>
@@ -19,12 +32,12 @@ typedef NS_ENUM(NSUInteger, PositionType){
 /**
  *  分享面板显示的回调
  */
-- (void)BNCUMSocialShareMenuViewDidAppear;
+- (void)HKYUMSocialShareMenuViewDidAppear;
 
 /**
  *  分享面板的消失的回调
  */
-- (void)BNCUMSocialShareMenuViewDidDisappear;
+- (void)HKYUMSocialShareMenuViewDidDisappear;
 
 /**
  *  返回分享面板的父窗口,用于嵌入在父窗口上显示
@@ -36,13 +49,18 @@ typedef NS_ENUM(NSUInteger, PositionType){
  *  @note 如果用户要替换成自己的ParentView，需要保证该view能覆盖到navigationbar和statusbar
  *  @note 当前分享面板已经是在window上,如果需要切换就重写此协议，如果不需要改变父窗口则不需要重写此协议
  */
-- (UIView*)BNCUMSocialParentView:(UIView*)defaultSuperView;
+- (UIView*)HKYUMSocialParentView:(UIView*)defaultSuperView;
 
 @end
 
 
-@interface BNCUMShare : NSObject
-+ (BNCUMShare *)shareWithUMShare;
+@interface HKYUMShare : NSObject
++ (HKYUMShare *)shareWithUMShare;
+
+/**
+ 是否开启起日志
+ */
+- (void)openLog:(BOOL)logOnOff;
 
 /**
  * 分享平台包含sms,email时,此代理必须设置
@@ -52,7 +70,7 @@ typedef NS_ENUM(NSUInteger, PositionType){
 /**
  分享面板的位置，默认为bottom
  */
-@property (nonatomic,assign)PositionType   viewPostion;
+@property (nonatomic,assign)HKYPositionType viewPostion;
 
 
 /**
@@ -65,7 +83,7 @@ typedef NS_ENUM(NSUInteger, PositionType){
 /**
  字体颜色
 
- @param titleColor 标题颜色
+ @param titleColor 分享面板标题颜色
  @param platformNameColor 平台名称颜色
  */
 -(void)designTitleColor:(UIColor *)titleColor WithPlatformNameColor:(UIColor *)platformNameColor;

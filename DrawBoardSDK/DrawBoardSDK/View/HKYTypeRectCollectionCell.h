@@ -14,7 +14,6 @@
 
 @property (nonatomic, assign) id<HKYCollectionCellDelegate> rectTypeDelegate;
 
-@property (nonatomic, assign) RectTypeOptions defaultRectType;
-
+-(void)setDataSource:(NSArray *)dataSource defaultRectType:(RectTypeOptions)defaultRectType;
 @end
 

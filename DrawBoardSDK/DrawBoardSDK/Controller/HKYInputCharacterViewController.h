@@ -12,7 +12,7 @@
 @class HKYTextModel;
 
 @protocol HKYInputCharacterViewControllerDelegate <NSObject>
-
+///文字编辑完成回调
 -(void)InputCharacterView:(HKYInputCharacterViewController *)inputCharacter textModel:(HKYTextModel *)textModel;
 
 @end

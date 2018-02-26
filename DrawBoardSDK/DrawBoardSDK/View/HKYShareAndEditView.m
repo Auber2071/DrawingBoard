@@ -32,7 +32,7 @@ typedef enum : NSUInteger {
 
 -(void)layoutSubviews{
     [super layoutSubviews];
-    CGFloat padding = 50.f;
+    CGFloat padding = 0.12*CGRectGetWidth(self.frame);
     CGFloat btnW = (CGRectGetWidth(self.frame) - padding*(self.btnMutArr.count+1))/self.btnMutArr.count;
     for (int i = 0; i<self.btnMutArr.count; i++) {
         UIButton *tempBtn = self.btnMutArr[i];
@@ -66,20 +66,20 @@ typedef enum : NSUInteger {
                  UIImageView *v2 = [[UIImageView alloc] initWithFrame:CGRectMake(0,100, 50, 50)];
                  v2.image = [UIImage imageNamed:@"APPBaseSDKBundle.bundle/zhuanqian"];
                  */
-                UIImage *image = [UIImage imageWithContentsOfFile:[DrawBoardBundle pathForResource:@"fanhui@3x" ofType:@"png" inDirectory:@"Images/otherImage"]];
+                UIImage *image = [UIImage imageWithContentsOfFile:[HKYShareBundle pathForResource:@"fanhui@3x" ofType:@"png" inDirectory:@"Images/otherImage"]];
                 [button setBackgroundImage:image forState:UIControlStateNormal];
             }
                 break;
             case 1:{
                 button.tag = EditPhotoOption;
-                UIImage *image = [UIImage imageWithContentsOfFile:[DrawBoardBundle pathForResource:@"bianji@3x" ofType:@"png" inDirectory:@"Images/otherImage"]];
+                UIImage *image = [UIImage imageWithContentsOfFile:[HKYShareBundle pathForResource:@"bianji@3x" ofType:@"png" inDirectory:@"Images/otherImage"]];
                 [button setBackgroundImage:image forState:UIControlStateNormal];
             }
                 break;
             case 2:{
                 button.tag = SharePhotoOption;
                 [button setBackgroundColor:[UIColor whiteColor]];
-                UIImage *image = [UIImage imageWithContentsOfFile:[DrawBoardBundle pathForResource:@"duihao@3x" ofType:@"png" inDirectory:@"Images/otherImage"]];
+                UIImage *image = [UIImage imageWithContentsOfFile:[HKYShareBundle pathForResource:@"duihao@3x" ofType:@"png" inDirectory:@"Images/otherImage"]];
                 [button setBackgroundImage:image forState:UIControlStateNormal];
             }
                 break;

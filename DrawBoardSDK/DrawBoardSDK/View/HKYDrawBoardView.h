@@ -21,7 +21,10 @@ typedef NS_ENUM(NSInteger,DrawingStatus){
 @class HKYTextModel;
 @class HKYDrawBoardView;
 @protocol HKYDrawBoardViewDeletage <NSObject>
-- (void)drawBoardBtnClickWithTag:(NSInteger)tag;
+///绘图面板  编辑已绘制的文字回调
+- (void)drawBoard:(HKYDrawBoardView *)drawView drawBoardBtnClickWithTag:(NSInteger)tag;
+
+///绘图面板  绘图状态回调
 - (void)drawBoard:(HKYDrawBoardView *)drawView drawingStatus:(DrawingStatus)drawingStatus;
 
 @end

@@ -16,7 +16,7 @@
 #import "UIView+HKYExtension.h"
 #import "HKYDrawingBoardHeader.h"
 
-#define DrawBoardBundle [NSBundle bundleWithURL:[[NSBundle mainBundle] URLForResource:@"DrawBoardBundle" withExtension:@"bundle"]]
+#define HKYShareBundle [NSBundle bundleWithURL:[[NSBundle mainBundle] URLForResource:@"DrawBoardBundle" withExtension:@"bundle"]]
 
 
 //-------------------16进制色值转换-------------------------

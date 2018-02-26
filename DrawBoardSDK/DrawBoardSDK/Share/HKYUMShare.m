@@ -1,24 +1,25 @@
 //
-//  BNCUMShare.m
+//  HKYUMShare.m
 //  PrimaryLevel_JX
 //
 //  Created by hankai on 2017/6/7.
 //  Copyright © 2017年 Vencent. All rights reserved.
 //
 
-#import "BNCUMShare.h"
+#import "HKYUMShare.h"
 
 #import <UShareUI/UShareUI.h>
 #import <UMSocialCore/UMSocialCore.h>
 
-@interface BNCUMShare ()<UMSocialShareMenuViewDelegate>
+@interface HKYUMShare ()<UMSocialShareMenuViewDelegate>
 @property (nonatomic, strong) UMSocialShareUIConfig *shareUIConfig;
+@property (nonatomic, assign) BOOL isOpenLog;
 
 @end
 
-@implementation BNCUMShare
-+ (BNCUMShare *) shareWithUMShare{
-    static BNCUMShare *shareObject = nil;
+@implementation HKYUMShare
++ (HKYUMShare *) shareWithUMShare{
+    static HKYUMShare *shareObject = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         shareObject = [[self alloc]init];
@@ -27,28 +28,29 @@
 }
 
 
+- (void)openLog:(BOOL)logOnOff{
+    _isOpenLog = logOnOff;
+    [[UMSocialManager defaultManager] openLog:logOnOff];
+}
+
+-(void)p_DNSLog:(NSString *)params{
+    if (self.isOpenLog) {
+        NSLog(@"%@", params);
+    }else{
+    }
+}
+
 - (instancetype)init{
     self = [super init];
     if (self) {
+        _viewPostion = HKYPositionType_Bottom;
         [self designShareView];
     }
     return self;
 }
 
-
-
-
-#pragma mark - Public Methods
-//分享事件
-- (void)shareImg:(UIImage *)image {
-    //显示分享面板
-    __weak typeof(self) tempSelf = self;
-    [UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMSocialPlatformType platformType, NSDictionary *userInfo) {
-        [tempSelf shareImageToPlatformType:platformType image:image];
-    }];
-}
-
--(void)setViewPostion:(PositionType)viewPostion{
+#pragma mark - Custom Configuration
+-(void)setViewPostion:(HKYPositionType)viewPostion{
     _viewPostion = viewPostion;
     [self p_setupViewPostion];
 }
@@ -57,7 +59,6 @@
     _platTypeOrder = platTypeOrder;
     [UMSocialUIManager setPreDefinePlatforms:_platTypeOrder];//平台排序
 }
-
 
 -(void)designTitleColor:(UIColor *)titleColor WithPlatformNameColor:(UIColor *)platformNameColor{
     [UMSocialShareUIConfig shareInstance].shareTitleViewConfig.shareTitleViewTitleColor = titleColor;
@@ -74,11 +75,32 @@
     }
 }
 
+#pragma mark - Public Methods
+//分享事件
+- (void)shareImg:(UIImage *)image {
+    //显示分享面板
+    __weak typeof(self) tempSelf = self;
+    [UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMSocialPlatformType platformType, NSDictionary *userInfo) {
+        [tempSelf shareImageToPlatformType:platformType image:image];
+    }];
+}
+
 #pragma mark - Private Methods
 - (void)designShareView{
     
     [UMSocialUIManager setShareMenuViewDelegate:self];
-    //显示分享面板
+    [self setupPlatformsUI];
+    [self setupPlatforms];
+    [self p_setupShareUIConfig];
+    [self p_setupViewPostion];
+}
+-(UIImage *)p_setupImageWithImageName:(NSString *)imgName{
+    UIImage *image = [UIImage imageWithContentsOfFile:[HKYShareBundle pathForResource:imgName ofType:@"png" inDirectory:@"Images/ShareUIImage"]];
+    return image;
+}
+
+//显示分享面板
+-(void)setupPlatformsUI{
     [UMSocialUIManager addCustomPlatformWithoutFilted:UMSocialPlatformType_QQ withPlatformIcon:[self  p_setupImageWithImageName:@"icon-qq"] withPlatformName:@"QQ"];
     [UMSocialUIManager addCustomPlatformWithoutFilted:UMSocialPlatformType_WechatTimeLine withPlatformIcon:[self p_setupImageWithImageName:@"icon-pyq"] withPlatformName:@"朋友圈"];
     [UMSocialUIManager addCustomPlatformWithoutFilted:UMSocialPlatformType_Qzone withPlatformIcon:[self p_setupImageWithImageName:@"icon-qq-kj"] withPlatformName:@"QQ空间"];
@@ -87,20 +109,23 @@
     [UMSocialUIManager addCustomPlatformWithoutFilted:UMSocialPlatformType_WechatSession withPlatformIcon:[self p_setupImageWithImageName:@"icon-wx"] withPlatformName:@"微信"];
     [UMSocialUIManager addCustomPlatformWithoutFilted:UMSocialPlatformType_Sms withPlatformIcon:[self p_setupImageWithImageName:@"icon-dx"] withPlatformName:@"短信"];
     [UMSocialUIManager addCustomPlatformWithoutFilted:UMSocialPlatformType_Email withPlatformIcon:[self p_setupImageWithImageName:@"icon-yx"] withPlatformName:@"邮箱"];
-    
-    //分享平台默认顺序
-    [UMSocialUIManager setPreDefinePlatforms:@[@(UMSocialPlatformType_WechatSession),@(UMSocialPlatformType_QQ),@(UMSocialPlatformType_Sina),@(UMSocialPlatformType_WechatTimeLine),@(UMSocialPlatformType_Qzone),@(UMSocialPlatformType_WechatFavorite),@(UMSocialPlatformType_Sms),@(UMSocialPlatformType_Email)]];//平台排序
-    
-    [self p_setupShareUIConfig];
-    [self p_setupViewPostion];
-}
--(UIImage *)p_setupImageWithImageName:(NSString *)imgName{
-    UIImage *image = [UIImage imageWithContentsOfFile:[DrawBoardBundle pathForResource:imgName ofType:@"png" inDirectory:@"Images/ShareUIImage"]];
-    return image;
 }
 
+//平台排序
+-(void)setupPlatforms{
+    [UMSocialUIManager setPreDefinePlatforms:@[@(UMSocialPlatformType_WechatSession),
+                                               @(UMSocialPlatformType_QQ),
+                                               @(UMSocialPlatformType_Sina),
+                                               @(UMSocialPlatformType_WechatTimeLine),
+                                               @(UMSocialPlatformType_Qzone),
+                                               @(UMSocialPlatformType_WechatFavorite),
+                                               @(UMSocialPlatformType_Sms),
+                                               @(UMSocialPlatformType_Email)
+                                               ]];
+}
+
+//面板位置
 -(void)p_setupShareUIConfig{
-    //面板位置
     UMSocialShareUIConfig *shareUIConfig = [UMSocialShareUIConfig shareInstance];
     shareUIConfig.shareTitleViewConfig.shareTitleViewTitleString = @"分享到";
     shareUIConfig.shareTitleViewConfig.shareTitleViewTitleColor = UIColorFromRGB(0xf17f5c);
@@ -119,25 +144,24 @@
 -(void)p_setupViewPostion{
     UMSocialShareUIConfig *shareUIConfig = [UMSocialShareUIConfig shareInstance];
     switch (self.viewPostion) {
-        case PositionType_Bottom:{
+        case HKYPositionType_Bottom:{
             shareUIConfig.sharePageGroupViewConfig.sharePageGroupViewPostionType = UMSocialSharePageGroupViewPositionType_Bottom;
         }
             break;
-        case PositionType_Middle:{
+        case HKYPositionType_Middle:{
             shareUIConfig.sharePageGroupViewConfig.sharePageGroupViewPostionType = UMSocialSharePageGroupViewPositionType_Middle;
         }
             break;
-        default:{
-            shareUIConfig.sharePageGroupViewConfig.sharePageGroupViewPostionType = UMSocialSharePageGroupViewPositionType_Bottom;
-        }
-            break;
     }
+}
+
+-(void)p_setupSharePageGroupViewConfig{
+    UMSocialShareUIConfig *shareUIConfig = [UMSocialShareUIConfig shareInstance];
     if (shareUIConfig.sharePageGroupViewConfig.sharePageGroupViewPostionType == UMSocialSharePageGroupViewPositionType_Middle) {
         shareUIConfig.sharePageScrollViewConfig.shareScrollViewPageMaxColumnCountForPortraitAndMid = 3.f;
         shareUIConfig.shareContainerConfig.shareContainerCornerRadius = 8.f;
     }
 }
-
 
 
 
@@ -159,16 +183,16 @@
     //调用分享接口
     [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:self.bncShareDelegate completion:^(id data, NSError *error) {
         if (error) {
-            DLog(@"************Share fail with error :  %@*********",error);
+            [self p_DNSLog:[NSString stringWithFormat:@"************Share fail with error :  %@*********",error]];
         }else{
             if ([data isKindOfClass:[UMSocialShareResponse class]]) {
                 UMSocialShareResponse *resp = data;
                 //分享结果消息
-                DLog(@"response message is %@",resp.message);
+                [self p_DNSLog:[NSString stringWithFormat:@"response message is %@",resp.message]];
                 //第三方原始返回的数据
-                DLog(@"response originalResponse data is %@",resp.originalResponse);
+                [self p_DNSLog:[NSString stringWithFormat:@"response originalResponse data is %@",resp.originalResponse]];
             }else{
-                DLog(@"response data is %@",data);
+                [self p_DNSLog:[NSString stringWithFormat:@"response data is %@",data]];
             }
         }
         [self alertWithError:error];
@@ -189,7 +213,7 @@
         }
         if (error) {
             result = [NSString stringWithFormat:@"Share fail with error code: %d\n%@",(int)error.code, str];
-            DLog(@"error message:%@",result);
+            [self p_DNSLog:[NSString stringWithFormat:@"error message:%@",result]];
             
             switch (error.code) {
                 case UMSocialPlatformErrorType_Unknow:
@@ -253,22 +277,22 @@
 
 #pragma mark - UMSocialShareMenuViewDelegate
 - (void)UMSocialShareMenuViewDidAppear {
-    if (self.bncShareDelegate && [self.bncShareDelegate respondsToSelector:@selector(BNCUMSocialShareMenuViewDidAppear)]) {
-        [self.bncShareDelegate BNCUMSocialShareMenuViewDidAppear];
+    if (self.bncShareDelegate && [self.bncShareDelegate respondsToSelector:@selector(HKYUMSocialShareMenuViewDidAppear)]) {
+        [self.bncShareDelegate HKYUMSocialShareMenuViewDidAppear];
     }
-    DLog(@"UMSocialShareMenuViewDidAppear");
+    [self p_DNSLog:@"UMSocialShareMenuViewDidAppear"];
 }
 
 - (void)UMSocialShareMenuViewDidDisappear {
-    if (self.bncShareDelegate && [self.bncShareDelegate respondsToSelector:@selector(BNCUMSocialShareMenuViewDidDisappear)]) {
-        [self.bncShareDelegate BNCUMSocialShareMenuViewDidDisappear];
+    if (self.bncShareDelegate && [self.bncShareDelegate respondsToSelector:@selector(HKYUMSocialShareMenuViewDidDisappear)]) {
+        [self.bncShareDelegate HKYUMSocialShareMenuViewDidDisappear];
     }
-    DLog(@"UMSocialShareMenuViewDidDisappear");
+    [self p_DNSLog:@"UMSocialShareMenuViewDidDisappear"];
 }
 
 -(UIView *)UMSocialParentView:(UIView *)defaultSuperView{
-    if (self.bncShareDelegate && [self.bncShareDelegate respondsToSelector:@selector(BNCUMSocialParentView:)]) {
-        UIView *tempView = [self.bncShareDelegate BNCUMSocialParentView:defaultSuperView];
+    if (self.bncShareDelegate && [self.bncShareDelegate respondsToSelector:@selector(HKYUMSocialParentView:)]) {
+        UIView *tempView = [self.bncShareDelegate HKYUMSocialParentView:defaultSuperView];
         return tempView;
     }
     return defaultSuperView;

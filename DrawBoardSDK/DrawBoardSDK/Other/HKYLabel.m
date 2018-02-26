@@ -18,13 +18,14 @@
         self.textAlignment = NSTextAlignmentCenter;
         self.userInteractionEnabled = YES;
         [self addGestureTarget];
-//        __weak typeof(self) tempSelf = self;
-//        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-//            [NSTimer scheduledTimerWithTimeInterval:HKYTimerInterval repeats:NO block:^(NSTimer * _Nonnull timer) {
-//                __strong typeof(self) strongSelf = tempSelf;
-//                strongSelf.layer.borderWidth = 0.f;
-//            }];
-//        });
+        //详解：http://www.cocoachina.com
+        //不管是重复性的timer还是一次性的timer都会对它的方法的接收者进行retain，这两种timer的区别在于“一次性的timer在完成调用以后会自动将自己invalidate，而重复的timer则将永生，直到你显示的invalidate它为止”。
+        /*
+        __weak typeof(self) tempSelf = self;
+            [NSTimer scheduledTimerWithTimeInterval:HKYTimerInterval repeats:NO block:^(NSTimer * _Nonnull timer) {
+                tempSelf.layer.borderWidth = 0.f;
+            }];
+        */
     }
     return self;
 }
@@ -79,6 +80,9 @@
     }
 }
 
+-(void)hideBorder{
+    self.layer.borderWidth = 0.f;
+}
 #pragma mark 旋转
 -(void)rotateLabel:(UIRotationGestureRecognizer *)gesture{
     if (gesture.state==UIGestureRecognizerStateChanged) {
@@ -96,3 +100,39 @@
 -(void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{}
 
 @end
+/*
+//  以下这种timer的用法，企图在dealloc中对timer进行invalidate是一种自欺欺人的做法
+//  因为你的timer对self进行了retain，如果timer一直有效，则self的引用计数永远不会等于0
+#import "SvCheatYourself.h"
+@interface SvCheatYourself () {
+    
+    NSTimer *_timer;
+    
+}
+@end
+@implementation SvCheatYourself
+
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        
+        _timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(testTimer:) userInfo:nil repeats:YES];
+        
+    }
+    
+    return self;
+}
+- (void)dealloc
+{
+    // 自欺欺人的写法，永远都不会执行到，除非你在外部手动invalidate这个timer
+    [_timer invalidate];
+    
+    [super dealloc];
+}
+- (void)testTimer:(NSTimer*)timer
+{
+    NSLog(@"haha!");
+}
+@end
+*/

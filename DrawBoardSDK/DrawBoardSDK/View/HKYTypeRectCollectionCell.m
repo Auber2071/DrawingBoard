@@ -7,88 +7,87 @@
 //
 
 #import "HKYTypeRectCollectionCell.h"
+#import "UIButton+HKYImageTitleSpacing.h"
+#import "HKYShapeMode.h"
+
 
 @interface HKYTypeRectCollectionCell ()
-@property (nonatomic, strong) NSArray *titleArr;
 @property (nonatomic, strong) NSMutableArray *btnMutArr;
-
 @property (nonatomic, strong) UIButton *lastBtn;
-@property (nonatomic, strong) UIView *indicatorView;
 
+@property (nonatomic, assign) RectTypeOptions defaultRectType;
+@property (nonatomic, strong) NSArray *dataSource;
 @end
 
 @implementation HKYTypeRectCollectionCell
-static NSTimeInterval duration = 0.1f;
+
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
         _defaultRectType = RectTypeOptionEllipse;
-        [self p_addRectOptions];
     }
     return self;
 }
 
+
+-(void)setDataSource:(NSArray *)dataSource defaultRectType:(RectTypeOptions)defaultRectType{
+    self.defaultRectType = defaultRectType;
+    self.dataSource = dataSource;
+    [self p_addRectOptions];
+}
 -(void)setDefaultRectType:(RectTypeOptions)defaultRectType{
     _defaultRectType = defaultRectType;
     for (UIButton *tempBtn in self.btnMutArr) {
         if (tempBtn.tag == defaultRectType) {
             tempBtn.enabled = NO;
             self.lastBtn = tempBtn;
-            [UIView animateWithDuration:duration animations:^{
-                self.indicatorView.width = tempBtn.titleLabel.width;
-                self.indicatorView.centerX = tempBtn.centerX;
-            }];
         }else{
             tempBtn.enabled = YES;
         }
     }
 }
 
+-(void)layoutSubviews{
+    [super layoutSubviews];
+    
+    if (self.btnMutArr.count>0) {
+        UIEdgeInsets btnInset = UIEdgeInsetsMake(0, 0, 0, 0);
+        CGFloat btnWidth = (SCREEN_WIDTH-btnInset.left-btnInset.right)/self.btnMutArr.count;
+        for (int i = 0; i<self.btnMutArr.count; i++) {
+            UIButton *tempBtn = (UIButton *)self.btnMutArr[i];
+            [tempBtn setFrame:CGRectMake(btnInset.left + i*btnWidth, btnInset.top, btnWidth, CGRectGetHeight(self.frame)-btnInset.top-btnInset.bottom)];
+            [tempBtn layoutButtonWithEdgeInsetsStyle:BNCButtonEdgeInsetsStyleTop imageTitleSpace:10.f];
+        }
+    }
+}
 
 -(void)p_addRectOptions{
-    self.indicatorView = [[UIView alloc] init];
-    self.indicatorView.backgroundColor = UIColorFromRGB(0xffa500);
-    self.indicatorView.height = 2;
-    self.indicatorView.y = CGRectGetHeight(self.frame) - self.indicatorView.height;
-    [self.contentView addSubview:self.indicatorView];
-    
-    UIEdgeInsets btnInset = UIEdgeInsetsMake(0, SCREEN_WIDTH/5, 0, SCREEN_WIDTH/5);
-    CGFloat btnWidth = (SCREEN_WIDTH-btnInset.left-btnInset.right)/3.f;
-    for (int i = 0; i< self.titleArr.count; i++) {
+    for (int i = 0; i< self.dataSource.count; i++) {
+        HKYShapeMode *tempModel = self.dataSource[i];
+        
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-        [button setTitle:self.titleArr[i] forState:UIControlStateNormal];
-        [button.titleLabel setFont:[UIFont systemFontOfSize:14.f]];
-        [button setTitleColor:UIColorFromRGB(0x999999) forState:UIControlStateNormal];
-        [button setTitleColor:UIColorFromRGB(0xffa500) forState:UIControlStateDisabled];
-        [button setFrame:CGRectMake(btnInset.left + i*btnWidth, 0, btnWidth, CGRectGetHeight(self.frame)-2)];
-        [button layoutIfNeeded];
+        [button setTitle:tempModel.title forState:UIControlStateNormal];
+        [button.titleLabel setFont:tempModel.titleFont];
+        [button setTitleColor:tempModel.normalTitleColor forState:UIControlStateNormal];
+        [button setTitleColor:tempModel.selectedTitleColor forState:UIControlStateDisabled];
+        button.tag = tempModel.tag;
+        
+        if (tempModel.normalImg) {
+            [button setImage:tempModel.normalImg forState:UIControlStateNormal];
+        }
+        if (tempModel.selectedImg) {
+            [button setImage:tempModel.selectedImg forState:UIControlStateDisabled];
+        }
+        
         [button addTarget:self action:@selector(p_clickColorOption:) forControlEvents:UIControlEventTouchUpInside];
         [self.contentView addSubview:button];
         [self.btnMutArr addObject:button];
         
-        switch (i) {
-            case 0:{
-                button.tag = RectTypeOptionSquare;
-            }
-                break;
-            case 1:{
-                button.tag = RectTypeOptionEllipse;
-            }
-                break;
-            case 2:{
-                button.tag = RectTypeOptionArrows;
-            }
-                break;
-        }
         if (i == self.defaultRectType) {
             button.enabled = NO;
             self.lastBtn = button;
-            [button.titleLabel sizeToFit];
-            self.indicatorView.width = button.titleLabel.width;
-            self.indicatorView.centerX = button.centerX;
         }
-        
     }
 }
 
@@ -98,27 +97,25 @@ static NSTimeInterval duration = 0.1f;
     sender.enabled = NO;
     self.lastBtn = sender;
     
-    [UIView animateWithDuration:duration animations:^{
-        self.indicatorView.width = sender.titleLabel.width;
-        self.indicatorView.centerX = sender.centerX;
-    }];
-    
     if (self.rectTypeDelegate && [self.rectTypeDelegate respondsToSelector:@selector(changeRectTypeOption:)]) {
         [self.rectTypeDelegate changeRectTypeOption:sender.tag];
     }
 }
     
 #pragma mark - Lazy Methods
--(NSArray *)titleArr{
-    if (!_titleArr) {
-        _titleArr = @[@"矩形",@"椭圆",@"箭头"];
+
+-(NSArray *)dataSource{
+    if (!_dataSource) {
+        _dataSource = [NSArray array];
     }
-    return _titleArr;
+    return _dataSource;
 }
+
 -(NSMutableArray *)btnMutArr{
     if (!_btnMutArr) {
         _btnMutArr = [NSMutableArray array];
     }
     return _btnMutArr;
 }
+
 @end

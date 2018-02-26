@@ -11,6 +11,7 @@
 @class HKYDrawBoardViewController;
 @protocol HKYDrawBoardViewControllerDelegaete <NSObject>
 
+///批注完成回调
 -(void)finishEditWithImage:(UIImage *)finishImage;
 
 @end

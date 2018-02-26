@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HKYEditViewModel.h"
 
 typedef NS_ENUM(NSInteger,EditMenuTypeOptions) {
     EditMenuTypeOptionNone,
@@ -20,13 +21,16 @@ typedef NS_ENUM(NSInteger,EditMenuTypeOptions) {
 @class HKYEditView;
 
 @protocol HKYEditViewDelegate <NSObject>
+
+///批注选项     切换批注选项回调
 -(void)HKYEditView:(HKYEditView *)sender changedDrawingOption:(EditMenuTypeOptions)drawingOption;
 
 
 @end
 
 @interface HKYEditView : UIView
-@property (nonatomic, assign) id<HKYEditViewDelegate> editViewDelegate;
 
+@property (nonatomic, assign) id<HKYEditViewDelegate> editViewDelegate;
+@property (nonatomic, strong) NSArray <HKYEditViewModel*>*dataSource;
 
 @end
