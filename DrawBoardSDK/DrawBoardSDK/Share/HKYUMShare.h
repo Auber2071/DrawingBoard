@@ -13,7 +13,7 @@ typedef NS_ENUM(NSUInteger, PositionType){
     PositionType_Middle,//显示在中间
 };
 
-@protocol BNCUMShareDelegate <NSObject>
+@protocol HKYUMShareDelegate <NSObject>
 
 @optional
 /**
@@ -47,7 +47,7 @@ typedef NS_ENUM(NSUInteger, PositionType){
 /**
  * 分享平台包含sms,email时,此代理必须设置
  */
-@property (nonatomic, assign) id<BNCUMShareDelegate> bncShareDelegate;
+@property (nonatomic, assign) id<HKYUMShareDelegate> bncShareDelegate;
 
 /**
  分享面板的位置，默认为bottom
