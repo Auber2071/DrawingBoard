@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		261880EF1F6B82390043B25A /* DrawBoardSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 261880EA1F6B81D60043B25A /* DrawBoardSDK.framework */; };
 		261880F01F6B82E50043B25A /* DrawBoardBundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 261880EC1F6B81D60043B25A /* DrawBoardBundle.bundle */; };
+		263556AE2047CEAD005A1C23 /* icon_version.sh in Resources */ = {isa = PBXBuildFile; fileRef = 263556AD2047CEAD005A1C23 /* icon_version.sh */; };
 		26CFBE2C1F4C004A00CA1E58 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 26CFBE2B1F4C004A00CA1E58 /* main.m */; };
 		26CFBE2F1F4C004A00CA1E58 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 26CFBE2E1F4C004A00CA1E58 /* AppDelegate.m */; };
 		26CFBE371F4C004A00CA1E58 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 26CFBE361F4C004A00CA1E58 /* Assets.xcassets */; };
@@ -43,6 +44,7 @@
 
 /* Begin PBXFileReference section */
 		261880E31F6B81D60043B25A /* DrawBoardSDK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DrawBoardSDK.xcodeproj; path = DrawBoardSDK/DrawBoardSDK.xcodeproj; sourceTree = "<group>"; };
+		263556AD2047CEAD005A1C23 /* icon_version.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = icon_version.sh; sourceTree = "<group>"; };
 		26CFBE271F4C004A00CA1E58 /* DrawingBoard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DrawingBoard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		26CFBE2B1F4C004A00CA1E58 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		26CFBE2D1F4C004A00CA1E58 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 				26CFBE381F4C004A00CA1E58 /* LaunchScreen.storyboard */,
 				26CFBE3B1F4C004A00CA1E58 /* Info.plist */,
 				26CFBE2B1F4C004A00CA1E58 /* main.m */,
+				263556AD2047CEAD005A1C23 /* icon_version.sh */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -151,6 +154,7 @@
 				26CFBE251F4C004A00CA1E58 /* Resources */,
 				5606C5BC55172FD363D81CE2 /* [CP] Embed Pods Frameworks */,
 				B9F100356E40B52ACBCB7D0E /* [CP] Copy Pods Resources */,
+				263556B12047CF93005A1C23 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -226,6 +230,7 @@
 			files = (
 				26CFBE3A1F4C004A00CA1E58 /* LaunchScreen.storyboard in Resources */,
 				26CFBE371F4C004A00CA1E58 /* Assets.xcassets in Resources */,
+				263556AE2047CEAD005A1C23 /* icon_version.sh in Resources */,
 				261880F01F6B82E50043B25A /* DrawBoardBundle.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -233,6 +238,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		263556B12047CF93005A1C23 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/DrawingBoard/icon_version.sh\"";
+		};
 		2B499E3AD87E9907F9160672 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -407,7 +425,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = CD93ADF6E4D2729C2DFBC568 /* Pods-DrawingBoard.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Internal";
 				DEVELOPMENT_TEAM = DH6P4GZ73C;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
@@ -423,7 +441,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 742A00AE132E7F32420E6D89 /* Pods-DrawingBoard.release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Internal";
 				DEVELOPMENT_TEAM = DH6P4GZ73C;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
